@@ -12,3 +12,36 @@ canvas {
 .viewer img:hover {
   transform: scale(1.03);
 }
+/* === Ajuste: diminuir tamanho visual dos copos === */
+
+/* Limita o tamanho do viewer e centraliza o conteúdo */
+.viewer {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 540px;   /* controla área total do viewer */
+  margin: 0 auto;
+}
+
+/* Ajuste explícito do canvas (onde o copo é desenhado) */
+canvas {
+  width: 65% !important;      /* controle responsivo (%) dentro do viewer */
+  max-width: 360px !important; /* NÃO ultrapassar 360px */
+  height: auto !important;
+  display: block;
+  border-radius: 6px;
+  transition: transform 0.25s ease;
+}
+
+/* caso o seu código desenhe IMG direto, cobre também imagens */
+.viewer img, .copo-preview img {
+  width: 65%;
+  max-width: 360px;
+  height: auto;
+  transition: transform 0.25s ease;
+}
+
+.viewer img:hover, .copo-preview img:hover, canvas:hover {
+  transform: scale(1.02);
+}
