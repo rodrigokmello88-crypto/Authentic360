@@ -1,28 +1,26 @@
-/* Final style: gray-rosy soft background (#e9e0e6) */
-:root{
-  --bg:#e9e0e6;
-  --panel:#ffffff;
-  --accent:#ff2d8a;
-  --muted:#666;
+﻿/* Ajuste do tamanho dos copos (responsivo) */
+.copo-preview img,
+.viewer img,
+canvas {
+  width: clamp(120px, 65%, 320px); /* valor mínimo, preferido (%) e máximo */
+  max-width: 320px;
+  height: auto;
+  transition: transform 0.3s ease, filter 0.2s ease;
+  display: block;
+  margin: 0 auto;
 }
-*{box-sizing:border-box}
-body{ margin:0; font-family:Montserrat, sans-serif; background:var(--bg); color:#111; }
-.topbar{ display:flex; align-items:center; justify-content:center; gap:20px; padding:28px 32px; max-width:1200px; margin:0 auto; }
-.brand{ display:flex; flex-direction:column; align-items:center; gap:6px; }
-.brand img{ height:84px; }
-.brand h1{ margin:0; color:var(--accent); font-size:28px; }
-.model-select{ position:absolute; right:32px; top:28px; }
-.model-select label{ font-size:13px; color:var(--muted); margin-right:8px; }
-main{ max-width:1200px; margin:20px auto; display:grid; grid-template-columns: 1fr 360px; gap:18px; padding:0 20px; }
-.stage{ }
-.viewer{ background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04)); border:1px solid rgba(0,0,0,0.06); border-radius:12px; padding:12px; display:flex; align-items:center; justify-content:center; }
-canvas{ background:transparent; max-width:100%; height:auto; border-radius:6px; }
-.panel{ background:var(--panel); border-radius:12px; padding:16px; box-shadow:0 6px 20px rgba(0,0,0,0.06); }
-label{ display:block; color:var(--muted); margin-bottom:6px; }
-input[type=file], select, input[type=range]{ width:100%; padding:8px; margin-bottom:10px; }
-.row{ display:flex; gap:8px; }
-.swatches{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
-.color-swatch{ width:36px; height:36px; border-radius:50%; cursor:pointer; border:2px solid rgba(0,0,0,0.06); }
-.btn{ width:100%; padding:10px; background:linear-gradient(90deg,var(--accent),#ff77b3); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:700; margin-top:8px; }
-.btn.ghost{ background:transparent; border:1px solid rgba(0,0,0,0.06); color:var(--muted); }
-footer{ text-align:center; padding:18px 0; color:var(--muted); margin-top:20px; }
+
+.copo-preview img:hover,
+.viewer img:hover {
+  transform: scale(1.03);
+  filter: brightness(1.03);
+}
+
+@media (max-width: 420px) {
+  .copo-preview img,
+  .viewer img,
+  canvas {
+    width: 85%;
+    max-width: 260px;
+  }
+}
