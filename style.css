@@ -1,6 +1,6 @@
-﻿/* Aplicação do ajuste solicitado para tamanho dos copos */
-.copo-preview img,
-.viewer img,
+﻿/* Ajuste do tamanho dos copos */
+.copo-preview img, 
+.viewer img, 
 canvas {
   width: 65%;            /* ajuste principal do tamanho */
   max-width: 320px;      /* limite máximo da largura */
@@ -8,7 +8,7 @@ canvas {
   transition: transform 0.3s ease;
 }
 
-.copo-preview img:hover,
+.copo-preview img:hover, 
 .viewer img:hover {
   transform: scale(1.03);
 }
