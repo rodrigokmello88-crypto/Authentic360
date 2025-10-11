@@ -1,26 +1,14 @@
-﻿/* Ajuste do tamanho dos copos (responsivo) */
+﻿/* Aplicação do ajuste solicitado para tamanho dos copos */
 .copo-preview img,
 .viewer img,
 canvas {
-  width: clamp(120px, 65%, 320px); /* valor mínimo, preferido (%) e máximo */
-  max-width: 320px;
+  width: 65%;            /* ajuste principal do tamanho */
+  max-width: 320px;      /* limite máximo da largura */
   height: auto;
-  transition: transform 0.3s ease, filter 0.2s ease;
-  display: block;
-  margin: 0 auto;
+  transition: transform 0.3s ease;
 }
 
 .copo-preview img:hover,
 .viewer img:hover {
   transform: scale(1.03);
-  filter: brightness(1.03);
-}
-
-@media (max-width: 420px) {
-  .copo-preview img,
-  .viewer img,
-  canvas {
-    width: 85%;
-    max-width: 260px;
-  }
 }
