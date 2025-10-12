@@ -9,7 +9,8 @@ const modelFiles = [
   './copos/ecologico.png',
   './copos/espumante.png',
   './copos/squeeze.png',
-  './copos/taca_gin.png'
+  './copos/taca_gin.png',
+  './copos/xicara.png
 ];
 
 // Elementos principais
