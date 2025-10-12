@@ -2,22 +2,19 @@
 /* Tema: cinza-rosado suave, foco nos copos e harmonia geral */
 
 :root {
-  --bg: #e9e0e6;
-  --panel: #ffffff;
-  --accent: #ff2d8a;
-  --muted: #666;
-}
-
-* {
-  box-sizing: border-box;
+  --bg: #4d4d4d;       /* cinza 70% preto */
+  --panel: #5b5b5b;    /* painel ligeiramente mais claro para contraste */
+  --accent: #ff2d8a;   /* rosa vibrante principal */
+  --muted: #ccc;       /* texto neutro claro */
 }
 
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   background: var(--bg);
-  color: #111;
+  color: #f2f2f2; /* texto principal claro */
 }
+
 
 /* === Topo e Marca === */
 .topbar {
