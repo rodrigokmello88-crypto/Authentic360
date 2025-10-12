@@ -1,153 +1,131 @@
-/* ===== Estilo AutentiCors360 ===== */
-/* Tema: cinza-rosado suave, foco nos copos e harmonia geral */
-
+/* === Tema moderno e equilibrado === */
 :root {
-  --bg: #4d4d4d;       /* cinza 70% preto */
-  --panel: #5b5b5b;    /* painel ligeiramente mais claro para contraste */
-  --accent: #ff2d8a;   /* rosa vibrante principal */
-  --muted: #ccc;       /* texto neutro claro */
+  --bg: #2c2f33;        /* grafite azulado escuro - elegante */
+  --panel: #3a3f44;     /* painel levemente mais claro */
+  --accent: #ff2d8a;    /* rosa vibrante */
+  --text: #e6e6e6;      /* texto claro */
+  --muted: #aaa;        /* texto secundário */
 }
 
+/* ===== Layout base ===== */
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  background: var(--bg);
-  color: #f2f2f2; /* texto principal claro */
-}
-
-
-/* === Topo e Marca === */
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 24px 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.brand {
+  background-color: var(--bg);
+  color: var(--text);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  min-height: 100vh;
 }
 
-.brand img {
-  height: 72px;
+/* ===== Header e logo ===== */
+header {
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem 0;
+  background-color: var(--panel);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.brand h1 {
-  margin: 0;
-  color: var(--accent);
-  font-size: 26px;
-  font-weight: 700;
+header img {
+  max-width: 180px;
+  height: auto;
 }
 
-.model-select {
-  position: absolute;
-  right: 32px;
-  top: 28px;
-}
-
-.model-select label {
-  font-size: 13px;
-  color: var(--muted);
-  margin-right: 8px;
-}
-
-/* === Área principal === */
-main {
+/* ===== Container principal ===== */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
   max-width: 1200px;
-  margin: 20px auto;
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 18px;
-  padding: 0 20px;
+  width: 100%;
 }
 
-/* === Visualizador de Copo === */
+/* ===== Seletor de modelo ===== */
+.model-selector {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.model-selector select {
+  background-color: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.model-selector select:hover {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+/* ===== Área do viewer ===== */
 .viewer {
-  background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.05));
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 12px;
-  padding: 16px;
+  padding: 12px;
+  background-color: var(--panel);
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.4);
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 1rem;
 }
 
-canvas, .viewer img {
-  width: 60%;
-  max-width: 280px;
-  height: auto;
-  border-radius: 8px;
+.viewer img,
+.viewer canvas {
+  width: 55% !important;      /* tamanho reduzido dos copos */
+  max-width: 260px !important;
+  height: auto !important;
+  border-radius: 6px;
   transition: transform 0.3s ease;
 }
 
-canvas:hover, .viewer img:hover {
-  transform: scale(1.03);
+.viewer img:hover,
+.viewer canvas:hover {
+  transform: scale(1.05);
 }
 
-/* === Painel lateral === */
-.panel {
-  background: var(--panel);
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* === Swatches (botões de cores) === */
-.swatches {
+/* ===== Controles e botões ===== */
+.controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 10px;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
 }
 
-.color-swatch {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.color-swatch:hover {
-  transform: scale(1.1);
-  border-color: var(--accent);
-}
-
-/* === Botões === */
-.btn {
-  width: 100%;
-  padding: 10px;
-  background: linear-gradient(90deg, var(--accent), #ff77b3);
+button {
+  background-color: var(--accent);
   color: #fff;
   border: none;
   border-radius: 8px;
-  font-weight: 700;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  margin-top: 8px;
-  transition: opacity 0.3s ease;
+  transition: background-color 0.25s ease, transform 0.2s ease;
 }
 
-.btn:hover {
-  opacity: 0.9;
+button:hover {
+  background-color: #ff479a;
+  transform: scale(1.05);
 }
 
-.btn.ghost {
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: var(--muted);
-}
-
+/* ===== Rodapé ===== */
 footer {
+  margin-top: auto;
+  padding: 1rem;
   text-align: center;
-  padding: 18px 0;
   color: var(--muted);
-  margin-top: 20px;
-  font-size: 14px;
+  font-size: 0.9rem;
 }
