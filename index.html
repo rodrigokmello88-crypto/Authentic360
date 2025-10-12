@@ -1,63 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mockups — AutênticoRS</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockups — AutênticoRS360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header class="topbar">
-  <div class="brand">
-    <img src="./logo.png" alt="Logo" id="siteLogo" onerror="this.style.display='none'">
-    <h1>Mockups</h1>
-  </div>
-  <div class="model-select">
-    <label>Modelo</label>
-    <select id="modelSelect"></select>
-  </div>
-</header>
+  <header class="topbar">
+    <div class="brand">
+      <img src="logo.png" alt="Logo" class="logo" />
+      <h1>Mockups</h1>
+    </div>
+    <div class="model-selector">
+      <label for="modelSelect">Modelo:</label>
+      <select id="modelSelect"></select>
+    </div>
+  </header>
 
-<main>
-  <section class="stage">
-    <div class="viewer" id="viewer">
+  <main class="container">
+    <div class="viewer">
       <canvas id="mainCanvas" width="900" height="900"></canvas>
       <div class="overlay" id="overlay"></div>
     </div>
-  </section>
 
-  <aside class="panel">
-    <label>Cor do copo</label>
-    <div id="swatches" class="swatches"></div>
+    <aside class="panel">
+      <label>Cor do copo</label>
+      <div id="swatches" class="swatches"></div>
 
-    <label>Upload da arte</label>
-    <input type="file" id="artUpload" accept="image/*">
+      <label>Upload da arte</label>
+      <input type="file" id="artUpload" accept="image/*">
 
-    <label>Scale / Rotate</label>
-    <div class="row">
-      <input type="range" id="scaleRange" min="10" max="300" value="100">
-      <input type="range" id="rotateRange" min="-180" max="180" value="0">
-    </div>
+      <label>Scale / Rotate</label>
+      <div class="row">
+        <input type="range" id="scaleRange" min="10" max="300" value="100">
+        <input type="range" id="rotateRange" min="-180" max="180" value="0">
+      </div>
 
-    <label>Pos X / Pos Y</label>
-    <div class="row">
-      <input type="range" id="posX" min="-400" max="400" value="0">
-      <input type="range" id="posY" min="-400" max="400" value="0">
-    </div>
+      <label>Pos X / Pos Y</label>
+      <div class="row">
+        <input type="range" id="posX" min="-400" max="400" value="0">
+        <input type="range" id="posY" min="-400" max="400" value="0">
+      </div>
 
-    <button class="btn" id="applyBtn">Confirmar arte</button>
-    <button class="btn ghost" id="resetBtn">Resetar arte</button>
+      <button class="btn" id="applyBtn">Confirmar arte</button>
+      <button class="btn ghost" id="resetBtn">Resetar arte</button>
 
-    <hr/>
+      <hr/>
 
-    <button class="btn" id="exportImageBtn">📷 Baixar imagem</button>
-    <button class="btn" id="exportVideoBtn">🎥 Gerar vídeo 360°</button>
-  </aside>
-</main>
+      <button class="btn" id="exportImageBtn">📷 Baixar imagem</button>
+      <button class="btn" id="exportVideoBtn">🎥 Gerar vídeo 360°</button>
+    </aside>
+  </main>
 
-<footer>AutênticoRS — Protótipo</footer>
+  <footer>AutênticoRS — Protótipo</footer>
 
-<script src="./script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
