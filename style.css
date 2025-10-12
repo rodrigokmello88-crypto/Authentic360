@@ -1,78 +1,156 @@
-﻿/* Ajuste do tamanho dos copos */
-.copo-preview img, 
-.viewer img, 
-canvas {
-  width: 65%;            /* ajuste principal do tamanho */
-  max-width: 320px;      /* limite máximo da largura */
-  height: auto;
-  transition: transform 0.3s ease;
+/* ===== Estilo AutentiCors360 ===== */
+/* Tema: cinza-rosado suave, foco nos copos e harmonia geral */
+
+:root {
+  --bg: #e9e0e6;
+  --panel: #ffffff;
+  --accent: #ff2d8a;
+  --muted: #666;
 }
 
-.copo-preview img:hover, 
-.viewer img:hover {
-  transform: scale(1.03);
+* {
+  box-sizing: border-box;
 }
-/* === Ajuste: diminuir tamanho visual dos copos === */
 
-/* Limita o tamanho do viewer e centraliza o conteúdo */
-.viewer {
-  padding: 12px;
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background: var(--bg);
+  color: #111;
+}
+
+/* === Topo e Marca === */
+.topbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 540px;   /* controla área total do viewer */
+  gap: 20px;
+  padding: 24px 32px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Ajuste explícito do canvas (onde o copo é desenhado) */
-canvas {
-  width: 65% !important;      /* controle responsivo (%) dentro do viewer */
-  max-width: 360px !important; /* NÃO ultrapassar 360px */
-  height: auto !important;
-  display: block;
-  border-radius: 6px;
-  transition: transform 0.25s ease;
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-/* caso o seu código desenhe IMG direto, cobre também imagens */
-.viewer img, .copo-preview img {
-  width: 65%;
-  max-width: 360px;
-  height: auto;
-  transition: transform 0.25s ease;
-}
-
-.viewer img:hover, .copo-preview img:hover, canvas:hover {
-  transform: scale(1.02);
-}
-/* --- Correção rápida: limitar logo e forçar canvas visível --- */
 .brand img {
-  max-width: 360px !important;
-  width: 48% !important;
-  height: auto !important;
-  object-fit: contain;
+  height: 72px;
 }
 
-/* Força o viewer/canvas a um tamanho fixo (evita crescer demais) */
+.brand h1 {
+  margin: 0;
+  color: var(--accent);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.model-select {
+  position: absolute;
+  right: 32px;
+  top: 28px;
+}
+
+.model-select label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-right: 8px;
+}
+
+/* === Área principal === */
+main {
+  max-width: 1200px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 18px;
+  padding: 0 20px;
+}
+
+/* === Visualizador de Copo === */
 .viewer {
-  max-width: 680px !important;
-  margin: 0 auto;
-  padding: 18px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.05));
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-canvas {
-  width: 480px !important;
-  height: 480px !important; /* força proporção quadrada */
-  max-width: 480px !important;
-  display: block;
-  margin: 0 auto;
+
+canvas, .viewer img {
+  width: 60%;
+  max-width: 280px;
+  height: auto;
   border-radius: 8px;
-  background: transparent !important;
+  transition: transform 0.3s ease;
 }
 
-/* Se seu script desenha imagem em vez de canvas, aplica também */
-.viewer img, .copo-preview img {
-  max-width: 480px !important;
-  width: 70% !important;
-  height: auto !important;
+canvas:hover, .viewer img:hover {
+  transform: scale(1.03);
 }
 
+/* === Painel lateral === */
+.panel {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* === Swatches (botões de cores) === */
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.color-swatch {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+  border-color: var(--accent);
+}
+
+/* === Botões === */
+.btn {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(90deg, var(--accent), #ff77b3);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--muted);
+}
+
+footer {
+  text-align: center;
+  padding: 18px 0;
+  color: var(--muted);
+  margin-top: 20px;
+  font-size: 14px;
+}
