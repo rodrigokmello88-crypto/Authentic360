@@ -45,3 +45,34 @@ canvas {
 .viewer img:hover, .copo-preview img:hover, canvas:hover {
   transform: scale(1.02);
 }
+/* --- Correção rápida: limitar logo e forçar canvas visível --- */
+.brand img {
+  max-width: 360px !important;
+  width: 48% !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+/* Força o viewer/canvas a um tamanho fixo (evita crescer demais) */
+.viewer {
+  max-width: 680px !important;
+  margin: 0 auto;
+  padding: 18px;
+}
+canvas {
+  width: 480px !important;
+  height: 480px !important; /* força proporção quadrada */
+  max-width: 480px !important;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  background: transparent !important;
+}
+
+/* Se seu script desenha imagem em vez de canvas, aplica também */
+.viewer img, .copo-preview img {
+  max-width: 480px !important;
+  width: 70% !important;
+  height: auto !important;
+}
+
