@@ -1,8 +1,8 @@
 // ====== Config ======
 const modelFiles = [
   'copos/twister.png',
-  'copos/caneca_png.png',
-  'copos/caneca_slim_png.png',
+  'copos/caneca.png',
+  'copos/caneca_slim.png',
   'copos/ecologico.png',
   'copos/espumante.png',
   'copos/squeeze.png',
