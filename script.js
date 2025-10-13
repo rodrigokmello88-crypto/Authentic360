@@ -10,6 +10,7 @@ const modelFiles = [
   'copos/xicara.png'
 ];
 
+
 // cores disponíveis (hex)
 const colors = [
   {name:'Branco', hex:'#ffffff'},
