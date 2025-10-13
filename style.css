@@ -86,3 +86,13 @@ footer {
   font-weight: bold;
   color: #ff9fba;
 }
+const modelFiles = [
+  './copos/twister.png',
+  './copos/caneca_png.png',
+  './copos/caneca_slim_png.png',
+  './copos/ecologico.png',
+  './copos/espumante.png',
+  './copos/squeeze.png',
+  './copos/taca_gin.png'
+  './copos/xicara.png'
+];
