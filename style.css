@@ -1,180 +1,92 @@
-:root {
-  --bg: #2e3238;        /* grafite escuro */
-  --panel: #3f464f;     /* painel levemente mais claro */
-  --accent: #ff2d8a;    /* rosa vibrante */
-  --text: #e3e3e3;      /* texto claro */
-  --muted: #a0a0a0;     /* texto secundário */
-}
-
-* {
-  box-sizing: border-box;
-}
-
 body {
+  font-family: Arial, sans-serif;
+  background-color: #1f1f23; /* Cinza escuro 70% preto com leve tom rosado */
+  color: #fff;
   margin: 0;
-  font-family: "Montserrat", sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+  padding: 0;
+  text-align: center;
 }
 
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 32px;
-  background-color: var(--panel);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.brand img.logo {
-  height: 60px;
-}
-
-.brand h1 {
-  margin: 0;
-  color: var(--accent);
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.model-selector {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.model-selector select {
-  background-color: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  padding: 6px 10px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.model-selector select:hover {
-  background-color: var(--accent);
-  color: white;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 30px auto;
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 24px;
-  padding: 0 20px;
-}
-
-.viewer {
-  background-color: var(--panel);
-  border-radius: 10px;
-  padding: 16px;
+header {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  background-color: #2a2a30;
+  padding: 10px;
 }
 
-canvas, .viewer img {
-  width: 50%;
-  max-width: 240px;
-  height: auto;
-  border-radius: 6px;
-  transition: transform 0.3s ease;
+.logo {
+  height: 50px;
+  margin-right: 10px;
 }
 
-canvas:hover, .viewer img:hover {
-  transform: scale(1.05);
+h1 {
+  font-size: 1.5rem;
+  color: #ff9fba; /* tom rosado que combina com o fundo */
 }
 
-.panel {
-  background-color: var(--panel);
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+.controls {
+  margin: 20px auto;
 }
 
-label {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-bottom: 6px;
-  display: block;
-}
-
-input[type=file], select, input[type=range] {
-  width: 100%;
-  padding: 6px 8px;
-  margin-bottom: 12px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background-color: var(--bg);
-  color: var(--text);
-}
-
-.row {
+.color-buttons {
   display: flex;
-  gap: 8px;
-}
-
-.swatches {
-  display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 
-.color-swatch {
-  width: 32px;
-  height: 32px;
+.color {
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  background-color: var(--accent);
-  border: 2px solid rgba(255,255,255,0.2);
+  border: 2px solid #fff;
   cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s;
+  transition: transform 0.2s;
 }
 
-.color-swatch:hover {
-  transform: scale(1.1);
-  border-color: var(--text);
+.color:hover {
+  transform: scale(1.15);
 }
 
-.btn {
-  width: 100%;
-  padding: 10px 0;
-  background-color: var(--accent);
-  color: white;
+.color.white { background-color: #ffffff; }
+.color.black { background-color: #000000; }
+.color.blue { background-color: #007BFF; }
+.color.pink { background-color: #FF69B4; }
+.color.yellow { background-color: #FFD700; }
+.color.green { background-color: #28a745; }
+.color.purple { background-color: #800080; }
+
+.download button {
+  background-color: #ff9fba;
   border: none;
-  border-radius: 6px;
+  color: #1f1f23;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: background-color 0.3s, transform 0.2s;
-  margin-top: 8px;
+  transition: background 0.2s;
 }
 
-.btn:hover {
-  background-color: #ff5cb4;
-  transform: scale(1.03);
+.download button:hover {
+  background-color: #ff77a0;
 }
 
-.btn.ghost {
-  background-color: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: var(--muted);
+.preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.preview img {
+  width: 250px;
+  height: auto;
+  filter: drop-shadow(0 0 8px #000);
 }
 
 footer {
-  text-align: center;
-  padding: 16px 0;
-  color: var(--muted);
-  margin-top: 40px;
+  margin-top: 30px;
   font-size: 0.9rem;
+  opacity: 0.8;
 }
