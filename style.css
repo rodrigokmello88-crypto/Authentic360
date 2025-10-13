@@ -1,166 +1,219 @@
-/* ====== Reset ====== */
+:root {
+  --bg-dark: #0b0c10;
+  --panel: rgba(15, 15, 20, 0.85);
+  --accent: #0078ff; /* azul da logo */
+  --text: #ffffff;
+  --muted: #cccccc;
+}
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
 }
 
-/* ====== Fundo ====== */
 body {
-  background: url('fundos.png') no-repeat center center fixed;
+  font-family: "Montserrat", sans-serif;
+  background: url("fundos.png") no-repeat center center fixed;
   background-size: cover;
-  color: #fff;
+  color: var(--text);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
-/* ====== Topo ====== */
+/* ======= Topo ======= */
 .topbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 25px 0 10px;
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  text-align: center;
 }
 
-.topbar .logo {
-  width: 200px;
-  height: auto;
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* ====== Layout principal ====== */
+.logo {
+  height: 70px;
+}
+
+.sub {
+  font-size: 18px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* ======= Layout Principal ======= */
 .main-grid {
+  max-width: 1200px;
+  margin: 28px auto;
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 260px 1fr;
   gap: 20px;
-  flex: 1;
-  padding: 40px;
+  padding: 0 18px;
+  align-items: start;
 }
 
-/* ====== Painel lateral de modelos ====== */
 .models-panel {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
 }
 
 .models-panel h3 {
-  color: #fff;
-  margin-bottom: 15px;
-  text-align: center;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 16px;
+  text-align: left;
 }
 
 .models-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
-.models-list button {
-  background-color: #007BFF; /* Azul Authentic360 */
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 15px;
-  font-size: 0.95rem;
-  font-weight: 600;
+.model-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
-  transition: background 0.3s;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.18s, transform 0.12s;
+  background: transparent;
 }
 
-.models-list button:hover {
-  background-color: #0066dd;
+.model-item img {
+  width: 64px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: contain;
 }
 
-/* ====== Painel do visualizador ====== */
+.model-item .label {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.model-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ======= Painel Viewer ======= */
 .viewer-panel {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 25px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  gap: 12px;
 }
 
 .viewer {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  padding: 10px;
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  min-height: 420px;
 }
 
 canvas {
-  border-radius: 12px;
+  width: 420px;
+  height: 420px;
   max-width: 100%;
-  height: auto;
+  border-radius: 8px;
+  background: transparent;
 }
 
-/* ====== Área inferior de controles ====== */
+/* ======= Controles ======= */
 .controls-row {
-  margin-top: 25px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
 }
 
 .swatches {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
+  align-items: center;
 }
 
-.swatches div {
-  width: 28px;
-  height: 28px;
+.color-swatch {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.25);
   cursor: pointer;
-  border: 2px solid #fff;
-  transition: transform 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s;
 }
 
-.swatches div:hover {
-  transform: scale(1.1);
+.color-swatch:hover {
+  transform: scale(1.06);
 }
 
-/* ====== Botões ====== */
+/* ======= Botões ======= */
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
 .btn {
-  background-color: #007BFF;
+  background: var(--accent);
   color: #fff;
-  font-weight: 600;
+  padding: 10px 16px;
   border: none;
   border-radius: 10px;
-  padding: 10px 20px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.25s;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
 .btn:hover {
-  background-color: #0066dd;
+  background: #005ce6;
 }
 
-/* ====== Rodapé ====== */
+/* ======= Rodapé ======= */
 .footer {
   text-align: center;
-  padding: 15px 0;
-  font-size: 0.9rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
-  backdrop-filter: blur(6px);
+  color: var(--muted);
+  padding: 18px 0;
+  margin-top: 28px;
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 14px;
 }
 
-/* ====== Responsividade ====== */
-@media (max-width: 768px) {
+/* ======= Responsivo ======= */
+@media (max-width: 880px) {
   .main-grid {
     grid-template-columns: 1fr;
-    padding: 20px;
+    padding: 10px;
+  }
+
+  .models-panel {
+    order: 2;
+  }
+
+  .viewer-panel {
+    order: 1;
+  }
+
+  canvas {
+    width: 320px;
+    height: 320px;
   }
 }
