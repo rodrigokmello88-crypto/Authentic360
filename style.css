@@ -1,128 +1,166 @@
-/* ====== Reset básico ====== */
+/* ====== Reset ====== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
-/* ====== Fundo principal ====== */
+/* ====== Fundo ====== */
 body {
-  background: url("/fundos.png") no-repeat center center fixed;
+  background: url('fundos.png') no-repeat center center fixed;
   background-size: cover;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ====== Topo ====== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.topbar .logo {
+  width: 200px;
+  height: auto;
+}
+
+/* ====== Layout principal ====== */
+.main-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  flex: 1;
+  padding: 40px;
+}
+
+/* ====== Painel lateral de modelos ====== */
+.models-panel {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.models-panel h3 {
+  color: #fff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.models-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.models-list button {
+  background-color: #007BFF; /* Azul Authentic360 */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.models-list button:hover {
+  background-color: #0066dd;
+}
+
+/* ====== Painel do visualizador ====== */
+.viewer-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* ====== Cabeçalho com logo ====== */
-header {
-  margin-top: 40px;
-  text-align: center;
+.viewer {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 10px;
 }
 
-header img.logo {
-  width: 200px;
-  margin-bottom: 10px;
+canvas {
+  border-radius: 12px;
+  max-width: 100%;
+  height: auto;
 }
 
-header h1 {
-  font-size: 2rem;
-  color: #ffffff;
-  font-weight: 600;
+/* ====== Área inferior de controles ====== */
+.controls-row {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-/* ====== Área principal ====== */
-main {
-  margin-top: 60px;
-  text-align: center;
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-/* ====== Seletor de modelos ====== */
-label {
-  font-size: 1.2rem;
-  color: #ffffff;
-  font-weight: 500;
-  display: block;
-  margin-bottom: 10px;
-}
-
-select {
-  padding: 10px 15px;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  color: #333;
-  background-color: #ffffff;
+.swatches div {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
+  border: 2px solid #fff;
+  transition: transform 0.2s;
 }
 
-select:hover {
-  background-color: #e7f0ff;
+.swatches div:hover {
+  transform: scale(1.1);
 }
 
 /* ====== Botões ====== */
-button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  font-size: 1rem;
+.btn {
+  background-color: #007BFF;
+  color: #fff;
   font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: 0.3s ease;
-  background-color: #007BFF; /* Azul forte da logo */
-  color: #ffffff;
+  transition: background 0.3s ease;
 }
 
-button:hover {
-  background-color: #006ae1;
-}
-
-/* ====== Container do mockup ====== */
-.mockup-container {
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.mockup-container img {
-  width: 350px;
-  max-width: 90%;
-  transition: all 0.4s ease;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
-}
-
-/* ====== Logo pequena sob o mockup ====== */
-.logo-bottom {
-  width: 120px;
-  margin-top: 15px;
-  opacity: 0.9;
+.btn:hover {
+  background-color: #0066dd;
 }
 
 /* ====== Rodapé ====== */
-footer {
-  position: fixed;
-  bottom: 15px;
+.footer {
   text-align: center;
-  width: 100%;
-  color: #ffffff;
+  padding: 15px 0;
   font-size: 0.9rem;
-  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  backdrop-filter: blur(6px);
 }
 
-footer a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-footer a:hover {
-  text-decoration: underline;
+/* ====== Responsividade ====== */
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
 }
