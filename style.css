@@ -1,19 +1,20 @@
+/* ====== Paleta e Reset ====== */
 :root {
   --bg-dark: #0b0c10;
   --panel: rgba(15, 15, 20, 0.85);
-  --accent: #0078ff; /* azul da logo Authentic360 */
+  --accent: #0078ff; /* azul Authentic360 */
   --text: #ffffff;
   --muted: #cccccc;
 }
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
-/* ======= Fundo ======= */
+/* ====== Fundo ====== */
 body {
   background: url("fundos.png") no-repeat center center fixed;
   background-size: cover;
@@ -23,12 +24,12 @@ body {
   flex-direction: column;
 }
 
-/* ======= Topo ======= */
+/* ====== Topo ====== */
 .topbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 25px 0 10px;
+  padding: 20px 0 10px;
   background: rgba(0, 0, 0, 0.4);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   text-align: center;
@@ -51,18 +52,19 @@ body {
   margin-top: 6px;
 }
 
-/* ======= Layout Principal ======= */
+/* ====== Layout Principal ====== */
 .main-grid {
   max-width: 1200px;
   margin: 28px auto;
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 20px;
+  flex: 1;
   padding: 0 18px;
   align-items: start;
 }
 
-/* ======= Painel de Modelos ======= */
+/* ====== Painel lateral de modelos ====== */
 .models-panel {
   background: var(--panel);
   border-radius: 10px;
@@ -88,34 +90,40 @@ body {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  transition: background 0.18s, transform 0.12s;
-  background: transparent;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 8px 12px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.model-item:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
 }
 
 .model-item img {
-  width: 64px;
+  width: 60px;
   height: auto;
-  border-radius: 6px;
   object-fit: contain;
+  border-radius: 6px;
 }
 
 .model-item .label {
-  color: var(--text);
+  color: #fff;
   font-weight: 600;
   font-size: 14px;
 }
 
-.model-item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
-}
-
-/* ======= Painel do Mockup ======= */
+/* ====== Painel Viewer ====== */
 .viewer-panel {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   gap: 12px;
 }
 
@@ -130,25 +138,28 @@ body {
   min-height: 420px;
 }
 
+/* Remove sombra oval do copo */
 canvas {
+  border-radius: 12px;
   width: 420px;
-  height: 420px;
-  max-width: 100%;
-  border-radius: 8px;
-  background: transparent;
+  height: auto;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
-/* ======= Controles ======= */
+/* ====== Controles ====== */
 .controls-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
   margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
 }
 
 .swatches {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: center;
 }
@@ -159,7 +170,6 @@ canvas {
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.25);
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
   transition: transform 0.15s;
 }
 
@@ -167,7 +177,7 @@ canvas {
   transform: scale(1.06);
 }
 
-/* ======= Botão ======= */
+/* ====== Botões ====== */
 .actions {
   display: flex;
   gap: 10px;
@@ -176,10 +186,10 @@ canvas {
 .btn {
   background: var(--accent);
   color: #fff;
-  padding: 10px 16px;
+  font-weight: 700;
+  padding: 10px 20px;
   border: none;
   border-radius: 10px;
-  font-weight: 700;
   cursor: pointer;
   transition: background 0.25s;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
@@ -189,33 +199,31 @@ canvas {
   background: #005ce6;
 }
 
-/* ======= Rodapé ======= */
+.btn-secondary {
+  background: #00a8ff;
+}
+
+.btn-secondary:hover {
+  background: #008ae0;
+}
+
+/* ====== Rodapé ====== */
 .footer {
   text-align: center;
+  font-size: 14px;
   color: var(--muted);
   padding: 18px 0;
   margin-top: 28px;
   background: rgba(0, 0, 0, 0.4);
-  font-size: 14px;
 }
 
-/* ======= Responsivo ======= */
+/* ====== Responsivo ====== */
 @media (max-width: 880px) {
   .main-grid {
     grid-template-columns: 1fr;
     padding: 10px;
   }
-
-  .models-panel {
-    order: 2;
-  }
-
-  .viewer-panel {
-    order: 1;
-  }
-
-  canvas {
-    width: 320px;
-    height: 320px;
-  }
+  .models-panel { order: 2; }
+  .viewer-panel { order: 1; }
+  canvas { width: 320px; height: auto; }
 }
