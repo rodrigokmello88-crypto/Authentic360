@@ -1,46 +1,128 @@
-:root{
-  --bg: #28282c;         /* base escura */
-  --panel: #34363a;      /* painel */
-  --accent: #ff2d8a;     /* rosa */
-  --text: #eaeaea;
-  --muted: #bdbdbd;
+/* ====== Reset básico ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-*{box-sizing:border-box}
-body{ margin:0; font-family:Montserrat, sans-serif; background:linear-gradient(180deg,var(--bg),#211f22); color:var(--text); }
+/* ====== Fundo principal ====== */
+body {
+  background: url("/fundos.png") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  color: #ffffff;
+}
 
-.topbar{ display:flex; align-items:center; justify-content:center; padding:18px 0; background:rgba(0,0,0,0.15); box-shadow:0 2px 6px rgba(0,0,0,0.4); }
-.logo{ height:64px; }
+/* ====== Cabeçalho com logo ====== */
+header {
+  margin-top: 40px;
+  text-align: center;
+}
 
-.main-grid{ max-width:1200px; margin:26px auto; display:grid; grid-template-columns:260px 1fr; gap:20px; padding:0 18px; align-items:start; }
+header img.logo {
+  width: 200px;
+  margin-bottom: 10px;
+}
 
-.models-panel{ background:var(--panel); border-radius:10px; padding:12px; box-shadow:0 6px 18px rgba(0,0,0,0.45); }
-.models-panel h3{ margin:0 0 10px 0; color:var(--accent); font-size:16px; text-align:left; }
-.models-list{ display:flex; flex-direction:column; gap:10px; }
+header h1 {
+  font-size: 2rem;
+  color: #ffffff;
+  font-weight: 600;
+}
 
-.model-item{ display:flex; align-items:center; gap:10px; cursor:pointer; padding:8px; border-radius:8px; transition:background 0.18s, transform 0.12s; background:transparent; }
-.model-item img{ width:64px; height:auto; border-radius:6px; object-fit:contain; background:transparent; }
-.model-item .label{ color:var(--text); font-weight:600; font-size:14px; }
-.model-item:hover{ background:rgba(255,255,255,0.03); transform:translateY(-2px); }
+/* ====== Área principal ====== */
+main {
+  margin-top: 60px;
+  text-align: center;
+}
 
-.viewer-panel{ display:flex; flex-direction:column; gap:12px; }
-.viewer{ background:var(--panel); border-radius:12px; padding:18px; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,0.5); min-height:420px; }
-canvas{ width:420px; height:420px; max-width:100%; border-radius:8px; background:transparent; }
+/* ====== Seletor de modelos ====== */
+label {
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10px;
+}
 
-.controls-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:4px; }
-.swatches{ display:flex; gap:10px; align-items:center; }
-.color-swatch{ width:36px; height:36px; border-radius:50%; border:2px solid rgba(0,0,0,0.2); cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.35); }
-.color-swatch:hover{ transform:scale(1.06); }
+select {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #333;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-.actions{ display:flex; gap:10px; }
-.btn{ background:linear-gradient(90deg,var(--accent),#ff77b3); border:none; color:white; padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:700; box-shadow:0 6px 16px rgba(0,0,0,0.35); }
+select:hover {
+  background-color: #e7f0ff;
+}
 
-.footer{ text-align:center; color:var(--muted); padding:18px 0; margin-top:28px; }
+/* ====== Botões ====== */
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background-color: #007BFF; /* Azul forte da logo */
+  color: #ffffff;
+}
 
-/* small responsive */
-@media (max-width:880px){
-  .main-grid{ grid-template-columns:1fr; padding:10px; }
-  .models-panel{ order:2; }
-  .viewer-panel{ order:1; }
-  canvas{ width:320px; height:320px; }
+button:hover {
+  background-color: #006ae1;
+}
+
+/* ====== Container do mockup ====== */
+.mockup-container {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mockup-container img {
+  width: 350px;
+  max-width: 90%;
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+/* ====== Logo pequena sob o mockup ====== */
+.logo-bottom {
+  width: 120px;
+  margin-top: 15px;
+  opacity: 0.9;
+}
+
+/* ====== Rodapé ====== */
+footer {
+  position: fixed;
+  bottom: 15px;
+  text-align: center;
+  width: 100%;
+  color: #ffffff;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+footer a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
