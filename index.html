@@ -1,60 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mockups — AutênticoRS360</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutentiCors360</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <img src="logo.png" alt="Logo" class="logo" />
-      <h1>Mockups</h1>
-    </div>
-    <div class="model-selector">
-      <label for="modelSelect">Modelo:</label>
-      <select id="modelSelect"></select>
-    </div>
+  <header>
+    <img src="logo.png" alt="Logo" class="logo">
+    <h1>AutentiCors360</h1>
   </header>
 
-  <main class="container">
-    <div class="viewer">
-      <canvas id="mainCanvas" width="900" height="900"></canvas>
-      <div class="overlay" id="overlay"></div>
+  <main>
+    <div class="controls">
+      <div class="color-buttons">
+        <button class="color white" data-color="#ffffff"></button>
+        <button class="color black" data-color="#000000"></button>
+        <button class="color blue" data-color="#007BFF"></button>
+        <button class="color pink" data-color="#FF69B4"></button>
+        <button class="color yellow" data-color="#FFD700"></button>
+        <button class="color green" data-color="#28a745"></button>
+        <button class="color purple" data-color="#800080"></button>
+      </div>
+
+      <div class="download">
+        <button id="download-btn">📥 Baixar imagem</button>
+      </div>
     </div>
 
-    <aside class="panel">
-      <label>Cor do copo</label>
-      <div id="swatches" class="swatches"></div>
-
-      <label>Upload da arte</label>
-      <input type="file" id="artUpload" accept="image/*">
-
-      <label>Scale / Rotate</label>
-      <div class="row">
-        <input type="range" id="scaleRange" min="10" max="300" value="100">
-        <input type="range" id="rotateRange" min="-180" max="180" value="0">
-      </div>
-
-      <label>Pos X / Pos Y</label>
-      <div class="row">
-        <input type="range" id="posX" min="-400" max="400" value="0">
-        <input type="range" id="posY" min="-400" max="400" value="0">
-      </div>
-
-      <button class="btn" id="applyBtn">Confirmar arte</button>
-      <button class="btn ghost" id="resetBtn">Resetar arte</button>
-
-      <hr/>
-
-      <button class="btn" id="exportImageBtn">📷 Baixar imagem</button>
-      <button class="btn" id="exportVideoBtn">🎥 Gerar vídeo 360°</button>
-    </aside>
+    <div class="preview">
+      <img id="cup-image" src="copos/copo.png" alt="Copo personalizado">
+    </div>
   </main>
 
-  <footer>AutênticoRS — Protótipo</footer>
+  <footer>
+    <p>AutentiCors360 © 2025</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
