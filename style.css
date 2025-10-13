@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #1f1f23; /* Cinza escuro 70% preto com leve tom rosado */
+  background-color: #1c1c1f; /* Cinza escuro, 70% preto */
   color: #fff;
   margin: 0;
   padding: 0;
@@ -9,24 +9,19 @@ body {
 
 header {
   display: flex;
-  align-items: center;
   justify-content: center;
-  background-color: #2a2a30;
-  padding: 10px;
+  align-items: center;
+  background-color: #252529;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 .logo {
-  height: 50px;
-  margin-right: 10px;
-}
-
-h1 {
-  font-size: 1.5rem;
-  color: #ff9fba; /* tom rosado que combina com o fundo */
+  height: 60px;
 }
 
 .controls {
-  margin: 20px auto;
+  margin: 25px auto;
 }
 
 .color-buttons {
@@ -76,17 +71,18 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .preview img {
-  width: 250px;
+  width: 240px;
   height: auto;
   filter: drop-shadow(0 0 8px #000);
 }
 
 footer {
-  margin-top: 30px;
-  font-size: 0.9rem;
-  opacity: 0.8;
+  margin-top: 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ff9fba;
 }
