@@ -1,36 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AutentiCors360</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Autêntico Logo" class="logo" />
+  <header class="topbar">
+    <img src="logo.png" alt="logo" class="logo">
   </header>
 
-  <div class="container">
-    <div class="color-picker">
-      <button class="color" data-color="#ffffff"></button>
-      <button class="color" data-color="#000000"></button>
-      <button class="color" data-color="#3b82f6"></button>
-      <button class="color" data-color="#f472b6"></button>
-      <button class="color" data-color="#fde047"></button>
-      <button class="color" data-color="#22c55e"></button>
-      <button class="color" data-color="#a855f7"></button>
-    </div>
+  <main class="main-grid">
+    <aside class="models-panel">
+      <h3>Modelos</h3>
+      <div id="modelsList" class="models-list"></div>
+    </aside>
 
-    <div class="preview">
-      <img id="cup-image" src="copos/caneca_png.png" alt="Copo personalizado" />
-    </div>
+    <section class="viewer-panel">
+      <div class="viewer">
+        <canvas id="mockupCanvas" width="800" height="800"></canvas>
+      </div>
 
-    <button id="download-btn">⬇️ Baixar imagem</button>
-  </div>
+      <div class="controls-row">
+        <div id="swatches" class="swatches"></div>
+        <div class="actions">
+          <button id="downloadBtn" class="btn">📷 Baixar imagem</button>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <footer>© AutentiCors360 2025</footer>
+  <footer class="footer">© AutentiCors360</footer>
+
   <script src="script.js"></script>
 </body>
 </html>
