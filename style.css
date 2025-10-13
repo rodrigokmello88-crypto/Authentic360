@@ -1,7 +1,7 @@
 :root {
   --bg-dark: #0b0c10;
   --panel: rgba(15, 15, 20, 0.85);
-  --accent: #0078ff; /* azul da logo */
+  --accent: #0078ff; /* azul da logo Authentic360 */
   --text: #ffffff;
   --muted: #cccccc;
 }
@@ -10,10 +10,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
 }
 
+/* ======= Fundo ======= */
 body {
-  font-family: "Montserrat", sans-serif;
   background: url("fundos.png") no-repeat center center fixed;
   background-size: cover;
   color: var(--text);
@@ -61,6 +62,7 @@ body {
   align-items: start;
 }
 
+/* ======= Painel de Modelos ======= */
 .models-panel {
   background: var(--panel);
   border-radius: 10px;
@@ -110,7 +112,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* ======= Painel Viewer ======= */
+/* ======= Painel do Mockup ======= */
 .viewer-panel {
   display: flex;
   flex-direction: column;
@@ -165,7 +167,7 @@ canvas {
   transform: scale(1.06);
 }
 
-/* ======= Botões ======= */
+/* ======= Botão ======= */
 .actions {
   display: flex;
   gap: 10px;
