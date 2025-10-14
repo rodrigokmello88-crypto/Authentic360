@@ -3,34 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Authentic360 Mockup Studio</title>
+  <title>Authentic360</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
-    <div class="logo-area">
-      <img src="logo.png" alt="Authentic360" class="logo">
-      <span class="sub">Mockup Studio</span>
-    </div>
+    <img src="logo.png" alt="logo" class="logo">
   </header>
 
   <main class="main-grid">
     <aside class="models-panel">
       <h3>Modelos</h3>
-      <div id="modelsList" class="models-list"></div>
+      <select id="modelSelect" class="model-select">
+        <option value="caneca_png.png">Caneca</option>
+        <option value="caneca_slim_png.png">Caneca Slim</option>
+        <option value="ecologico.png">Ecológico</option>
+        <option value="espumante.png">Espumante</option>
+        <option value="squeeze.png">Squeeze</option>
+        <option value="taca_gin.png">Taça Gin</option>
+        <option value="twister.png">Twister</option>
+        <option value="xicara.png">Xícara</option>
+      </select>
     </aside>
 
     <section class="viewer-panel">
       <div class="viewer">
-        <canvas id="mockupCanvas" width="600" height="600"></canvas>
+        <canvas id="mockupCanvas" width="500" height="500"></canvas>
       </div>
 
       <div class="controls-row">
-        <div id="colorButtons" class="color-buttons"></div>
+        <div id="swatches" class="swatches"></div>
         <div class="actions">
           <button id="downloadBtn" class="btn">📷 Baixar imagem</button>
-          <button id="videoBtn" class="btn btn-secondary">🎥 Gerar vídeo 360°</button>
+          <button id="generate360Btn" class="btn">🎥 Gerar vídeo 360°</button>
         </div>
       </div>
     </section>
