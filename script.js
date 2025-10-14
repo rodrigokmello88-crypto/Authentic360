@@ -1,84 +1,56 @@
-const models = [
-  { name: "Copo 1 - Twister", file: "twister.png" },
-  { name: "Copo 2", file: "copo2.png" },
-  { name: "Copo 3", file: "copo3.png" },
-  { name: "Xícara", file: "xicara.png" }
-];
-
-const colors = ["#ffffff", "#0078ff", "#00aaff", "#111111", "#f4d03f"];
-
-const modelsList = document.getElementById("modelsList");
 const canvas = document.getElementById("mockupCanvas");
 const ctx = canvas.getContext("2d");
-const colorButtons = document.getElementById("colorButtons");
+const modelSelect = document.getElementById("modelSelect");
+const swatchesContainer = document.getElementById("swatches");
+const downloadBtn = document.getElementById("downloadBtn");
+const generate360Btn = document.getElementById("generate360Btn");
 
-let currentModel = null;
-let baseImage = null;
-let currentColor = "#ffffff";
-let rotation = 0;
+const cores = ["#ffffff", "#007bff", "#00a6ff", "#000000", "#f1c232"];
+let imagemAtual = new Image();
+let corAtual = "#ffffff";
 
-// cria lista de modelos (somente nomes)
-models.forEach(model => {
-  const btn = document.createElement("button");
-  btn.className = "model-button";
-  btn.textContent = model.name;
-  btn.onclick = () => loadModel(model.file);
-  modelsList.appendChild(btn);
-});
-
-// cria botões de cor
-colors.forEach(color => {
-  const btn = document.createElement("div");
-  btn.className = "color-btn";
-  btn.style.background = color;
-  btn.onclick = () => {
-    currentColor = color;
-    drawMockup();
-  };
-  colorButtons.appendChild(btn);
-});
-
-// carregar modelo
-function loadModel(modelFile) {
-  const img = new Image();
-  img.src = `copos/${modelFile}`;
-  img.onload = () => {
-    baseImage = img;
-    drawMockup();
-  };
-}
-
-// desenhar mockup com cor aplicada
-function drawMockup() {
-  if (!baseImage) return;
+function desenharMockup() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const scale = 0.6;
-  const w = baseImage.width * scale;
-  const h = baseImage.height * scale;
-  const x = (canvas.width - w) / 2;
-  const y = (canvas.height - h) / 2;
+  ctx.fillStyle = corAtual;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // cor base
-  ctx.fillStyle = currentColor;
-  ctx.fillRect(x, y, w, h);
+  const escala = 0.5; // reduz o tamanho do copo
+  const largura = imagemAtual.width * escala;
+  const altura = imagemAtual.height * escala;
+  const x = (canvas.width - largura) / 2;
+  const y = (canvas.height - altura) / 2;
 
-  // imagem do copo
-  ctx.globalAlpha = 0.85;
-  ctx.drawImage(baseImage, x, y, w, h);
-  ctx.globalAlpha = 1;
+  ctx.drawImage(imagemAtual, x, y, largura, altura);
 }
 
-// baixar imagem
-document.getElementById("downloadBtn").addEventListener("click", () => {
-  if (!baseImage) return alert("Escolha um modelo primeiro!");
+function carregarImagem(nomeArquivo) {
+  imagemAtual.src = `copos/${nomeArquivo}`;
+  imagemAtual.onload = desenharMockup;
+}
+
+modelSelect.addEventListener("change", (e) => {
+  carregarImagem(e.target.value);
+});
+
+cores.forEach(cor => {
+  const sw = document.createElement("div");
+  sw.style.background = cor;
+  sw.addEventListener("click", () => {
+    corAtual = cor;
+    desenharMockup();
+  });
+  swatchesContainer.appendChild(sw);
+});
+
+downloadBtn.addEventListener("click", () => {
   const link = document.createElement("a");
   link.download = "mockup.png";
   link.href = canvas.toDataURL("image/png");
   link.click();
 });
 
-// gerar vídeo 360° (versão demo)
-document.getElementById("videoBtn").addEventListener("click", () => {
-  if (!baseImage) return alert("Escolha um modelo primeiro!");
-  alert("🎥 Em breve: geração automática de vídeo 360° (WebM).");
+generate360Btn.addEventListener("click", async () => {
+  alert("⏳ Em breve: geração automática do vídeo 360°");
 });
+
+carregarImagem(modelSelect.value);
