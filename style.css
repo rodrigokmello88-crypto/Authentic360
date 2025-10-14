@@ -1,111 +1,128 @@
 body {
   margin: 0;
-  font-family: "Montserrat", sans-serif;
-  background: linear-gradient(180deg, #ffffff, #e8f3ff);
-  color: #333;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: #111;
+  color: #fff;
+  overflow: hidden;
 }
 
-.topbar {
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 10px 20px;
-  text-align: center;
-}
-
-.logo {
-  height: 50px;
-}
-
-.main-grid {
-  display: flex;
-  flex: 1;
-  padding: 20px;
-  gap: 20px;
-}
-
-.models-panel {
-  width: 200px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 15px;
-}
-
-.model-select {
+.background {
+  position: fixed;
+  top: 0; left: 0;
   width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.9;
 }
 
-.viewer-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+header {
+  text-align: center;
   padding: 20px;
 }
 
-.viewer {
-  background: transparent;
+header .logo h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+header .logo span {
+  color: #00bcd4;
+}
+
+header p {
+  color: #a7baff;
+  margin-top: -5px;
+}
+
+main {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 20px;
 }
 
-canvas {
-  max-width: 400px;
-  max-height: 400px;
-  border-radius: 8px;
+.modelos {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px #000;
 }
 
-.controls-row {
-  margin-top: 15px;
+.modelos h2 {
+  color: #1e90ff;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.modelos ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modelos li {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.modelos li:hover,
+.modelos li.active {
+  background: rgba(30, 144, 255, 0.4);
+}
+
+.preview {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px #000;
   text-align: center;
 }
 
-.swatches {
+.canvas-area canvas {
+  width: 280px;
+  height: 280px;
+  border-radius: 10px;
+  background: transparent;
+}
+
+.color-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+.color-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 5px #000;
+}
+
+.actions {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 15px;
 }
 
-.swatches div {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid #ccc;
-}
-
-.btn {
+.actions button {
   background: #007bff;
-  color: white;
+  color: #fff;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border-radius: 10px;
   cursor: pointer;
-  margin: 0 5px;
-  transition: 0.3s;
-  font-weight: 600;
+  transition: 0.2s;
 }
 
-.btn:hover {
-  background: #0056b3;
-}
-
-.footer {
-  text-align: center;
-  padding: 10px;
-  font-size: 0.9rem;
-  background: #fff;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+.actions button:hover {
+  background: #0059b2;
 }
