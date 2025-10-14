@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Authentic360</title>
+  <title>Authentic360 Mockup Studio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
-    <img src="logo.png" alt="Authentic360" class="logo">
+    <div class="logo-area">
+      <img src="logo.png" alt="Authentic360" class="logo">
+      <span class="sub">Mockup Studio</span>
+    </div>
   </header>
 
   <main class="main-grid">
@@ -20,11 +23,11 @@
 
     <section class="viewer-panel">
       <div class="viewer">
-        <canvas id="mockupCanvas" width="800" height="800"></canvas>
+        <canvas id="mockupCanvas" width="600" height="600"></canvas>
       </div>
 
       <div class="controls-row">
-        <div id="swatches" class="swatches"></div>
+        <div id="colorButtons" class="color-buttons"></div>
         <div class="actions">
           <button id="downloadBtn" class="btn">📷 Baixar imagem</button>
           <button id="videoBtn" class="btn btn-secondary">🎥 Gerar vídeo 360°</button>
