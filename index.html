@@ -3,52 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authentic360 Mockup Studio</title>
+  <title>Authentic360 - Mockup Studio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <img src="fundos.png" alt="Fundo" class="background" />
-    <div class="logo">
-      <h1>AUTHENTIC<span>360</span></h1>
-      <p>Mockup Studio</p>
+  <div class="container">
+    <h1>Authentic360 - Mockup Studio</h1>
+
+    <ul id="modelList">
+      <li data-model="twister" class="active">Twister</li>
+      <li data-model="caneca">Caneca</li>
+      <li data-model="caneca_slim">Caneca Slim</li>
+      <li data-model="taca_gin">Taça Gin</li>
+      <li data-model="espumante">Espumante</li>
+      <li data-model="ecologico">Ecológico</li>
+      <li data-model="squeeze">Squeeze</li>
+      <li data-model="xicara">Xícara</li>
+    </ul>
+
+    <div class="color-buttons">
+      <div class="color-btn" data-color="#ffffff"></div>
+      <div class="color-btn" data-color="#1e88e5"></div>
+      <div class="color-btn" data-color="#03a9f4"></div>
+      <div class="color-btn" data-color="#000000"></div>
+      <div class="color-btn" data-color="#f4c542"></div>
     </div>
-  </header>
 
-  <main>
-    <aside class="modelos">
-      <h2>Modelos</h2>
-      <ul id="modelList">
-        <li data-model="twister">Twister</li>
-        <li data-model="caneca">Caneca</li>
-        <li data-model="caneca_slim">Caneca Slim</li>
-        <li data-model="taca_gin">Taça Gin</li>
-        <li data-model="espumante">Espumante</li>
-        <li data-model="ecologico">Ecológico</li>
-        <li data-model="squeeze">Squeeze</li>
-        <li data-model="xicara">Xícara</li>
-      </ul>
-    </aside>
+    <canvas id="previewCanvas" width="700" height="700"></canvas>
 
-    <section class="preview">
-      <div class="canvas-area">
-        <canvas id="previewCanvas" width="600" height="600"></canvas>
-      </div>
-
-      <div class="color-buttons">
-        <button class="color-btn" data-color="#ffffff" title="Branco"></button>
-        <button class="color-btn" data-color="#b0b0b0" title="Cinza"></button>
-        <button class="color-btn" data-color="#000000" title="Preto"></button>
-        <button class="color-btn" data-color="#e91e63" title="Rosa"></button>
-        <button class="color-btn" data-color="#2196f3" title="Azul"></button>
-      </div>
-
-      <div class="actions">
-        <button id="downloadBtn">📸 Baixar imagem</button>
-        <button id="recordBtn">🎥 Gerar Vídeo 360°</button>
-      </div>
-    </section>
-  </main>
+    <div class="buttons">
+      <button id="downloadBtn">📷 Baixar Imagem</button>
+      <button id="recordBtn">🎥 Gerar Vídeo 360°</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
