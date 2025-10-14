@@ -1,165 +1,111 @@
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background: url('fundos.png') no-repeat center center fixed;
-  background-size: cover;
-  color: #003366;
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(180deg, #ffffff, #e8f3ff);
+  color: #333;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* TOPO */
 .topbar {
-  background: rgba(255,255,255,0.85);
-  padding: 12px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #fff;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+  text-align: center;
 }
 
 .logo {
-  height: 70px;
+  height: 50px;
 }
 
-.sub {
-  font-size: 14px;
-  color: #0078ff;
-  font-weight: 600;
-  text-align: center;
-}
-
-/* LAYOUT PRINCIPAL */
 .main-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 20px;
-  padding: 20px;
-}
-
-/* PAINEL DE MODELOS */
-.models-panel {
-  background: rgba(20,20,20,0.85);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.models-panel h3 {
-  color: #00aaff;
-  margin-bottom: 12px;
-  text-align: center;
-  font-weight: 700;
-}
-
-.models-list {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.model-button {
-  background-color: #111;
-  color: #fff;
-  border: 1px solid #00aaff;
-  border-radius: 8px;
-  padding: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.model-button:hover {
-  background-color: #00aaff;
-  color: #fff;
-  transform: scale(1.05);
-}
-
-/* PAINEL VIEWER */
-.viewer-panel {
-  background: rgba(255,255,255,0.9);
-  border-radius: 15px;
+  flex: 1;
   padding: 20px;
+  gap: 20px;
+}
+
+.models-panel {
+  width: 200px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+}
+
+.model-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.viewer-panel {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
 }
 
 .viewer {
-  width: 100%;
-  max-width: 600px;
-  height: 600px;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 canvas {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 400px;
+  max-height: 400px;
+  border-radius: 8px;
 }
 
-/* CORES */
-.color-buttons {
+.controls-row {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.swatches {
   display: flex;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 15px;
 }
 
-.color-btn {
-  width: 32px;
-  height: 32px;
+.swatches div {
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  border: 2px solid #ccc;
   cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.color-btn:hover {
-  transform: scale(1.15);
-}
-
-/* BOTÕES DE AÇÃO */
-.actions {
-  display: flex;
-  gap: 10px;
+  border: 2px solid #ccc;
 }
 
 .btn {
-  background-color: #0078ff;
-  color: #fff;
+  background: #007bff;
+  color: white;
   border: none;
-  padding: 10px 16px;
-  font-weight: 600;
-  border-radius: 8px;
+  padding: 8px 14px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s;
+  margin: 0 5px;
+  transition: 0.3s;
+  font-weight: 600;
 }
 
 .btn:hover {
-  background-color: #005fcc;
+  background: #0056b3;
 }
 
-.btn-secondary {
-  background-color: #00aaff;
-}
-
-/* RODAPÉ */
 .footer {
   text-align: center;
-  padding: 15px;
-  background: rgba(255,255,255,0.85);
-  font-size: 14px;
-  color: #003366;
-}
-
-/* RESPONSIVO */
-@media (max-width: 768px) {
-  .main-grid {
-    grid-template-columns: 1fr;
-  }
+  padding: 10px;
+  font-size: 0.9rem;
+  background: #fff;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
 }
