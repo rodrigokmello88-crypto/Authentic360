@@ -28,17 +28,30 @@ img.onload = () => drawModel();
 function drawModel() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  const scale = 1.3; // +30%
+  const width = 200 * scale;
+  const height = 300 * scale;
+  const x = canvas.width / 2 - width / 2;
+  const y = canvas.height / 2 - height / 2;
+
+  // simulação de rotação horizontal real (efeito elíptico)
+  const angle = (rotation % 360) * (Math.PI / 180);
+  const perspective = 0.8 + 0.2 * Math.cos(angle);
+  const drawWidth = width * perspective;
+
   ctx.save();
   ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.rotate(rotation * Math.PI / 180);
-  ctx.translate(-canvas.width / 2, -canvas.height / 2);
-
-  ctx.filter = `drop-shadow(0px 0px 5px rgba(0,0,0,0.3))`;
-  ctx.drawImage(img, 200, 150, 200, 300);
+  ctx.drawImage(
+    img,
+    -drawWidth / 2,
+    -height / 2,
+    drawWidth,
+    height
+  );
 
   ctx.globalCompositeOperation = "source-atop";
   ctx.fillStyle = currentColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(-drawWidth / 2, -height / 2, drawWidth, height);
 
   ctx.restore();
   ctx.globalCompositeOperation = "source-over";
@@ -52,12 +65,12 @@ canvas.addEventListener("mouseup", () => (isDragging = false));
 canvas.addEventListener("mouseleave", () => (isDragging = false));
 canvas.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
-  rotation += (e.clientX - lastX) * 0.5;
+  rotation += (e.clientX - lastX) * 0.8;
   lastX = e.clientX;
   drawModel();
 });
 
-// troca de modelo
+// trocar modelo
 modelList.addEventListener("click", (e) => {
   if (e.target.tagName === "LI") {
     document.querySelectorAll("#modelList li").forEach((li) => li.classList.remove("active"));
@@ -67,7 +80,7 @@ modelList.addEventListener("click", (e) => {
   }
 });
 
-// troca de cor
+// trocar cor
 document.querySelectorAll(".color-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     currentColor = btn.dataset.color;
@@ -83,7 +96,7 @@ downloadBtn.addEventListener("click", () => {
   link.click();
 });
 
-// gerar vídeo 360
+// gerar vídeo 360° (8s)
 recordBtn.addEventListener("click", async () => {
   const stream = canvas.captureStream(30);
   const recorder = new MediaRecorder(stream, {
@@ -101,9 +114,9 @@ recordBtn.addEventListener("click", async () => {
   };
 
   recorder.start();
-  const totalFrames = 8 * 30; // 8s a 30fps
+  const totalFrames = 8 * 30;
   for (let i = 0; i < totalFrames; i++) {
-    rotation += 1.5;
+    rotation += 360 / totalFrames;
     drawModel();
     await new Promise((r) => requestAnimationFrame(r));
   }
