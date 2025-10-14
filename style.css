@@ -3,15 +3,16 @@ body {
   font-family: 'Montserrat', sans-serif;
   background: url('fundos.png') no-repeat center center fixed;
   background-size: cover;
+  color: #003366;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  color: #003366;
 }
 
+/* TOPO */
 .topbar {
   background: rgba(255,255,255,0.85);
-  padding: 10px 20px;
+  padding: 12px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,19 +23,35 @@ body {
   height: 70px;
 }
 
+.sub {
+  font-size: 14px;
+  color: #0078ff;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* LAYOUT PRINCIPAL */
 .main-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 15px;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
   padding: 20px;
 }
 
+/* PAINEL DE MODELOS */
 .models-panel {
-  background: rgba(255,255,255,0.85);
+  background: rgba(20,20,20,0.85);
   border-radius: 15px;
-  padding: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.models-panel h3 {
+  color: #00aaff;
+  margin-bottom: 12px;
+  text-align: center;
+  font-weight: 700;
 }
 
 .models-list {
@@ -43,54 +60,84 @@ body {
   gap: 10px;
 }
 
-.models-list img {
-  width: 100%;
-  border-radius: 10px;
+.model-button {
+  background-color: #111;
+  color: #fff;
+  border: 1px solid #00aaff;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: left;
+  transition: background 0.2s, transform 0.1s;
 }
 
-.models-list img:hover {
+.model-button:hover {
+  background-color: #00aaff;
+  color: #fff;
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+/* PAINEL VIEWER */
 .viewer-panel {
   background: rgba(255,255,255,0.9);
   border-radius: 15px;
-  padding: 15px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .viewer {
-  background: transparent;
-  border-radius: 10px;
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
+  height: 600px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.controls-row {
-  margin-top: 20px;
+canvas {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* CORES */
+.color-buttons {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 800px;
-  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.color-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color-btn:hover {
+  transform: scale(1.15);
+}
+
+/* BOTÕES DE AÇÃO */
+.actions {
+  display: flex;
+  gap: 10px;
 }
 
 .btn {
   background-color: #0078ff;
   color: #fff;
   border: none;
-  padding: 12px 20px;
+  padding: 10px 16px;
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background 0.2s;
 }
 
 .btn:hover {
@@ -98,13 +145,21 @@ body {
 }
 
 .btn-secondary {
-  background-color: #0099ff;
+  background-color: #00aaff;
 }
 
+/* RODAPÉ */
 .footer {
   text-align: center;
   padding: 15px;
   background: rgba(255,255,255,0.85);
   font-size: 14px;
   color: #003366;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
 }
