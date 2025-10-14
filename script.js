@@ -16,10 +16,13 @@ let isDragging = false;
 let lastX = 0;
 
 const canvas = document.getElementById("previewCanvas");
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d", { alpha: true });
 const modelList = document.getElementById("modelList");
 const downloadBtn = document.getElementById("downloadBtn");
 const recordBtn = document.getElementById("recordBtn");
+
+const fundo = new Image();
+fundo.src = "fundos.png";
 
 const img = new Image();
 img.src = models[currentModel];
@@ -28,35 +31,34 @@ img.onload = () => drawModel();
 function drawModel() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const scale = 1.3; // +30%
+  // fundo no preview
+  ctx.globalAlpha = 0.3;
+  ctx.drawImage(fundo, 0, 0, canvas.width, canvas.height);
+  ctx.globalAlpha = 1;
+
+  const scale = 1.9; // copos 60% maiores
   const width = 200 * scale;
   const height = 300 * scale;
   const x = canvas.width / 2 - width / 2;
   const y = canvas.height / 2 - height / 2;
 
-  // simulação de rotação horizontal real (efeito elíptico)
   const angle = (rotation % 360) * (Math.PI / 180);
   const perspective = 0.8 + 0.2 * Math.cos(angle);
   const drawWidth = width * perspective;
 
   ctx.save();
   ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.drawImage(
-    img,
-    -drawWidth / 2,
-    -height / 2,
-    drawWidth,
-    height
-  );
+  ctx.drawImage(img, -drawWidth / 2, -height / 2, drawWidth, height);
 
   ctx.globalCompositeOperation = "source-atop";
   ctx.fillStyle = currentColor;
   ctx.fillRect(-drawWidth / 2, -height / 2, drawWidth, height);
-
   ctx.restore();
+
   ctx.globalCompositeOperation = "source-over";
 }
 
+// rotação manual com o mouse
 canvas.addEventListener("mousedown", (e) => {
   isDragging = true;
   lastX = e.clientX;
@@ -70,7 +72,7 @@ canvas.addEventListener("mousemove", (e) => {
   drawModel();
 });
 
-// trocar modelo
+// troca de modelo
 modelList.addEventListener("click", (e) => {
   if (e.target.tagName === "LI") {
     document.querySelectorAll("#modelList li").forEach((li) => li.classList.remove("active"));
@@ -80,7 +82,7 @@ modelList.addEventListener("click", (e) => {
   }
 });
 
-// trocar cor
+// troca de cor
 document.querySelectorAll(".color-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     currentColor = btn.dataset.color;
@@ -88,7 +90,7 @@ document.querySelectorAll(".color-btn").forEach((btn) => {
   });
 });
 
-// baixar imagem
+// baixar imagem PNG
 downloadBtn.addEventListener("click", () => {
   const link = document.createElement("a");
   link.download = `${currentModel}.png`;
@@ -96,7 +98,7 @@ downloadBtn.addEventListener("click", () => {
   link.click();
 });
 
-// gerar vídeo 360° (8s)
+// gerar vídeo 360° (8s com transparência)
 recordBtn.addEventListener("click", async () => {
   const stream = canvas.captureStream(30);
   const recorder = new MediaRecorder(stream, {
