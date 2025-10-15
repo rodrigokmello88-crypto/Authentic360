@@ -61,7 +61,7 @@ main {
 }
 
 .visualizador {
-  background: #1c1c1c;
+  background: #1c1c1c; /* mantém o retângulo chumbo forte */
   border-radius: 12px;
   padding: 40px;
   display: flex;
@@ -70,6 +70,7 @@ main {
   width: 600px;
   height: 400px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  overflow: hidden; /* evita que o copo saia da área */
 }
 
 #visor {
@@ -78,13 +79,17 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
+  position: relative;
 }
 
-#copо {
-  max-width: 50%;
-  max-height: 80%;
+#copo {
+  width: auto;
+  height: 65%;
   object-fit: contain;
+  object-position: center;
   image-rendering: high-quality;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
 }
 
 .cores {
