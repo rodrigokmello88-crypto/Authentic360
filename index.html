@@ -8,46 +8,45 @@
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Authentic Personalizados" class="logo" />
+    <img src="logo.png" alt="Authentic 360" class="logo" />
   </header>
 
   <main>
     <aside class="menu">
       <h2>Modelos</h2>
-      <button onclick="trocarCopo('caneca')">Caneca</button>
-      <button onclick="trocarCopo('caneca-slim')">Caneca Slim</button>
-      <button onclick="trocarCopo('ecologico')">Ecológico</button>
-      <button onclick="trocarCopo('espumante')">Espumante</button>
-      <button onclick="trocarCopo('squeeze')">Squeeze</button>
-      <button onclick="trocarCopo('taca-gin')">Taça Gin</button>
-      <button onclick="trocarCopo('twister')">Twister</button>
-      <button onclick="trocarCopo('xicara')">Xícara</button>
+      <button onclick="trocarCopo('caneca_png.png')">Caneca</button>
+      <button onclick="trocarCopo('caneca_slim.png')">Caneca Slim</button>
+      <button onclick="trocarCopo('ecologico.png')">Ecológico</button>
+      <button onclick="trocarCopo('espumante.png')">Espumante</button>
+      <button onclick="trocarCopo('squeeze.png')">Squeeze</button>
+      <button onclick="trocarCopo('taca_gin.png')">Taça Gin</button>
+      <button onclick="trocarCopo('twister.png')">Twister</button>
+      <button onclick="trocarCopo('xicara.png')">Xícara</button>
     </aside>
 
     <section class="visualizador">
-      <div id="visor">
-        <img id="copo" src="copos/caneca.png" alt="Modelo selecionado" />
+      <div class="copo-container">
+        <img id="copo" src="copos/caneca_png.png" alt="Copo" />
+      </div>
+
+      <div class="cores">
+        <div class="cor" style="background:#d9d9d9" onclick="mudarCor('#d9d9d9')"></div>
+        <div class="cor" style="background:#808080" onclick="mudarCor('#808080')"></div>
+        <div class="cor" style="background:#333333" onclick="mudarCor('#333333')"></div>
+        <div class="cor" style="background:#000000" onclick="mudarCor('#000000')"></div>
+        <div class="cor" style="background:#00ffff" onclick="mudarCor('#00ffff')"></div>
+        <div class="cor" style="background:#ff00ff" onclick="mudarCor('#ff00ff')"></div>
+      </div>
+
+      <div class="botoes">
+        <button onclick="gerarVideo()">🎥 Gerar vídeo 360°</button>
+        <button onclick="baixarImagem()">⬇️ Baixar</button>
       </div>
     </section>
   </main>
 
-  <div class="cores">
-    <button class="cor" style="background:#e6e6e6" onclick="mudarCor('#e6e6e6')"></button>
-    <button class="cor" style="background:#bfbfbf" onclick="mudarCor('#bfbfbf')"></button>
-    <button class="cor" style="background:#8c8c8c" onclick="mudarCor('#8c8c8c')"></button>
-    <button class="cor" style="background:#333" onclick="mudarCor('#333')"></button>
-    <button class="cor" style="background:#0094ff" onclick="mudarCor('#0094ff')"></button>
-    <button class="cor" style="background:#00ffff" onclick="mudarCor('#00ffff')"></button>
-    <button class="cor" style="background:#ff00ff" onclick="mudarCor('#ff00ff')"></button>
-  </div>
-
-  <div class="botoes">
-    <button class="acao" onclick="gerarVideo()">Gerar vídeo 360°</button>
-    <button class="acao" onclick="baixarImagem()">Baixar</button>
-  </div>
-
   <footer>
-    <p>© 2025 Authentic Personalizados — Todos os direitos reservados.</p>
+    © 2025 Authentic Personalizados — Todos os direitos reservados.
   </footer>
 
   <script src="script.js"></script>
