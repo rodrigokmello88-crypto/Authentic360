@@ -2,7 +2,7 @@ const models = [
   { name: 'Caneca', file: 'caneca_png.png', scale: 0.42 },
   { name: 'Caneca Slim', file: 'caneca_slim_png.png', scale: 0.42 },
   { name: 'Ecológico', file: 'ecologico.png', scale: 0.40 },
-  { name: 'Espumante', file: 'espumante.png', scale: 0.32 },
+  { name: 'Espumante', file: 'espumante.png', scale: 0.29 }, // 🔽 diminuído
   { name: 'Squeeze', file: 'squeeze.png', scale: 0.33 },
   { name: 'Taça Gin', file: 'taca_gin.png', scale: 0.31 },
   { name: 'Twister', file: 'twister.png', scale: 0.40 },
