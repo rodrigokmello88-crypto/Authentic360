@@ -1,6 +1,6 @@
 const modelos = {
   'caneca_png.png': 'copos/caneca_png.png',
-  'caneca_slim.png': 'copos/caneca_slim.png',
+  'caneca_slim_png.png': 'copos/caneca_slim_png.png',
   'ecologico.png': 'copos/ecologico.png',
   'espumante.png': 'copos/espumante.png',
   'squeeze.png': 'copos/squeeze.png',
@@ -9,28 +9,49 @@ const modelos = {
   'xicara.png': 'copos/xicara.png'
 };
 
+window.onload = () => {
+  const container = document.querySelector('.copo-container');
+  const tinta = document.createElement('div');
+  tinta.id = 'tinta';
+  container.appendChild(tinta);
+};
+
 function trocarCopo(modelo) {
   const img = document.getElementById('copo');
+  const tinta = document.getElementById('tinta');
   if (modelos[modelo]) {
     img.src = modelos[modelo];
-  } else {
-    console.error(`Modelo ${modelo} não encontrado`);
+    img.style.width = "45%";
+    tinta.style.width = "45%";
   }
 }
 
 function mudarCor(cor) {
-  const copo = document.getElementById('copo');
-  copo.style.filter = `drop-shadow(0 0 5px ${cor}) brightness(1.2)`;
+  const tinta = document.getElementById('tinta');
+  tinta.style.backgroundColor = cor;
 }
 
 function gerarVideo() {
-  alert("⚙️ Gerando vídeo 360°... (simulação)");
+  alert("🎥 Gerando vídeo 360° (simulação)");
 }
 
 function baixarImagem() {
   const img = document.getElementById('copo');
   const link = document.createElement('a');
   link.href = img.src;
-  link.download = 'copo.png';
+  link.download = 'modelo_copo.png';
   link.click();
 }
+
+document.getElementById('uploadArte').addEventListener('change', function (event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const arte = document.getElementById('arte');
+    arte.src = e.target.result;
+    arte.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
