@@ -55,15 +55,21 @@ main {
 
 .visualizador {
   background: #1a1a1a;
+  width: 450px;
+  height: 450px;
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .copo-container {
-  width: 360px;
-  height: 360px;
+  width: 100%;
+  height: 100%;
   position: relative;
   display: flex;
   justify-content: center;
@@ -71,27 +77,37 @@ main {
 }
 
 #copo {
-  width: 45%;
+  width: 42%;
   height: auto;
   position: relative;
   z-index: 2;
+  object-fit: contain;
   transition: all 0.3s ease;
 }
 
+/* camada de tinta sólida (usa o PNG como máscara) */
 #tinta {
   position: absolute;
-  width: 45%;
-  height: 100%;
-  background-color: transparent;
+  width: 42%;
+  height: auto;
+  aspect-ratio: 1/1;
   z-index: 1;
-  mix-blend-mode: color;
   transition: all 0.3s ease;
+  -webkit-mask-image: var(--mask-img);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: var(--mask-img);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background-color: transparent;
 }
 
 #arte {
   position: absolute;
   width: 25%;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
