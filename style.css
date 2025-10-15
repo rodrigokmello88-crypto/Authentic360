@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: url("fundo.jpg") no-repeat center center fixed;
+  background: url("fundos.png") no-repeat center center fixed;
   background-size: cover;
   color: white;
   text-align: center;
@@ -58,21 +58,46 @@ main {
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .copo-container {
   width: 360px;
   height: 360px;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 }
 
-.copo-container img {
-  width: 50%;
+#copo {
+  width: 45%;
   height: auto;
-  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+#tinta {
+  position: absolute;
+  width: 45%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 1;
+  mix-blend-mode: color;
+  transition: all 0.3s ease;
+}
+
+#arte {
+  position: absolute;
+  width: 25%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  opacity: 0.9;
+  display: none;
+  pointer-events: none;
 }
 
 .cores {
@@ -83,14 +108,14 @@ main {
 }
 
 .cor {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 2px solid #fff;
   cursor: pointer;
 }
 
-.botoes button {
+.botoes button, .upload {
   background: #3b82f6;
   color: white;
   border: none;
@@ -100,10 +125,15 @@ main {
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
+  display: inline-block;
 }
 
-.botoes button:hover {
+.botoes button:hover, .upload:hover {
   background: #2563eb;
+}
+
+.upload input {
+  display: none;
 }
 
 footer {
