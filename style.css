@@ -1,4 +1,4 @@
-/* ======== RESET BÁSICO ======== */
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* ======== FUNDO GERAL ======== */
+/* ===== FUNDO ===== */
 body {
   background: url('fundos.png') no-repeat center center fixed;
   background-size: cover;
@@ -17,46 +17,45 @@ body {
   align-items: center;
 }
 
-/* ======== CABEÇALHO / LOGO ======== */
+/* ===== CABEÇALHO ===== */
 header {
   width: 100%;
-  background: transparent; /* 🔹 tira o cinza da barra */
+  background: transparent;
   text-align: center;
-  padding: 20px 0 10px 0;
+  padding: 15px 0;
 }
 
 header img {
   height: 70px;
 }
 
-/* ======== CONTAINER PRINCIPAL ======== */
+/* ===== CONTAINER PRINCIPAL ===== */
 .main-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 25px;
-  padding: 20px;
-  max-width: 1200px; /* 🔹 ajustado para caber 100% */
-  width: 100%;
+  gap: 40px;
+  padding: 30px;
+  width: 90%;
+  max-width: 1200px;
 }
 
-/* ======== MENU LATERAL ======== */
+/* ===== MENU LATERAL ===== */
 .sidebar {
-  background: #1b1b1b; /* 🔹 cinza chumbo */
-  padding: 25px 20px;
+  background: #1b1b1b;
+  padding: 20px;
   border-radius: 12px;
-  width: 230px;
-  text-align: center;
+  width: 240px;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  text-align: center;
 }
 
 .sidebar h2 {
   font-size: 18px;
-  margin-bottom: 15px;
   color: #3b82f6;
+  margin-bottom: 15px;
 }
 
-/* ======== BOTÕES DE MODELOS ======== */
 .model-btn {
   background: #3b82f6;
   border: none;
@@ -68,14 +67,14 @@ header img {
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .model-btn:hover {
   background: #2563eb;
 }
 
-/* ======== VIEWER ======== */
+/* ===== VIEWER ===== */
 .viewer {
   background: #1b1b1b;
   border-radius: 12px;
@@ -83,25 +82,26 @@ header img {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 65%; /* 🔹 reduzido pra caber no 100% */
-  min-height: 440px;
+  width: 600px;
+  height: 500px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
 canvas {
-  max-width: 65%;
+  width: 70%;
   height: auto;
-  background: transparent; /* 🔹 mantém fundo transparente */
+  background: transparent; /* respeita transparência PNG */
+  object-fit: contain;
 }
 
-/* ======== SWATCHES (CORES) ======== */
+/* ===== CORES ===== */
 .color-controls {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .color-swatch {
@@ -117,7 +117,7 @@ canvas {
   transform: scale(1.2);
 }
 
-/* ======== BOTÃO DE VÍDEO ======== */
+/* ===== BOTÃO GERAR ===== */
 .controls {
   margin-top: 25px;
   display: flex;
@@ -139,7 +139,7 @@ button#generateVideo:hover {
   background: #2563eb;
 }
 
-/* ======== RODAPÉ ======== */
+/* ===== RODAPÉ ===== */
 footer {
   text-align: center;
   font-size: 13px;
