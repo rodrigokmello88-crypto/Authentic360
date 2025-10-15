@@ -78,12 +78,13 @@ header img {
 }
 
 canvas {
-  width: 85%;
+  width: 42.5%; /* antes 85%, reduzido 50% */
   height: auto;
   border-radius: 10px;
   object-fit: contain;
   background: transparent;
 }
+
 
 .color-controls {
   display: flex;
