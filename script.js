@@ -1,126 +1,128 @@
-const models = {
-  twister: "copos/twister.png",
-  caneca: "copos/caneca.png",
-  caneca_slim: "copos/caneca_slim.png",
-  taca_gin: "copos/taca_gin.png",
-  espumante: "copos/espumante.png",
-  ecologico: "copos/ecologico.png",
-  squeeze: "copos/squeeze.png",
-  xicara: "copos/xicara.png",
-};
-
-let currentModel = "twister";
-let currentColor = "#ffffff";
-let rotation = 0;
-let isDragging = false;
-let lastX = 0;
-
-const canvas = document.getElementById("previewCanvas");
-const ctx = canvas.getContext("2d", { alpha: true });
-const modelList = document.getElementById("modelList");
-const downloadBtn = document.getElementById("downloadBtn");
-const recordBtn = document.getElementById("recordBtn");
-
-const fundo = new Image();
-fundo.src = "fundos.png";
-
-const img = new Image();
-img.src = models[currentModel];
-img.onload = () => drawModel();
-
-function drawModel() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // fundo no preview
-  ctx.globalAlpha = 0.3;
-  ctx.drawImage(fundo, 0, 0, canvas.width, canvas.height);
-  ctx.globalAlpha = 1;
-
-  const scale = 1.9; // copos 60% maiores
-  const width = 200 * scale;
-  const height = 300 * scale;
-  const x = canvas.width / 2 - width / 2;
-  const y = canvas.height / 2 - height / 2;
-
-  const angle = (rotation % 360) * (Math.PI / 180);
-  const perspective = 0.8 + 0.2 * Math.cos(angle);
-  const drawWidth = width * perspective;
-
-  ctx.save();
-  ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.drawImage(img, -drawWidth / 2, -height / 2, drawWidth, height);
-
-  ctx.globalCompositeOperation = "source-atop";
-  ctx.fillStyle = currentColor;
-  ctx.fillRect(-drawWidth / 2, -height / 2, drawWidth, height);
-  ctx.restore();
-
-  ctx.globalCompositeOperation = "source-over";
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: url('fundos.png') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: #fff;
 }
 
-// rotação manual com o mouse
-canvas.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  lastX = e.clientX;
-});
-canvas.addEventListener("mouseup", () => (isDragging = false));
-canvas.addEventListener("mouseleave", () => (isDragging = false));
-canvas.addEventListener("mousemove", (e) => {
-  if (!isDragging) return;
-  rotation += (e.clientX - lastX) * 0.8;
-  lastX = e.clientX;
-  drawModel();
-});
+.topbar {
+  text-align: center;
+  padding: 10px 0;
+}
 
-// troca de modelo
-modelList.addEventListener("click", (e) => {
-  if (e.target.tagName === "LI") {
-    document.querySelectorAll("#modelList li").forEach((li) => li.classList.remove("active"));
-    e.target.classList.add("active");
-    currentModel = e.target.dataset.model;
-    img.src = models[currentModel];
-  }
-});
+.logo {
+  height: 70px;
+}
 
-// troca de cor
-document.querySelectorAll(".color-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    currentColor = btn.dataset.color;
-    drawModel();
-  });
-});
+.main-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  flex: 1;
+  overflow: hidden;
+}
 
-// baixar imagem PNG
-downloadBtn.addEventListener("click", () => {
-  const link = document.createElement("a");
-  link.download = `${currentModel}.png`;
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-});
+.models-panel {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  overflow-y: auto;
+}
 
-// gerar vídeo 360° (8s com transparência)
-recordBtn.addEventListener("click", async () => {
-  const stream = canvas.captureStream(30);
-  const recorder = new MediaRecorder(stream, {
-    mimeType: "video/webm;codecs=vp9",
-  });
-  const chunks = [];
-  recorder.ondataavailable = (e) => chunks.push(e.data);
-  recorder.onstop = () => {
-    const blob = new Blob(chunks, { type: "video/webm" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${currentModel}_360.webm`;
-    a.click();
-  };
+.models-panel h3 {
+  margin-top: 0;
+  color: #4fa9ff;
+  text-align: center;
+}
 
-  recorder.start();
-  const totalFrames = 8 * 30;
-  for (let i = 0; i < totalFrames; i++) {
-    rotation += 360 / totalFrames;
-    drawModel();
-    await new Promise((r) => requestAnimationFrame(r));
-  }
-  recorder.stop();
-});
+.models-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.models-list li {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-align: center;
+}
+
+.models-list li:hover {
+  background: #4fa9ff;
+  color: white;
+}
+
+.viewer-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.viewer {
+  width: 60%;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  transform: scale(0.8); /* 20% menor */
+}
+
+.controls {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.swatches {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.color-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s;
+}
+
+.color-btn:hover {
+  transform: scale(1.2);
+}
+
+.btn {
+  padding: 10px 20px;
+  background: #4fa9ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #0066cc;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
