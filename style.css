@@ -1,100 +1,81 @@
-:root {
-  --bg-dark: #0b0c10;
-  --panel: #1a1a1a;
-  --accent: #0078ff;
-  --text: #ffffff;
-  --muted: #bbbbbb;
-}
-
-/* ====== Reset ====== */
+/* ======== RESET BÁSICO ======== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-/* ====== Fundo ====== */
+/* ======== FUNDO GERAL ======== */
 body {
   background: url('fundos.png') no-repeat center center fixed;
   background-size: cover;
-  color: var(--text);
+  color: #fff;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-}
-
-/* ====== Topbar ====== */
-.topbar {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 18px 0;
-  border-bottom: 2px solid var(--accent);
 }
 
-.logo {
+/* ======== CABEÇALHO / LOGO ======== */
+header {
+  width: 100%;
+  background: transparent; /* 🔹 tira o cinza da barra */
+  text-align: center;
+  padding: 20px 0 10px 0;
+}
+
+header img {
   height: 70px;
 }
 
-/* ====== Layout ====== */
-.main-grid {
-  max-width: 1200px;
-  margin: 40px auto;
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 24px;
-  padding: 0 20px;
-}
-
-/* ====== Painel lateral ====== */
-.models-panel {
-  background: var(--panel);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-}
-
-.models-panel h3 {
-  color: var(--accent);
-  font-size: 18px;
-  margin-bottom: 12px;
-  text-align: center;
-}
-
-.models-list {
+/* ======== CONTAINER PRINCIPAL ======== */
+.main-container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 25px;
+  padding: 20px;
+  max-width: 1200px; /* 🔹 ajustado para caber 100% */
+  width: 100%;
 }
 
+/* ======== MENU LATERAL ======== */
+.sidebar {
+  background: #1b1b1b; /* 🔹 cinza chumbo */
+  padding: 25px 20px;
+  border-radius: 12px;
+  width: 230px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #3b82f6;
+}
+
+/* ======== BOTÕES DE MODELOS ======== */
 .model-btn {
-  background: #007bff;
-  color: #fff;
-  font-weight: 600;
+  background: #3b82f6;
   border: none;
+  color: #fff;
+  padding: 10px;
+  margin: 6px 0;
+  width: 100%;
   border-radius: 8px;
-  padding: 10px 14px;
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
 }
 
 .model-btn:hover {
-  background: #005fd1;
+  background: #2563eb;
 }
 
-/* ====== Painel Viewer ====== */
-.viewer-panel {
-  background: var(--panel);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
+/* ======== VIEWER ======== */
 .viewer {
   background: #1b1b1b;
   border-radius: 12px;
@@ -102,73 +83,67 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  min-height: 460px;
+  width: 65%; /* 🔹 reduzido pra caber no 100% */
+  min-height: 440px;
   overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
 canvas {
-  max-width: 70%;
+  max-width: 65%;
   height: auto;
-  background: transparent;
+  background: transparent; /* 🔹 mantém fundo transparente */
 }
 
-
-/* ====== Controles ====== */
-.controls-row {
+/* ======== SWATCHES (CORES) ======== */
+.color-controls {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 12px;
   margin-top: 20px;
 }
 
-.swatches {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .color-swatch {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid #ccc;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 
 .color-swatch:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
-/* ====== Botões ====== */
-.actions {
+/* ======== BOTÃO DE VÍDEO ======== */
+.controls {
+  margin-top: 25px;
   display: flex;
-  gap: 12px;
   justify-content: center;
 }
 
-.btn {
-  background: var(--accent);
+button#generateVideo {
+  background: #3b82f6;
   color: #fff;
   border: none;
   padding: 10px 18px;
-  border-radius: 10px;
-  font-weight: 700;
+  font-size: 15px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
-.btn:hover {
-  background: #005fd1;
+button#generateVideo:hover {
+  background: #2563eb;
 }
 
-/* ====== Footer ====== */
-.footer {
+/* ======== RODAPÉ ======== */
+footer {
   text-align: center;
-  padding: 18px 0;
-  color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
+  color: #999;
+  margin-top: 15px;
+  padding-bottom: 10px;
 }
