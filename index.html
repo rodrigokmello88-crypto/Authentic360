@@ -1,42 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authentic360 - Mockup Studio</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Authentic360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="container">
-    <h1>Authentic360 - Mockup Studio</h1>
+  <header class="topbar">
+    <img src="logo.png" alt="Authentic360 Logo" class="logo">
+  </header>
 
-    <ul id="modelList">
-      <li data-model="twister" class="active">Twister</li>
-      <li data-model="caneca">Caneca</li>
-      <li data-model="caneca_slim">Caneca Slim</li>
-      <li data-model="taca_gin">Taça Gin</li>
-      <li data-model="espumante">Espumante</li>
-      <li data-model="ecologico">Ecológico</li>
-      <li data-model="squeeze">Squeeze</li>
-      <li data-model="xicara">Xícara</li>
-    </ul>
+  <main class="main-grid">
+    <aside class="models-panel">
+      <h3>Modelos</h3>
+      <ul id="modelsList" class="models-list"></ul>
+    </aside>
 
-    <div class="color-buttons">
-      <div class="color-btn" data-color="#ffffff"></div>
-      <div class="color-btn" data-color="#1e88e5"></div>
-      <div class="color-btn" data-color="#03a9f4"></div>
-      <div class="color-btn" data-color="#000000"></div>
-      <div class="color-btn" data-color="#f4c542"></div>
-    </div>
+    <section class="viewer-panel">
+      <div class="viewer">
+        <canvas id="mockupCanvas" width="800" height="800"></canvas>
+      </div>
 
-    <canvas id="previewCanvas" width="700" height="700"></canvas>
+      <div class="controls">
+        <div id="swatches" class="swatches"></div>
+        <button id="generateVideoBtn" class="btn">🎥 Gerar Vídeo 360º</button>
+      </div>
+    </section>
+  </main>
 
-    <div class="buttons">
-      <button id="downloadBtn">📷 Baixar Imagem</button>
-      <button id="recordBtn">🎥 Gerar Vídeo 360°</button>
-    </div>
-  </div>
-
+  <footer class="footer">© 2025 Authentic360</footer>
   <script src="script.js"></script>
 </body>
 </html>
