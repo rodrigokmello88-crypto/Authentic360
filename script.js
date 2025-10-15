@@ -1,12 +1,12 @@
 const models = [
-  { name: 'Caneca', file: 'caneca_png.png' },
-  { name: 'Caneca Slim', file: 'caneca_slim_png.png' },
-  { name: 'Ecológico', file: 'ecologico.png' },
-  { name: 'Espumante', file: 'espumante.png' },
-  { name: 'Squeeze', file: 'squeeze.png' },
-  { name: 'Taça Gin', file: 'taca_gin.png' },
-  { name: 'Twister', file: 'twister.png' },
-  { name: 'Xícara', file: 'xicara.png' }
+  { name: 'Caneca', file: 'caneca_png.png', scale: 0.42 },
+  { name: 'Caneca Slim', file: 'caneca_slim_png.png', scale: 0.42 },
+  { name: 'Ecológico', file: 'ecologico.png', scale: 0.40 },
+  { name: 'Espumante', file: 'espumante.png', scale: 0.32 },
+  { name: 'Squeeze', file: 'squeeze.png', scale: 0.33 },
+  { name: 'Taça Gin', file: 'taca_gin.png', scale: 0.31 },
+  { name: 'Twister', file: 'twister.png', scale: 0.40 },
+  { name: 'Xícara', file: 'xicara.png', scale: 0.44 }
 ];
 
 const colors = ['#ffffff', '#d9d9d9', '#aaaaaa', '#555555', '#000000', '#007bff', '#ff0055', '#00ffcc'];
@@ -17,19 +17,19 @@ const canvas = document.getElementById('mockupCanvas');
 const ctx = canvas.getContext('2d');
 
 let currentModel = null;
+let currentScale = 0.4;
 let rotation = 0;
-let rotationInterval = null;
 
-// Carregar modelos
+// === Carregar modelos ===
 models.forEach(model => {
   const btn = document.createElement('button');
   btn.className = 'model-btn';
   btn.textContent = model.name;
-  btn.onclick = () => loadModel(model.file);
+  btn.onclick = () => loadModel(model);
   modelsList.appendChild(btn);
 });
 
-// Carregar botões de cor
+// === Paleta de cores ===
 colors.forEach(color => {
   const div = document.createElement('div');
   div.className = 'color-swatch';
@@ -38,11 +38,12 @@ colors.forEach(color => {
   swatches.appendChild(div);
 });
 
-function loadModel(file) {
+function loadModel(model) {
   const img = new Image();
-  img.src = `copos/${file}`;
+  img.src = `copos/${model.file}`;
   img.onload = () => {
     currentModel = img;
+    currentScale = model.scale;
     drawModel();
   };
 }
@@ -51,13 +52,11 @@ function drawModel(colorOverlay = null) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (!currentModel) return;
 
-  const scale = 0.4; // ⬅️ reduzido para 40% do tamanho original
-  const w = currentModel.width * scale;
-  const h = currentModel.height * scale;
+  const w = currentModel.width * currentScale;
+  const h = currentModel.height * currentScale;
 
   ctx.save();
   ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.rotate(rotation * Math.PI / 180);
   ctx.drawImage(currentModel, -w / 2, -h / 2, w, h);
 
   if (colorOverlay) {
@@ -74,7 +73,7 @@ function changeColor(color) {
   drawModel(color);
 }
 
-// Geração de vídeo 360° (8 segundos)
+// === Gravação 360° (8s) ===
 document.getElementById('generateVideo').addEventListener('click', async () => {
   if (!currentModel) return alert('Selecione um modelo primeiro!');
   
@@ -95,12 +94,13 @@ document.getElementById('generateVideo').addEventListener('click', async () => {
   recorder.start();
 
   let frame = 0;
-  rotationInterval = setInterval(() => {
-    rotation += 4;
+  const totalFrames = 8 * 30;
+  const interval = setInterval(() => {
+    rotation += 3;
     drawModel();
     frame++;
-    if (frame >= 240) { // 8s * 30fps
-      clearInterval(rotationInterval);
+    if (frame >= totalFrames) {
+      clearInterval(interval);
       recorder.stop();
     }
   }, 1000 / 30);
