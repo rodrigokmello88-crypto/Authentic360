@@ -1,49 +1,49 @@
+/* ===== RESET ===== */
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background: url('fundos.png') center/cover no-repeat fixed;
+  font-family: "Montserrat", sans-serif;
+  background: url("fundos.png") center/cover no-repeat fixed;
+  color: #fff;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  color: #fff;
-  overflow: hidden;
 }
 
 /* ===== TOPO ===== */
 .topbar {
   text-align: center;
-  padding: 18px 0;
-  background: rgba(0, 0, 0, 0.65); /* removido o cinza, fundo escuro translúcido */
-  backdrop-filter: blur(6px);
+  padding: 15px 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
 }
 
 .logo {
-  height: 65px;
+  height: 70px;
+  width: auto;
 }
 
-/* ===== LAYOUT PRINCIPAL ===== */
+/* ===== LAYOUT ===== */
 .main-grid {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 220px 1fr;
   flex: 1;
   overflow: hidden;
 }
 
 /* ===== MENU LATERAL ===== */
 .models-panel {
-  background-color: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.6);
   padding: 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
-  overflow-y: auto;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .models-panel h3 {
-  margin-top: 0;
   color: #4fa9ff;
-  text-align: center;
   font-weight: 600;
-  font-size: 16px;
+  text-align: center;
+  margin-top: 0;
 }
 
 .models-list {
@@ -54,7 +54,7 @@ body {
 
 .models-list li {
   padding: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   cursor: pointer;
@@ -64,11 +64,11 @@ body {
 
 .models-list li:hover {
   background: #4fa9ff;
-  color: white;
+  color: #fff;
   transform: translateY(-2px);
 }
 
-/* ===== ÁREA DO VISUALIZADOR ===== */
+/* ===== VISUALIZADOR ===== */
 .viewer-panel {
   display: flex;
   flex-direction: column;
@@ -77,38 +77,35 @@ body {
   padding: 20px;
 }
 
-/* 🔹 Retângulo cinza sólido (mantido como antes) */
+/* Retângulo de fundo cinza chumbo */
 .viewer-bg {
-  background-color: #3b3b3b; /* chumbo forte */
-  border-radius: 20px;
-  width: 70%;
-  padding: 25px;
+  background-color: #3b3b3b;
+  border-radius: 18px;
+  width: 65%;
+  padding: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 }
 
-/* 🔹 Copos (transparentes, sem fundo, tamanhos ajustados individualmente) */
+/* ===== Copos ===== */
 .cup-img {
+  width: 55%; /* 🔹 menor ainda, ideal para zoom 50% */
   height: auto;
   object-fit: contain;
-  background: transparent !important;
   image-rendering: auto;
+  background: transparent !important; /* 🔹 elimina qualquer fundo */
   mix-blend-mode: normal;
+  pointer-events: none;
 }
 
-/* Copos normais */
-.cup-img:not(.espumante):not(.taca-gin):not(.squeeze):not(.caneca-slim) {
-  width: 70%;
-}
-
-/* Copos grandes reduzidos */
+/* Tamanhos reduzidos individuais */
 .cup-img.espumante,
 .cup-img.taca-gin,
 .cup-img.squeeze,
 .cup-img.caneca-slim {
-  width: 60%; /* menor proporcionalmente */
+  width: 48%;
 }
 
 /* ===== CONTROLES ===== */
@@ -117,29 +114,29 @@ body {
   text-align: center;
 }
 
+/* Botões de cor logo abaixo */
 .swatches {
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   gap: 10px;
 }
 
 .color-btn {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 2px solid #ccc;
   cursor: pointer;
-  outline: none;
   transition: transform 0.2s, border 0.2s;
 }
 
 .color-btn:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
   border-color: white;
 }
 
-/* Botões de ação */
+/* Botão principal */
 .btn {
   padding: 10px 22px;
   background: #4fa9ff;
@@ -149,7 +146,6 @@ body {
   color: #fff;
   font-weight: 600;
   transition: background 0.3s;
-  margin-top: 8px;
 }
 
 .btn:hover {
@@ -159,20 +155,19 @@ body {
 /* ===== RODAPÉ ===== */
 .footer {
   text-align: center;
-  padding: 10px;
-  font-size: 14px;
-  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  font-size: 13px;
+  background-color: rgba(0, 0, 0, 0.65);
   color: #ccc;
 }
 
 /* ===== RESPONSIVO ===== */
-@media (max-width: 880px) {
+@media (max-width: 900px) {
   .main-grid {
     grid-template-columns: 1fr;
-    padding: 10px;
   }
 
   .viewer-bg {
-    width: 90%;
+    width: 85%;
   }
 }
