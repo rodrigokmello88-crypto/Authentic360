@@ -8,41 +8,47 @@
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Logo Authentic 360" class="logo" />
+    <img src="logo.png" alt="Authentic Personalizados" class="logo" />
   </header>
 
   <main>
     <aside class="menu">
       <h2>Modelos</h2>
-      <button onclick="mudarModelo('caneca_png.png')">Caneca</button>
-      <button onclick="mudarModelo('caneca_slim_png.png')">Caneca Slim</button>
-      <button onclick="mudarModelo('ecologico.png')">Ecológico</button>
-      <button onclick="mudarModelo('espumante.png')">Espumante</button>
-      <button onclick="mudarModelo('squeeze.png')">Squeeze</button>
-      <button onclick="mudarModelo('taca_gin.png')">Taça Gin</button>
-      <button onclick="mudarModelo('twister.png')">Twister</button>
-      <button onclick="mudarModelo('xicara.png')">Xícara</button>
+      <button onclick="trocarCopo('caneca')">Caneca</button>
+      <button onclick="trocarCopo('caneca-slim')">Caneca Slim</button>
+      <button onclick="trocarCopo('ecologico')">Ecológico</button>
+      <button onclick="trocarCopo('espumante')">Espumante</button>
+      <button onclick="trocarCopo('squeeze')">Squeeze</button>
+      <button onclick="trocarCopo('taca-gin')">Taça Gin</button>
+      <button onclick="trocarCopo('twister')">Twister</button>
+      <button onclick="trocarCopo('xicara')">Xícara</button>
     </aside>
 
     <section class="visualizador">
       <div id="visor">
-        <img id="copo" src="copos/caneca_png.png" alt="Modelo de Copo" />
+        <img id="copo" src="copos/caneca.png" alt="Modelo selecionado" />
       </div>
     </section>
   </main>
 
   <div class="cores">
-    <button class="cor" style="background:#ccc" onclick="mudarCor('#ccc')"></button>
-    <button class="cor" style="background:#999" onclick="mudarCor('#999')"></button>
-    <button class="cor" style="background:#000" onclick="mudarCor('#000')"></button>
-    <button class="cor" style="background:#00eaff" onclick="mudarCor('#00eaff')"></button>
-    <button class="cor" style="background:#f0f" onclick="mudarCor('#f0f')"></button>
+    <button class="cor" style="background:#e6e6e6" onclick="mudarCor('#e6e6e6')"></button>
+    <button class="cor" style="background:#bfbfbf" onclick="mudarCor('#bfbfbf')"></button>
+    <button class="cor" style="background:#8c8c8c" onclick="mudarCor('#8c8c8c')"></button>
+    <button class="cor" style="background:#333" onclick="mudarCor('#333')"></button>
+    <button class="cor" style="background:#0094ff" onclick="mudarCor('#0094ff')"></button>
+    <button class="cor" style="background:#00ffff" onclick="mudarCor('#00ffff')"></button>
+    <button class="cor" style="background:#ff00ff" onclick="mudarCor('#ff00ff')"></button>
   </div>
 
   <div class="botoes">
-    <button class="acao">Gerar vídeo 360°</button>
-    <button class="acao">Baixar</button>
+    <button class="acao" onclick="gerarVideo()">Gerar vídeo 360°</button>
+    <button class="acao" onclick="baixarImagem()">Baixar</button>
   </div>
+
+  <footer>
+    <p>© 2025 Authentic Personalizados — Todos os direitos reservados.</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
