@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authentic 360</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentic360 - Visualizador</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Authentic 360" class="logo" />
+    <img src="logo.png" class="logo" alt="Authentic360">
   </header>
 
   <main>
     <aside class="menu">
       <h2>Modelos</h2>
       <button onclick="trocarCopo('caneca_png.png')">Caneca</button>
-      <button onclick="trocarCopo('caneca_slim.png')">Caneca Slim</button>
+      <button onclick="trocarCopo('caneca_slim_png.png')">Caneca Slim</button>
       <button onclick="trocarCopo('ecologico.png')">Ecológico</button>
       <button onclick="trocarCopo('espumante.png')">Espumante</button>
       <button onclick="trocarCopo('squeeze.png')">Squeeze</button>
@@ -26,14 +26,15 @@
 
     <section class="visualizador">
       <div class="copo-container">
-        <img id="copo" src="copos/caneca_png.png" alt="Copo" />
+        <img id="copo" src="copos/caneca_png.png" alt="Copo">
+        <div id="tinta"></div>
+        <img id="arte" alt="Arte aplicada">
       </div>
 
       <div class="cores">
-        <div class="cor" style="background:#d9d9d9" onclick="mudarCor('#d9d9d9')"></div>
-        <div class="cor" style="background:#808080" onclick="mudarCor('#808080')"></div>
-        <div class="cor" style="background:#333333" onclick="mudarCor('#333333')"></div>
-        <div class="cor" style="background:#000000" onclick="mudarCor('#000000')"></div>
+        <div class="cor" style="background:#d1d5db" onclick="mudarCor('#d1d5db')"></div>
+        <div class="cor" style="background:#9ca3af" onclick="mudarCor('#9ca3af')"></div>
+        <div class="cor" style="background:#000" onclick="mudarCor('#000')"></div>
         <div class="cor" style="background:#00ffff" onclick="mudarCor('#00ffff')"></div>
         <div class="cor" style="background:#ff00ff" onclick="mudarCor('#ff00ff')"></div>
       </div>
@@ -41,14 +42,15 @@
       <div class="botoes">
         <button onclick="gerarVideo()">🎥 Gerar vídeo 360°</button>
         <button onclick="baixarImagem()">⬇️ Baixar</button>
+        <label class="upload">
+          📁 Enviar Arte
+          <input type="file" id="uploadArte" accept="image/png, image/jpeg">
+        </label>
       </div>
     </section>
   </main>
 
-  <footer>
-    © 2025 Authentic Personalizados — Todos os direitos reservados.
-  </footer>
-
+  <footer>© 2025 Authentic360</footer>
   <script src="script.js"></script>
 </body>
 </html>
