@@ -1,31 +1,113 @@
-const copo = document.getElementById('copo');
-const visor = document.getElementById('visor');
-const modelos = {
-  'caneca': 'copos/caneca.png',
-  'caneca-slim': 'copos/caneca-slim.png',
-  'ecologico': 'copos/ecologico.png',
-  'espumante': 'copos/espumante.png',
-  'squeeze': 'copos/squeeze.png',
-  'taca-gin': 'copos/taca-gin.png',
-  'twister': 'copos/twister.png',
-  'xicara': 'copos/xicara.png'
-};
-
-function trocarCopo(modelo) {
-  copo.src = modelos[modelo];
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: url("fundo.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  text-align: center;
 }
 
-function mudarCor(cor) {
-  visor.style.background = cor;
+header {
+  margin-top: 15px;
 }
 
-function gerarVideo() {
-  alert('Função de geração de vídeo 360° em desenvolvimento.');
+.logo {
+  width: 130px;
 }
 
-function baixarImagem() {
-  const link = document.createElement('a');
-  link.href = copo.src;
-  link.download = 'modelo_authentic.png';
-  link.click();
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 20px;
+}
+
+.menu {
+  background: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.menu h2 {
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.menu button {
+  display: block;
+  width: 180px;
+  margin: 8px auto;
+  padding: 10px;
+  border: none;
+  background: #3b82f6;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu button:hover {
+  background: #2563eb;
+}
+
+.visualizador {
+  background: #1a1a1a;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.copo-container {
+  width: 360px;
+  height: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.copo-container img {
+  width: 50%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.cores {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+
+.botoes button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botoes button:hover {
+  background: #2563eb;
+}
+
+footer {
+  margin-top: 30px;
+  font-size: 0.8rem;
+  color: #ccc;
 }
