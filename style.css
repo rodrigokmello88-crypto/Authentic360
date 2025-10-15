@@ -1,140 +1,31 @@
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: url('fundos.png') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const copo = document.getElementById('copo');
+const visor = document.getElementById('visor');
+const modelos = {
+  'caneca': 'copos/caneca.png',
+  'caneca-slim': 'copos/caneca-slim.png',
+  'ecologico': 'copos/ecologico.png',
+  'espumante': 'copos/espumante.png',
+  'squeeze': 'copos/squeeze.png',
+  'taca-gin': 'copos/taca-gin.png',
+  'twister': 'copos/twister.png',
+  'xicara': 'copos/xicara.png'
+};
+
+function trocarCopo(modelo) {
+  copo.src = modelos[modelo];
 }
 
-header {
-  width: 100%;
-  background: transparent;
-  text-align: center;
-  padding: 10px 0;
+function mudarCor(cor) {
+  visor.style.background = cor;
 }
 
-.logo {
-  max-width: 180px;
-  height: auto;
+function gerarVideo() {
+  alert('Função de geração de vídeo 360° em desenvolvimento.');
 }
 
-main {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 90%;
-  gap: 40px;
-  margin-top: 20px;
-}
-
-.menu {
-  background: #1c1c1c;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  width: 200px;
-}
-
-.menu h2 {
-  color: #5d9bff;
-  margin-bottom: 15px;
-}
-
-.menu button {
-  width: 100%;
-  background: #3a7bff;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  margin: 6px 0;
-  cursor: pointer;
-  font-weight: 500;
-  color: #fff;
-  transition: background 0.3s;
-}
-
-.menu button:hover {
-  background: #5594ff;
-}
-
-.visualizador {
-  background: #1c1c1c;
-  border-radius: 12px;
-  padding: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 600px;
-  height: 400px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
-  overflow: hidden;
-}
-
-#visor {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  position: relative;
-}
-
-#copo {
-  width: auto;
-  height: 65%;
-  object-fit: contain;
-  object-position: center;
-  image-rendering: high-quality;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
-  transition: transform 0.3s;
-}
-
-.cores {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.cor {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.cor:hover {
-  transform: scale(1.2);
-}
-
-.botoes {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-}
-
-.acao {
-  background: #3a7bff;
-  border: none;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.acao:hover {
-  background: #5594ff;
-}
-
-footer {
-  margin-top: 30px;
-  color: #ccc;
-  font-size: 0.8em;
+function baixarImagem() {
+  const link = document.createElement('a');
+  link.href = copo.src;
+  link.download = 'modelo_authentic.png';
+  link.click();
 }
