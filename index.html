@@ -2,38 +2,38 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Authentic360</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <header class="topbar">
-    <img src="logo.png" alt="Authentic360 Logo" class="logo">
+    <img src="logo.png" alt="Logo Authentic360" class="logo">
   </header>
 
   <main class="main-grid">
     <aside class="models-panel">
       <h3>Modelos</h3>
-      <ul id="modelsList" class="models-list"></ul>
+      <div id="modelsList" class="models-list"></div>
     </aside>
 
     <section class="viewer-panel">
       <div class="viewer">
-        <div class="viewer-bg">
-          <canvas id="mockupCanvas" width="800" height="800"></canvas>
-        </div>
+        <canvas id="mockupCanvas" width="800" height="800"></canvas>
       </div>
 
-      <div class="controls">
+      <div class="controls-row">
         <div id="swatches" class="swatches"></div>
-        <button id="generateVideoBtn" class="btn">🎥 Gerar Vídeo 360º</button>
+        <div class="actions">
+          <button id="generateVideo" class="btn">🎥 Gerar Vídeo 360°</button>
+          <button id="downloadBtn" class="btn">📷 Baixar imagem</button>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">© 2025 Authentic360</footer>
+  <footer class="footer">© Authentic360</footer>
 
   <script src="script.js"></script>
 </body>
