@@ -1,173 +1,173 @@
-/* ===== RESET ===== */
-body {
-  margin: 0;
-  font-family: "Montserrat", sans-serif;
-  background: url("fundos.png") center/cover no-repeat fixed;
-  color: #fff;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+:root {
+  --bg-dark: #0b0c10;
+  --panel: #1a1a1a;
+  --accent: #0078ff;
+  --text: #ffffff;
+  --muted: #bbbbbb;
 }
 
-/* ===== TOPO ===== */
+/* ====== Reset ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ====== Fundo ====== */
+body {
+  background: url('fundos.png') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ====== Topbar ====== */
 .topbar {
-  text-align: center;
-  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(5px);
+  padding: 18px 0;
+  border-bottom: 2px solid var(--accent);
 }
 
 .logo {
   height: 70px;
-  width: auto;
 }
 
-/* ===== LAYOUT ===== */
+/* ====== Layout ====== */
 .main-grid {
+  max-width: 1200px;
+  margin: 40px auto;
   display: grid;
-  grid-template-columns: 220px 1fr;
-  flex: 1;
-  overflow: hidden;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  padding: 0 20px;
 }
 
-/* ===== MENU LATERAL ===== */
+/* ====== Painel lateral ====== */
 .models-panel {
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--panel);
+  border-radius: 12px;
   padding: 20px;
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 
 .models-panel h3 {
-  color: #4fa9ff;
-  font-weight: 600;
+  color: var(--accent);
+  font-size: 18px;
+  margin-bottom: 12px;
   text-align: center;
-  margin-top: 0;
 }
 
 .models-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.models-list li {
-  padding: 10px;
-  margin-bottom: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  text-align: center;
-}
-
-.models-list li:hover {
-  background: #4fa9ff;
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-/* ===== VISUALIZADOR ===== */
-.viewer-panel {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-/* Retângulo de fundo cinza chumbo */
-.viewer-bg {
-  background-color: #3b3b3b;
-  border-radius: 18px;
-  width: 65%;
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
-}
-
-/* ===== Copos ===== */
-.cup-img {
-  width: 55%; /* 🔹 menor ainda, ideal para zoom 50% */
-  height: auto;
-  object-fit: contain;
-  image-rendering: auto;
-  background: transparent !important; /* 🔹 elimina qualquer fundo */
-  mix-blend-mode: normal;
-  pointer-events: none;
-}
-
-/* Tamanhos reduzidos individuais */
-.cup-img.espumante,
-.cup-img.taca-gin,
-.cup-img.squeeze,
-.cup-img.caneca-slim {
-  width: 48%;
-}
-
-/* ===== CONTROLES ===== */
-.controls {
-  margin-top: 20px;
-  text-align: center;
-}
-
-/* Botões de cor logo abaixo */
-.swatches {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 12px;
   gap: 10px;
 }
 
-.color-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  cursor: pointer;
-  transition: transform 0.2s, border 0.2s;
-}
-
-.color-btn:hover {
-  transform: scale(1.15);
-  border-color: white;
-}
-
-/* Botão principal */
-.btn {
-  padding: 10px 22px;
-  background: #4fa9ff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+.model-btn {
+  background: #007bff;
   color: #fff;
   font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.model-btn:hover {
+  background: #005fd1;
+}
+
+/* ====== Painel Viewer ====== */
+.viewer-panel {
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.viewer {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+canvas {
+  max-width: 80%;
+  height: auto;
+  background: transparent;
+}
+
+/* ====== Controles ====== */
+.controls-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.swatches {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.color-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+}
+
+/* ====== Botões ====== */
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
   transition: background 0.3s;
 }
 
 .btn:hover {
-  background: #0066cc;
+  background: #005fd1;
 }
 
-/* ===== RODAPÉ ===== */
+/* ====== Footer ====== */
 .footer {
   text-align: center;
-  padding: 8px;
-  font-size: 13px;
-  background-color: rgba(0, 0, 0, 0.65);
-  color: #ccc;
-}
-
-/* ===== RESPONSIVO ===== */
-@media (max-width: 900px) {
-  .main-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .viewer-bg {
-    width: 85%;
-  }
+  padding: 18px 0;
+  color: var(--muted);
+  font-size: 14px;
 }
