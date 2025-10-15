@@ -135,6 +135,30 @@ button#extraButton:hover {
 footer {
   text-align: center;
   font-size: 11px;
+  /* canvas responsivo - mantém proporção e evita corte */
+.viewer {
+  width: 520px;        /* tamanho do painel visual (ajuste se quiser) */
+  height: 430px;
+  max-width: 85vw;
+  max-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1b1b1b;
+  border-radius: 12px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+#previewCanvas {
+  width: 100%;   /* use a largura do container .viewer */
+  height: auto;  /* mantenha a proporção */
+  display: block;
+  background: transparent;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
   margin-top: 20px;
   padding-bottom: 15px;
   color: #ccc;
