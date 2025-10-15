@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  background: url('fundos.png') center/cover no-repeat;
+  background: url('fundos.png') center/cover no-repeat fixed;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -9,30 +9,33 @@ body {
   overflow: hidden;
 }
 
-/* LOGO */
+/* ===== TOPO ===== */
 .topbar {
   text-align: center;
-  padding: 15px 0;
+  padding: 18px 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
 }
 
 .logo {
   height: 65px;
 }
 
-/* LAYOUT */
+/* ===== LAYOUT PRINCIPAL ===== */
 .main-grid {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 240px 1fr;
   flex: 1;
   overflow: hidden;
 }
 
-/* PAINEL LATERAL */
+/* ===== MENU LATERAL ===== */
 .models-panel {
   background-color: rgba(0, 0, 0, 0.55);
   padding: 20px;
-  overflow-y: auto;
   backdrop-filter: blur(8px);
+  overflow-y: auto;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .models-panel h3 {
@@ -40,6 +43,7 @@ body {
   color: #4fa9ff;
   text-align: center;
   font-weight: 600;
+  font-size: 16px;
 }
 
 .models-list {
@@ -54,55 +58,51 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.2s;
   text-align: center;
 }
 
 .models-list li:hover {
   background: #4fa9ff;
   color: white;
+  transform: translateY(-2px);
 }
 
-/* VISUALIZAÇÃO */
+/* ===== ÁREA DO VISUALIZADOR ===== */
 .viewer-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
-.viewer {
-  width: 60%;
-  max-width: 700px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* 🔹 Retângulo cinza sólido de fundo (mantido igual) */
+/* 🔹 Retângulo translúcido para destacar o copo */
 .viewer-bg {
-  background-color: #a9a9a9; /* cinza sólido */
+  background-color: rgba(160, 160, 160, 0.35);
   border-radius: 20px;
-  width: 100%;
+  width: 70%;
   padding: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
 }
 
-/* 🔹 PNGs transparentes — agora 30% menores */
+/* 🔹 Copos transparentes (PNG mantido e reduzido 30%) */
 canvas, .cup-img {
   width: 70%;
   height: auto;
   object-fit: contain;
   background: transparent !important;
   mix-blend-mode: normal;
+  image-rendering: auto;
 }
 
-/* CONTROLES */
+/* ===== CONTROLES ===== */
 .controls {
-  margin-top: 25px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -110,12 +110,12 @@ canvas, .cup-img {
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
-  gap: 12px;
+  gap: 10px;
 }
 
 .color-btn {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 2px solid #ccc;
   cursor: pointer;
@@ -128,6 +128,7 @@ canvas, .cup-img {
   border-color: white;
 }
 
+/* Botões de ação */
 .btn {
   padding: 10px 22px;
   background: #4fa9ff;
@@ -137,16 +138,30 @@ canvas, .cup-img {
   color: #fff;
   font-weight: 600;
   transition: background 0.3s;
+  margin-top: 8px;
 }
 
 .btn:hover {
   background: #0066cc;
 }
 
-/* RODAPÉ */
+/* ===== RODAPÉ ===== */
 .footer {
   text-align: center;
-  padding: 8px;
+  padding: 10px;
   font-size: 14px;
   background-color: rgba(0, 0, 0, 0.6);
+  color: #ccc;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 880px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .viewer-bg {
+    width: 90%;
+  }
 }
