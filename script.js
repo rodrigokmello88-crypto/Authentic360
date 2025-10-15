@@ -1,114 +1,107 @@
 const models = [
-  { name: "Caneca", file: "caneca_png.png" },
-  { name: "Caneca Slim", file: "caneca_slim_png.png" },
-  { name: "Ecológico", file: "ecologico.png" },
-  { name: "Espumante", file: "espumante.png" },
-  { name: "Squeeze", file: "squeeze.png" },
-  { name: "Taça Gin", file: "taca_gin.png" },
-  { name: "Twister", file: "twister.png" },
-  { name: "Xícara", file: "xicara.png" }
+  { name: 'Caneca', file: 'caneca_png.png' },
+  { name: 'Caneca Slim', file: 'caneca_slim_png.png' },
+  { name: 'Ecológico', file: 'ecologico.png' },
+  { name: 'Espumante', file: 'espumante.png' },
+  { name: 'Squeeze', file: 'squeeze.png' },
+  { name: 'Taça Gin', file: 'taca_gin.png' },
+  { name: 'Twister', file: 'twister.png' },
+  { name: 'Xícara', file: 'xicara.png' }
 ];
 
-const canvas = document.getElementById("mockupCanvas");
-const ctx = canvas.getContext("2d");
+const colors = ['#ffffff', '#d9d9d9', '#aaaaaa', '#555555', '#000000', '#007bff', '#ff0055', '#00ffcc'];
+
+const modelsList = document.getElementById('modelsList');
+const swatches = document.getElementById('swatches');
+const canvas = document.getElementById('mockupCanvas');
+const ctx = canvas.getContext('2d');
+
 let currentModel = null;
-let currentColor = "#cccccc";
+let rotation = 0;
+let rotationInterval = null;
 
-function loadModelList() {
-  const list = document.getElementById("modelsList");
-  models.forEach(m => {
-    const li = document.createElement("li");
-    li.textContent = m.name;
-    li.onclick = () => loadModel(m.file);
-    list.appendChild(li);
-  });
-}
+// Carregar modelos
+models.forEach(model => {
+  const btn = document.createElement('button');
+  btn.className = 'model-btn';
+  btn.textContent = model.name;
+  btn.onclick = () => loadModel(model.file);
+  modelsList.appendChild(btn);
+});
 
-function loadColorButtons() {
-  const swatches = document.getElementById("swatches");
-  const colors = [
-    { name: "Branco", value: "#ffffff" },
-    { name: "Cinza", value: "#c0c0c0" },
-    { name: "Azul", value: "#4fa9ff" },
-    { name: "Preto", value: "#000000" },
-    { name: "Amarelo", value: "#f5c242" },
-    { name: "Vermelho", value: "#e84141" },
-    { name: "Verde", value: "#3ac47d" },
-    { name: "Rosa", value: "#ff66b2" },
-    { name: "Roxo", value: "#9055ff" }
-  ];
-
-  colors.forEach(c => {
-    const btn = document.createElement("button");
-    btn.className = "color-btn";
-    btn.style.background = c.value;
-    btn.title = c.name;
-    btn.onclick = () => {
-      currentColor = c.value;
-      drawModel();
-    };
-    swatches.appendChild(btn);
-  });
-}
+// Carregar botões de cor
+colors.forEach(color => {
+  const div = document.createElement('div');
+  div.className = 'color-swatch';
+  div.style.background = color;
+  div.onclick = () => changeColor(color);
+  swatches.appendChild(div);
+});
 
 function loadModel(file) {
-  currentModel = new Image();
-  currentModel.src = `copos/${file}`;
-  currentModel.onload = drawModel;
+  const img = new Image();
+  img.src = `copos/${file}`;
+  img.onload = () => {
+    currentModel = img;
+    drawModel();
+  };
 }
 
-function drawModel() {
-  if (!currentModel) return;
+function drawModel(colorOverlay = null) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = currentColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  if (!currentModel) return;
 
-  const w = currentModel.width * 0.45;
-  const h = currentModel.height * 0.45;
-  const x = (canvas.width - w) / 2;
-  const y = (canvas.height - h) / 2;
-  ctx.drawImage(currentModel, x, y, w, h);
+  const scale = 0.4; // ⬅️ reduzido para 40% do tamanho original
+  const w = currentModel.width * scale;
+  const h = currentModel.height * scale;
+
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate(rotation * Math.PI / 180);
+  ctx.drawImage(currentModel, -w / 2, -h / 2, w, h);
+
+  if (colorOverlay) {
+    ctx.globalAlpha = 0.25;
+    ctx.fillStyle = colorOverlay;
+    ctx.fillRect(-w / 2, -h / 2, w, h);
+    ctx.globalAlpha = 1;
+  }
+
+  ctx.restore();
 }
 
-// Gerar vídeo 360º (8 segundos)
-async function generateVideo() {
-  const frames = 240;
-  const stream = canvas.captureStream(30);
-  const recorder = new MediaRecorder(stream, {
-    mimeType: "video/webm;codecs=vp9",
-    videoBitsPerSecond: 2500000
-  });
-  const chunks = [];
+function changeColor(color) {
+  drawModel(color);
+}
 
+// Geração de vídeo 360° (8 segundos)
+document.getElementById('generateVideo').addEventListener('click', async () => {
+  if (!currentModel) return alert('Selecione um modelo primeiro!');
+  
+  const chunks = [];
+  const stream = canvas.captureStream(30);
+  const recorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
   recorder.ondataavailable = e => chunks.push(e.data);
-  recorder.onstop = () => {
-    const blob = new Blob(chunks, { type: "video/webm" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "mockup360.webm";
+  
+  recorder.onstop = async () => {
+    const blob = new Blob(chunks, { type: 'video/webm' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${Date.now()}_authentic360.webm`;
     a.click();
   };
-
+  
   recorder.start();
 
-  let angle = 0;
-  const spinInterval = setInterval(() => {
-    angle += (Math.PI * 2) / frames;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate(angle);
-    ctx.translate(-canvas.width / 2, -canvas.height / 2);
+  let frame = 0;
+  rotationInterval = setInterval(() => {
+    rotation += 4;
     drawModel();
-    ctx.restore();
+    frame++;
+    if (frame >= 240) { // 8s * 30fps
+      clearInterval(rotationInterval);
+      recorder.stop();
+    }
   }, 1000 / 30);
-
-  setTimeout(() => {
-    clearInterval(spinInterval);
-    recorder.stop();
-  }, 8000);
-}
-
-document.getElementById("generateVideoBtn").onclick = generateVideo;
-loadModelList();
-loadColorButtons();
+});
