@@ -61,7 +61,7 @@ main {
 }
 
 .visualizador {
-  background: #1c1c1c; /* mantém o retângulo chumbo forte */
+  background: #1c1c1c;
   border-radius: 12px;
   padding: 40px;
   display: flex;
@@ -70,7 +70,7 @@ main {
   width: 600px;
   height: 400px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
-  overflow: hidden; /* evita que o copo saia da área */
+  overflow: hidden;
 }
 
 #visor {
@@ -90,6 +90,7 @@ main {
   object-position: center;
   image-rendering: high-quality;
   filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  transition: transform 0.3s;
 }
 
 .cores {
@@ -130,4 +131,10 @@ main {
 
 .acao:hover {
   background: #5594ff;
+}
+
+footer {
+  margin-top: 30px;
+  color: #ccc;
+  font-size: 0.8em;
 }
