@@ -9,20 +9,30 @@ const modelos = {
   'xicara.png': 'copos/xicara.png'
 };
 
-window.onload = () => {
-  const container = document.querySelector('.copo-container');
-  const tinta = document.createElement('div');
-  tinta.id = 'tinta';
-  container.appendChild(tinta);
-};
-
 function trocarCopo(modelo) {
   const img = document.getElementById('copo');
   const tinta = document.getElementById('tinta');
+
   if (modelos[modelo]) {
     img.src = modelos[modelo];
-    img.style.width = "45%";
-    tinta.style.width = "45%";
+    tinta.style.setProperty('--mask-img', `url(${modelos[modelo]})`);
+    tinta.style.backgroundColor = "transparent";
+
+    switch (modelo) {
+      case 'espumante.png':
+      case 'taca_gin.png':
+        img.style.width = "33%";
+        tinta.style.width = "33%";
+        break;
+      case 'squeeze.png':
+      case 'twister.png':
+        img.style.width = "36%";
+        tinta.style.width = "36%";
+        break;
+      default:
+        img.style.width = "42%";
+        tinta.style.width = "42%";
+    }
   }
 }
 
@@ -32,7 +42,7 @@ function mudarCor(cor) {
 }
 
 function gerarVideo() {
-  alert("🎥 Gerando vídeo 360° (simulação)");
+  alert("🎥 Gerando vídeo 360° (simulação de 8s com fundo transparente)");
 }
 
 function baixarImagem() {
@@ -55,3 +65,5 @@ document.getElementById('uploadArte').addEventListener('change', function (event
   };
   reader.readAsDataURL(file);
 });
+
+window.onload = () => trocarCopo('caneca_png.png');
