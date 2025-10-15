@@ -3,106 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authentic Personalizados 360</title>
+  <title>Authentic 360</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- ===== CABEÇALHO ===== -->
   <header>
-    <img src="logo.png" alt="Authentic Logo">
+    <img src="logo.png" alt="Logo Authentic 360" class="logo" />
   </header>
 
-  <!-- ===== CONTEÚDO PRINCIPAL ===== -->
-  <main class="main-container">
-
-    <!-- ===== MENU LATERAL ===== -->
-    <aside class="sidebar">
+  <main>
+    <aside class="menu">
       <h2>Modelos</h2>
-      <button class="model-btn" onclick="trocarModelo('caneca_png.png')">Caneca</button>
-      <button class="model-btn" onclick="trocarModelo('caneca_slim_png.png')">Caneca Slim</button>
-      <button class="model-btn" onclick="trocarModelo('ecologico.png')">Ecológico</button>
-      <button class="model-btn" onclick="trocarModelo('espumante.png')">Espumante</button>
-      <button class="model-btn" onclick="trocarModelo('squeeze.png')">Squeeze</button>
-      <button class="model-btn" onclick="trocarModelo('taca_gin.png')">Taça Gin</button>
-      <button class="model-btn" onclick="trocarModelo('twister.png')">Twister</button>
-      <button class="model-btn" onclick="trocarModelo('xicara.png')">Xícara</button>
+      <button onclick="mudarModelo('caneca_png.png')">Caneca</button>
+      <button onclick="mudarModelo('caneca_slim_png.png')">Caneca Slim</button>
+      <button onclick="mudarModelo('ecologico.png')">Ecológico</button>
+      <button onclick="mudarModelo('espumante.png')">Espumante</button>
+      <button onclick="mudarModelo('squeeze.png')">Squeeze</button>
+      <button onclick="mudarModelo('taca_gin.png')">Taça Gin</button>
+      <button onclick="mudarModelo('twister.png')">Twister</button>
+      <button onclick="mudarModelo('xicara.png')">Xícara</button>
     </aside>
 
-    <!-- ===== VISOR ===== -->
-    <section class="viewer">
-      <canvas id="previewCanvas"></canvas>
+    <section class="visualizador">
+      <div id="visor">
+        <img id="copo" src="copos/caneca_png.png" alt="Modelo de Copo" />
+      </div>
     </section>
-
   </main>
 
-  <!-- ===== CONTROLE DE CORES ===== -->
-  <div class="color-controls">
-    <div class="color-swatch" style="background: #fff;" onclick="mudarCor('#ffffff')"></div>
-    <div class="color-swatch" style="background: #ccc;" onclick="mudarCor('#cccccc')"></div>
-    <div class="color-swatch" style="background: #999;" onclick="mudarCor('#999999')"></div>
-    <div class="color-swatch" style="background: #333;" onclick="mudarCor('#333333')"></div>
-    <div class="color-swatch" style="background: #000;" onclick="mudarCor('#000000')"></div>
-    <div class="color-swatch" style="background: #007bff;" onclick="mudarCor('#007bff')"></div>
-    <div class="color-swatch" style="background: #00ffff;" onclick="mudarCor('#00ffff')"></div>
-    <div class="color-swatch" style="background: #ff00ff;" onclick="mudarCor('#ff00ff')"></div>
+  <div class="cores">
+    <button class="cor" style="background:#ccc" onclick="mudarCor('#ccc')"></button>
+    <button class="cor" style="background:#999" onclick="mudarCor('#999')"></button>
+    <button class="cor" style="background:#000" onclick="mudarCor('#000')"></button>
+    <button class="cor" style="background:#00eaff" onclick="mudarCor('#00eaff')"></button>
+    <button class="cor" style="background:#f0f" onclick="mudarCor('#f0f')"></button>
   </div>
 
-  <!-- ===== BOTÃO GERAR VÍDEO ===== -->
- <div class="controls">
-  <button id="generateVideo">Gerar vídeo 360°</button>
-  <button id="extraButton">Baixar</button>
-</div>
+  <div class="botoes">
+    <button class="acao">Gerar vídeo 360°</button>
+    <button class="acao">Baixar</button>
+  </div>
 
-
-  <!-- ===== RODAPÉ ===== -->
-  <footer>
-    © 2025 Authentic Personalizados — Todos os direitos reservados.
-  </footer>
-
-  <!-- ===== SCRIPT PRINCIPAL ===== -->
-  <script>
-    const canvas = document.getElementById('previewCanvas');
-    const ctx = canvas.getContext('2d');
-    let imagemAtual = null;
-
-    function trocarModelo(nomeArquivo) {
-      const img = new Image();
-      img.src = 'copos/' + nomeArquivo;
-      img.onload = function() {
-        imagemAtual = img;
-        desenharImagem();
-      };
-    }
-
-    function desenharImagem() {
-      if (!imagemAtual) return;
-      const cw = canvas.width;
-      const ch = canvas.height;
-      ctx.clearRect(0, 0, cw, ch);
-
-      // desenha mantendo transparência e proporção
-      const escala = 0.7; // 70% do tamanho original
-      const largura = imagemAtual.width * escala;
-      const altura = imagemAtual.height * escala;
-      const x = (cw - largura) / 2;
-      const y = (ch - altura) / 2;
-      ctx.drawImage(imagemAtual, x, y, largura, altura);
-    }
-
-    function mudarCor(cor) {
-      document.body.style.backgroundColor = cor;
-    }
-
-    // configura tamanho do canvas
-    function ajustarCanvas() {
-      canvas.width = 600;
-      canvas.height = 500;
-      desenharImagem();
-    }
-
-    window.onload = ajustarCanvas;
-    window.onresize = ajustarCanvas;
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
