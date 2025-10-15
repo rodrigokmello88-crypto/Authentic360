@@ -79,7 +79,7 @@ body {
   align-items: center;
 }
 
-/* 🔹 Retângulo cinza sólido de fundo (mantido) */
+/* 🔹 Retângulo cinza sólido de fundo (mantido igual) */
 .viewer-bg {
   background-color: #a9a9a9; /* cinza sólido */
   border-radius: 20px;
@@ -91,13 +91,62 @@ body {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 }
 
-/* 🔹 PNGs transparentes — agora 50% maiores */
+/* 🔹 PNGs transparentes — agora 30% menores */
 canvas, .cup-img {
-  width: 150%;
+  width: 70%;
   height: auto;
   object-fit: contain;
   background: transparent !important;
   mix-blend-mode: normal;
 }
 
-/
+/* CONTROLES */
+.controls {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.swatches {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  gap: 12px;
+}
+
+.color-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s, border 0.2s;
+}
+
+.color-btn:hover {
+  transform: scale(1.2);
+  border-color: white;
+}
+
+.btn {
+  padding: 10px 22px;
+  background: #4fa9ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #0066cc;
+}
+
+/* RODAPÉ */
+.footer {
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
