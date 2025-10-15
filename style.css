@@ -79,10 +79,22 @@ body {
   align-items: center;
 }
 
+/* 🔹 Retângulo cinza sólido restaurado */
+.viewer-bg {
+  background-color: #a9a9a9; /* cinza sólido */
+  border-radius: 20px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
 canvas {
   width: 100%;
   height: auto;
-  transform: scale(0.6); /* Diminuído em 40% */
+  transform: scale(0.33); /* 🔹 Copos menores (reduzido 25%) */
 }
 
 /* CONTROLES */
