@@ -13,7 +13,7 @@ body {
 .topbar {
   text-align: center;
   padding: 18px 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.65); /* removido o cinza, fundo escuro translúcido */
   backdrop-filter: blur(6px);
 }
 
@@ -77,9 +77,9 @@ body {
   padding: 20px;
 }
 
-/* 🔹 Retângulo translúcido para destacar o copo */
+/* 🔹 Retângulo cinza sólido (mantido como antes) */
 .viewer-bg {
-  background-color: rgba(160, 160, 160, 0.35);
+  background-color: #3b3b3b; /* chumbo forte */
   border-radius: 20px;
   width: 70%;
   padding: 25px;
@@ -87,17 +87,28 @@ body {
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(10px);
 }
 
-/* 🔹 Copos transparentes (PNG mantido e reduzido 30%) */
-canvas, .cup-img {
-  width: 70%;
+/* 🔹 Copos (transparentes, sem fundo, tamanhos ajustados individualmente) */
+.cup-img {
   height: auto;
   object-fit: contain;
   background: transparent !important;
-  mix-blend-mode: normal;
   image-rendering: auto;
+  mix-blend-mode: normal;
+}
+
+/* Copos normais */
+.cup-img:not(.espumante):not(.taca-gin):not(.squeeze):not(.caneca-slim) {
+  width: 70%;
+}
+
+/* Copos grandes reduzidos */
+.cup-img.espumante,
+.cup-img.taca-gin,
+.cup-img.squeeze,
+.cup-img.caneca-slim {
+  width: 60%; /* menor proporcionalmente */
 }
 
 /* ===== CONTROLES ===== */
