@@ -27,16 +27,22 @@ function loadModelList() {
 function loadColorButtons() {
   const swatches = document.getElementById("swatches");
   const colors = [
-    { name: "Cinza", value: "#bfbfbf" },
-    { name: "Azul", value: "#4fa9ff" },
     { name: "Branco", value: "#ffffff" },
-    { name: "Preto", value: "#000000" }
+    { name: "Cinza", value: "#c0c0c0" },
+    { name: "Azul", value: "#4fa9ff" },
+    { name: "Preto", value: "#000000" },
+    { name: "Amarelo", value: "#f5c242" },
+    { name: "Vermelho", value: "#e84141" },
+    { name: "Verde", value: "#3ac47d" },
+    { name: "Rosa", value: "#ff66b2" },
+    { name: "Roxo", value: "#9055ff" }
   ];
 
   colors.forEach(c => {
     const btn = document.createElement("button");
     btn.className = "color-btn";
     btn.style.background = c.value;
+    btn.title = c.name;
     btn.onclick = () => {
       currentColor = c.value;
       drawModel();
@@ -54,20 +60,19 @@ function loadModel(file) {
 function drawModel() {
   if (!currentModel) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   ctx.fillStyle = currentColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  const w = currentModel.width * 0.8;
-  const h = currentModel.height * 0.8;
+  const w = currentModel.width * 0.6;
+  const h = currentModel.height * 0.6;
   const x = (canvas.width - w) / 2;
   const y = (canvas.height - h) / 2;
   ctx.drawImage(currentModel, x, y, w, h);
 }
 
-// Geração de vídeo 360° automático (8 segundos)
+// Geração de vídeo 360° (8s, rotação suave)
 async function generateVideo() {
-  const frames = 240; // 30fps * 8s
+  const frames = 240;
   const stream = canvas.captureStream(30);
   const recorder = new MediaRecorder(stream, {
     mimeType: "video/webm;codecs=vp9",
