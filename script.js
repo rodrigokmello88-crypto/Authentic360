@@ -105,3 +105,14 @@ document.getElementById('generateVideo').addEventListener('click', async () => {
     }
   }, 1000 / 30);
 });
+const copo = document.getElementById("copо");
+const visor = document.getElementById("visor");
+
+function mudarModelo(nomeArquivo) {
+  copo.src = `copos/${nomeArquivo}`;
+}
+
+function mudarCor(cor) {
+  visor.style.backgroundColor = cor;
+}
+
