@@ -1,149 +1,140 @@
-/* ===== RESET ===== */
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-}
-
-/* ===== FUNDO ===== */
-body {
-  background: url('fundos.png') no-repeat center center fixed;
+  background: url("fundos.png") no-repeat center center fixed;
   background-size: cover;
-  color: #fff;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  overflow-x: hidden;
+  color: #fff;
 }
 
-/* ===== CABEÇALHO ===== */
 header {
   width: 100%;
-  background: transparent;
   text-align: center;
-  padding: 15px 0;
+  padding: 10px 0;
+  background: transparent;
 }
 
 header img {
-  height: 70px;
+  height: 60px;
 }
 
-/* ===== CONTAINER PRINCIPAL ===== */
 .main-container {
   display: flex;
-  justify-content: center;
   align-items: flex-start;
+  justify-content: center;
+  width: 100%;
   gap: 40px;
-  padding: 30px;
-  width: 90%;
-  max-width: 1200px;
+  padding: 20px;
 }
 
-/* ===== MENU LATERAL ===== */
 .sidebar {
   background: #1b1b1b;
   padding: 20px;
   border-radius: 12px;
-  width: 240px;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
   text-align: center;
+  width: 220px;
 }
 
 .sidebar h2 {
+  color: #60a3ff;
   font-size: 18px;
-  color: #3b82f6;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .model-btn {
-  background: #3b82f6;
-  border: none;
-  color: #fff;
-  padding: 10px;
-  margin: 6px 0;
+  display: block;
   width: 100%;
+  background: #2f79ff;
+  color: white;
+  border: none;
+  padding: 8px 0;
   border-radius: 8px;
-  font-size: 15px;
-  font-weight: 500;
+  margin-bottom: 10px;
+  font-size: 14px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.3s;
 }
 
 .model-btn:hover {
-  background: #2563eb;
+  background: #1d5edb;
 }
 
-/* ===== VIEWER ===== */
 .viewer {
   background: #1b1b1b;
   border-radius: 12px;
-  padding: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  width: 520px;
+  height: 430px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 600px;
-  height: 500px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  overflow: hidden;
+  justify-content: center;
 }
 
 canvas {
-  width: 70%;
+  width: 85%;
   height: auto;
-  background: transparent; /* respeita transparência PNG */
+  border-radius: 10px;
   object-fit: contain;
+  background: transparent;
 }
 
-/* ===== CORES ===== */
 .color-controls {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 12px;
   margin-top: 15px;
+  gap: 8px;
 }
 
 .color-swatch {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  border: 2px solid #ccc;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  border: 2px solid #fff;
+  transition: transform 0.2s;
 }
 
 .color-swatch:hover {
   transform: scale(1.2);
 }
 
-/* ===== BOTÃO GERAR ===== */
 .controls {
-  margin-top: 25px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 15px;
 }
 
-button#generateVideo {
-  background: #3b82f6;
+button#generateVideo,
+button#extraButton {
+  background: #2f79ff;
   color: #fff;
   border: none;
-  padding: 10px 18px;
-  font-size: 15px;
+  padding: 10px 25px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  transition: background 0.3s;
 }
 
-button#generateVideo:hover {
-  background: #2563eb;
+button#generateVideo:hover,
+button#extraButton:hover {
+  background: #1d5edb;
 }
 
-/* ===== RODAPÉ ===== */
 footer {
   text-align: center;
-  font-size: 13px;
-  color: #999;
-  margin-top: 15px;
-  padding-bottom: 10px;
+  font-size: 11px;
+  margin-top: 20px;
+  padding-bottom: 15px;
+  color: #ccc;
 }
