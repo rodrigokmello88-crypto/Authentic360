@@ -1,114 +1,148 @@
-const models = [
-  { name: "Caneca", file: "caneca_png.png" },
-  { name: "Caneca Slim", file: "caneca_slim_png.png" },
-  { name: "Ecológico", file: "ecologico.png" },
-  { name: "Espumante", file: "espumante.png" },
-  { name: "Squeeze", file: "squeeze.png" },
-  { name: "Taça Gin", file: "taca_gin.png" },
-  { name: "Twister", file: "twister.png" },
-  { name: "Xícara", file: "xicara.png" }
-];
-
-const canvas = document.getElementById("mockupCanvas");
-const ctx = canvas.getContext("2d");
-let currentModel = null;
-let currentColor = "#cccccc";
-
-function loadModelList() {
-  const list = document.getElementById("modelsList");
-  models.forEach(m => {
-    const li = document.createElement("li");
-    li.textContent = m.name;
-    li.onclick = () => loadModel(m.file);
-    list.appendChild(li);
-  });
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: url('fundos.png') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: #fff;
+  overflow: hidden;
 }
 
-function loadColorButtons() {
-  const swatches = document.getElementById("swatches");
-  const colors = [
-    { name: "Branco", value: "#ffffff" },
-    { name: "Cinza", value: "#c0c0c0" },
-    { name: "Azul", value: "#4fa9ff" },
-    { name: "Preto", value: "#000000" },
-    { name: "Amarelo", value: "#f5c242" },
-    { name: "Vermelho", value: "#e84141" },
-    { name: "Verde", value: "#3ac47d" },
-    { name: "Rosa", value: "#ff66b2" },
-    { name: "Roxo", value: "#9055ff" }
-  ];
-
-  colors.forEach(c => {
-    const btn = document.createElement("button");
-    btn.className = "color-btn";
-    btn.style.background = c.value;
-    btn.title = c.name;
-    btn.onclick = () => {
-      currentColor = c.value;
-      drawModel();
-    };
-    swatches.appendChild(btn);
-  });
+/* LOGO */
+.topbar {
+  text-align: center;
+  padding: 15px 0;
 }
 
-function loadModel(file) {
-  currentModel = new Image();
-  currentModel.src = `copos/${file}`;
-  currentModel.onload = drawModel;
+.logo {
+  height: 65px;
 }
 
-function drawModel() {
-  if (!currentModel) return;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = currentColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  const w = currentModel.width * 0.6;
-  const h = currentModel.height * 0.6;
-  const x = (canvas.width - w) / 2;
-  const y = (canvas.height - h) / 2;
-  ctx.drawImage(currentModel, x, y, w, h);
+/* LAYOUT */
+.main-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  flex: 1;
+  overflow: hidden;
 }
 
-// Geração de vídeo 360° (8s, rotação suave)
-async function generateVideo() {
-  const frames = 240;
-  const stream = canvas.captureStream(30);
-  const recorder = new MediaRecorder(stream, {
-    mimeType: "video/webm;codecs=vp9",
-    videoBitsPerSecond: 2500000
-  });
-  const chunks = [];
-
-  recorder.ondataavailable = e => chunks.push(e.data);
-  recorder.onstop = () => {
-    const blob = new Blob(chunks, { type: "video/webm" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "mockup360.webm";
-    a.click();
-  };
-
-  recorder.start();
-
-  let angle = 0;
-  const spinInterval = setInterval(() => {
-    angle += (Math.PI * 2) / frames;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate(angle);
-    ctx.translate(-canvas.width / 2, -canvas.height / 2);
-    drawModel();
-    ctx.restore();
-  }, 1000 / 30);
-
-  setTimeout(() => {
-    clearInterval(spinInterval);
-    recorder.stop();
-  }, 8000);
+/* PAINEL LATERAL */
+.models-panel {
+  background-color: rgba(0, 0, 0, 0.55);
+  padding: 20px;
+  overflow-y: auto;
+  backdrop-filter: blur(8px);
 }
 
-document.getElementById("generateVideoBtn").onclick = generateVideo;
-loadModelList();
-loadColorButtons();
+.models-panel h3 {
+  margin-top: 0;
+  color: #4fa9ff;
+  text-align: center;
+  font-weight: 600;
+}
+
+.models-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.models-list li {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-align: center;
+}
+
+.models-list li:hover {
+  background: #4fa9ff;
+  color: white;
+}
+
+/* VISUALIZAÇÃO */
+.viewer-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer {
+  width: 55%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewer-bg {
+  background-color: rgba(180, 180, 180, 0.8);
+  border-radius: 20px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  transform: scale(0.45); /* 🔹 Copos menores */
+}
+
+/* CONTROLES */
+.controls {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.swatches {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  gap: 12px;
+}
+
+.color-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s, border 0.2s;
+}
+
+.color-btn:hover {
+  transform: scale(1.2);
+  border-color: white;
+}
+
+.btn {
+  padding: 10px 22px;
+  background: #4fa9ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #0066cc;
+}
+
+/* RODAPÉ */
+.footer {
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
