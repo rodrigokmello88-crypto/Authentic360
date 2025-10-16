@@ -1,12 +1,12 @@
 const modelos = {
   'caneca_png.png': 'copos/caneca_png.png',
   'caneca_slim_png.png': 'copos/caneca_slim_png.png',
-  'ecologico_png.png': 'copos/ecologico_png.png',
-  'espumante_png.png': 'copos/espumante_png.png',
-  'squeeze_png.png': 'copos/squeeze_png.png',
-  'tacagin_png.png': 'copos/tacagin_png.png',
-  'twister_png.png': 'copos/twister_png.png',
-  'xicara_png.png': 'copos/xicara_png.png'
+  'ecologico.png': 'copos/ecologico.png',
+  'espumante.png': 'copos/espumante.png',
+  'squeeze.png': 'copos/squeeze.png',
+  'taca_gin.png': 'copos/taca_gin.png',
+  'twister.png': 'copos/twister.png',
+  'xicara.png': 'copos/xicara.png'
 };
 
 function trocarCopo(modelo) {
@@ -14,15 +14,18 @@ function trocarCopo(modelo) {
   const tinta = document.getElementById('tinta');
   if (modelos[modelo]) {
     img.src = modelos[modelo];
-    img.style.width = "45%";
-    tinta.style.width = "45%";
+    img.style.filter = '';
+    tinta.style.backgroundColor = '#ffffff';
   }
 }
 
 function mudarCor(cor) {
   const tinta = document.getElementById('tinta');
   tinta.style.backgroundColor = cor;
-  tinta.style.mixBlendMode = "color";
+  tinta.style.mixBlendMode = "multiply";
+
+  const copo = document.getElementById('copo');
+  copo.style.filter = `brightness(1) saturate(1.2)`;
 }
 
 function gerarVideo() {
