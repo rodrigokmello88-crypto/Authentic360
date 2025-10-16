@@ -4,32 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Authentic360 - Visualizador</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <div class="container">
     <h1 class="titulo">Visualizador de Copos Authentic360</h1>
 
-    <div class="painel">
-      <div class="area-copos">
-        <canvas id="coposCanvas" width="800" height="400"></canvas>
+    <div class="painel" style="background-image: url('./fundos.png');">
+      <canvas id="coposCanvas" width="900" height="450"></canvas>
+    </div>
+
+    <div class="controles">
+      <h2>Personalização</h2>
+
+      <div class="cores">
+        <button data-color="#ffffff" style="background:#ffffff"></button>
+        <button data-color="#000000" style="background:#000000"></button>
+        <button data-color="#ff0000" style="background:#ff0000"></button>
+        <button data-color="#007bff" style="background:#007bff"></button>
+        <button data-color="#00cc66" style="background:#00cc66"></button>
+        <button data-color="#ffcc00" style="background:#ffcc00"></button>
       </div>
 
-      <div class="controles">
-        <h2>Personalização</h2>
-
-        <div class="cores">
-          <button data-color="#ffffff" style="background:#ffffff"></button>
-          <button data-color="#000000" style="background:#000000"></button>
-          <button data-color="#ff0000" style="background:#ff0000"></button>
-          <button data-color="#007bff" style="background:#007bff"></button>
-          <button data-color="#00cc66" style="background:#00cc66"></button>
-        </div>
-
-        <input type="file" id="upload" accept="image/*" />
-        <button id="baixar">Baixar Imagem</button>
-        <button id="gerarVideo">Gerar Vídeo 360º</button>
-      </div>
+      <input type="file" id="upload" accept="image/*" />
+      <button id="baixar">Baixar Imagem</button>
+      <button id="gerarVideo">Gerar Vídeo 360º</button>
     </div>
   </div>
 
