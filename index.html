@@ -3,46 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authentic 360 - Mockup de Copos</title>
+  <title>Authentic360</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Logo" class="logo">
+  <header class="topbar">
+    <img src="logo.png" alt="Logo Authentic360" class="logo" />
   </header>
 
-  <main>
-    <div class="viewer">
-      <canvas id="mockupCanvas" width="800" height="800"></canvas>
-    </div>
+  <div class="container">
+    <aside class="sidebar">
+      <h3>Modelos</h3>
+      <div id="modelsList" class="models-list"></div>
+    </aside>
 
-    <div class="controls">
-      <div class="btn-group">
-        <button id="prevModel" class="btn">◀</button>
-        <button id="nextModel" class="btn">▶</button>
+    <main class="main-viewer">
+      <div class="viewer">
+        <canvas id="mockupCanvas" width="800" height="600"></canvas>
       </div>
 
-      <div class="color-palette">
-        <button class="color-btn" data-color="#ffffff" style="background:#ffffff;"></button>
-        <button class="color-btn" data-color="#000000" style="background:#000000;"></button>
-        <button class="color-btn" data-color="#ff0000" style="background:#ff0000;"></button>
-        <button class="color-btn" data-color="#00ff00" style="background:#00ff00;"></button>
-        <button class="color-btn" data-color="#0000ff" style="background:#0000ff;"></button>
-        <button class="color-btn" data-color="#ff00ff" style="background:#ff00ff;"></button>
-        <button class="color-btn" data-color="#ff8800" style="background:#ff8800;"></button>
+      <div class="controls">
+        <div id="swatches" class="swatches"></div>
+        <div class="actions">
+          <label class="upload-btn">
+            📁 Enviar Arte
+            <input id="uploadInput" type="file" accept="image/*" />
+          </label>
+          <button id="downloadBtn" class="btn">Baixar Imagem</button>
+          <button id="recordBtn" class="btn">Gerar Vídeo 360°</button>
+        </div>
       </div>
+    </main>
+  </div>
 
-      <div class="upload-group">
-        <label for="upload" class="btn">📁 Inserir Arte</label>
-        <input type="file" id="upload" accept="image/*" />
-      </div>
-
-      <div class="action-group">
-        <button id="generateVideo" class="btn action">🎥 Gerar Vídeo</button>
-        <button id="downloadMockup" class="btn action">⬇️ Baixar</button>
-      </div>
-    </div>
-  </main>
+  <footer class="footer">© Authentic360 — Mockups</footer>
 
   <script src="script.js"></script>
 </body>
