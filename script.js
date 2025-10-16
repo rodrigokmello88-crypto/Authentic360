@@ -1,69 +1,79 @@
-const modelos = {
-  'caneca_png.png': 'copos/caneca_png.png',
-  'caneca_slim_png.png': 'copos/caneca_slim_png.png',
-  'ecologico.png': 'copos/ecologico.png',
-  'espumante.png': 'copos/espumante.png',
-  'squeeze.png': 'copos/squeeze.png',
-  'taca_gin.png': 'copos/taca_gin.png',
-  'twister.png': 'copos/twister.png',
-  'xicara.png': 'copos/xicara.png'
-};
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-function trocarCopo(modelo) {
-  const img = document.getElementById('copo');
-  const tinta = document.getElementById('tinta');
+let imagemAtual = new Image();
+let corAtual = '#ffffff';
+let arte = null;
+let modeloAtual = 'caneca';
 
-  if (modelos[modelo]) {
-    img.src = modelos[modelo];
-    tinta.style.setProperty('--mask-img', `url(${modelos[modelo]})`);
-    tinta.style.backgroundColor = "transparent";
+function carregarImagem(nome) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = `${nome}_png.png`;
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+  });
+}
 
-    switch (modelo) {
-      case 'espumante.png':
-      case 'taca_gin.png':
-        img.style.width = "33%";
-        tinta.style.width = "33%";
-        break;
-      case 'squeeze.png':
-      case 'twister.png':
-        img.style.width = "36%";
-        tinta.style.width = "36%";
-        break;
-      default:
-        img.style.width = "42%";
-        tinta.style.width = "42%";
-    }
+async function trocarCopo(modelo) {
+  modeloAtual = modelo;
+  const img = await carregarImagem(modelo);
+  imagemAtual = img;
+  desenhar();
+}
+
+function desenhar() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Centralizar e escalar conforme o modelo
+  let scale = 0.45; // padrão
+  if (modeloAtual === 'espumante') scale = 0.32;
+  if (modeloAtual === 'ecologico') scale = 0.4;
+
+  const width = imagemAtual.width * scale;
+  const height = imagemAtual.height * scale;
+  const x = (canvas.width - width) / 2;
+  const y = (canvas.height - height) / 2;
+
+  // pintar com cor sólida
+  ctx.fillStyle = corAtual;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.globalCompositeOperation = "destination-in";
+  ctx.drawImage(imagemAtual, x, y, width, height);
+  ctx.globalCompositeOperation = "source-over";
+
+  // aplicar arte
+  if (arte) {
+    ctx.drawImage(arte, x, y, width, height);
   }
 }
 
 function mudarCor(cor) {
-  const tinta = document.getElementById('tinta');
-  tinta.style.backgroundColor = cor;
+  corAtual = cor;
+  desenhar();
+}
+
+function enviarArte(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    arte = new Image();
+    arte.src = e.target.result;
+    arte.onload = desenhar;
+  };
+  reader.readAsDataURL(file);
 }
 
 function gerarVideo() {
-  alert("🎥 Gerando vídeo 360° (simulação de 8s com fundo transparente)");
+  alert('Função de vídeo 360º em desenvolvimento');
 }
 
 function baixarImagem() {
-  const img = document.getElementById('copo');
   const link = document.createElement('a');
-  link.href = img.src;
-  link.download = 'modelo_copo.png';
+  link.download = `${modeloAtual}.png`;
+  link.href = canvas.toDataURL();
   link.click();
 }
 
-document.getElementById('uploadArte').addEventListener('change', function (event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const arte = document.getElementById('arte');
-    arte.src = e.target.result;
-    arte.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-});
-
-window.onload = () => trocarCopo('caneca_png.png');
+trocarCopo('caneca');
