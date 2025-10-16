@@ -3,52 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authentic 360</title>
+  <title>Authentic360 - Visualizador</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <img src="fundos.png" alt="Fundo" class="background">
+  <header>
+    <img src="logo.png" class="logo" alt="Authentic360">
+  </header>
 
-    <div class="cup-area">
-      <canvas id="cupCanvas"></canvas>
-    </div>
+  <main>
+    <aside class="menu">
+      <h2>Modelos</h2>
+      <button onclick="trocarCopo('caneca_png.png')">Caneca</button>
+      <button onclick="trocarCopo('caneca_slim_png.png')">Caneca Slim</button>
+      <button onclick="trocarCopo('ecologico_png.png')">Ecológico</button>
+      <button onclick="trocarCopo('espumante_png.png')">Espumante</button>
+      <button onclick="trocarCopo('squeeze_png.png')">Squeeze</button>
+      <button onclick="trocarCopo('tacagin_png.png')">Taça Gin</button>
+      <button onclick="trocarCopo('twister_png.png')">Twister</button>
+      <button onclick="trocarCopo('xicara_png.png')">Xícara</button>
+    </aside>
 
-    <div class="controls">
-      <h2>Escolha o modelo:</h2>
-      <select id="cupSelect">
-        <option value="caneca_png.png">Caneca</option>
-        <option value="caneca_slim_png.png">Caneca Slim</option>
-        <option value="ecologico_png.png">Ecológico</option>
-        <option value="espumante_png.png">Espumante</option>
-        <option value="squeeze_png.png">Squeeze</option>
-        <option value="tacagin_png.png">Taça Gin</option>
-        <option value="twister_png.png">Twister</option>
-        <option value="xicara_png.png">Xícara</option>
-      </select>
-
-      <h2>Cor do copo:</h2>
-      <div class="color-buttons">
-        <button class="color-btn" data-color="#ffffff" style="background:#ffffff"></button>
-        <button class="color-btn" data-color="#ffff00" style="background:#ffff00"></button>
-        <button class="color-btn" data-color="#007bff" style="background:#007bff"></button>
-        <button class="color-btn" data-color="#8000ff" style="background:#8000ff"></button>
-        <button class="color-btn" data-color="#ff66b2" style="background:#ff66b2"></button>
-        <button class="color-btn" data-color="#00cc44" style="background:#00cc44"></button>
+    <section class="visualizador">
+      <div class="copo-container">
+        <img id="copo" src="copos/caneca_png.png" alt="Copo">
+        <div id="tinta"></div>
+        <img id="arte" alt="Arte aplicada">
       </div>
 
-      <div class="upload-area">
-        <label for="uploadInput" class="upload-label">Inserir Arte</label>
-        <input type="file" id="uploadInput" accept="image/*">
+      <div class="cores">
+        <div class="cor" style="background:#ffffff" onclick="mudarCor('#ffffff')"></div>
+        <div class="cor" style="background:#ffcc00" onclick="mudarCor('#ffcc00')"></div>
+        <div class="cor" style="background:#3b82f6" onclick="mudarCor('#3b82f6')"></div>
+        <div class="cor" style="background:#8b5cf6" onclick="mudarCor('#8b5cf6')"></div>
+        <div class="cor" style="background:#ff00ff" onclick="mudarCor('#ff00ff')"></div>
+        <div class="cor" style="background:#00ff99" onclick="mudarCor('#00ff99')"></div>
       </div>
 
-      <div class="buttons">
-        <button id="downloadBtn">Baixar PNG</button>
-        <button id="generateVideoBtn">Gerar Vídeo 360°</button>
+      <div class="botoes">
+        <button onclick="gerarVideo()">🎥 Gerar vídeo 360°</button>
+        <button onclick="baixarImagem()">⬇️ Baixar</button>
+        <label class="upload">
+          📁 Enviar Arte
+          <input type="file" id="uploadArte" accept="image/png, image/jpeg">
+        </label>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
+  <footer>© 2025 Authentic360</footer>
   <script src="script.js"></script>
 </body>
 </html>
