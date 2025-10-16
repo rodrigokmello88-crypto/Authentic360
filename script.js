@@ -1,73 +1,51 @@
-const canvas = document.getElementById("cupCanvas");
-const ctx = canvas.getContext("2d");
-canvas.width = 400;
-canvas.height = 400;
+const modelos = {
+  'caneca_png.png': 'copos/caneca_png.png',
+  'caneca_slim_png.png': 'copos/caneca_slim_png.png',
+  'ecologico_png.png': 'copos/ecologico_png.png',
+  'espumante_png.png': 'copos/espumante_png.png',
+  'squeeze_png.png': 'copos/squeeze_png.png',
+  'tacagin_png.png': 'copos/tacagin_png.png',
+  'twister_png.png': 'copos/twister_png.png',
+  'xicara_png.png': 'copos/xicara_png.png'
+};
 
-let currentColor = "#ffffff";
-let uploadedImage = null;
-let cupImage = new Image();
-cupImage.src = "copos/caneca_png.png";
-
-// Função principal de desenho
-function drawCup() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Desenhar o copo base
-  ctx.drawImage(cupImage, 0, 0, canvas.width, canvas.height);
-
-  // Aplicar cor sólida (sem sombra)
-  ctx.globalCompositeOperation = "source-atop";
-  ctx.fillStyle = currentColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.globalCompositeOperation = "source-over";
-
-  // Se houver imagem de arte enviada, aplicar no centro
-  if (uploadedImage) {
-    const w = canvas.width * 0.6;
-    const h = canvas.height * 0.4;
-    const x = (canvas.width - w) / 2;
-    const y = (canvas.height - h) / 2;
-    ctx.drawImage(uploadedImage, x, y, w, h);
+function trocarCopo(modelo) {
+  const img = document.getElementById('copo');
+  const tinta = document.getElementById('tinta');
+  if (modelos[modelo]) {
+    img.src = modelos[modelo];
+    img.style.width = "45%";
+    tinta.style.width = "45%";
   }
 }
 
-// Quando a imagem do copo carregar
-cupImage.onload = drawCup;
+function mudarCor(cor) {
+  const tinta = document.getElementById('tinta');
+  tinta.style.backgroundColor = cor;
+  tinta.style.mixBlendMode = "color";
+}
 
-// Trocar modelo
-document.getElementById("cupSelect")?.addEventListener("change", (e) => {
-  cupImage.src = `copos/${e.target.value}`;
-});
+function gerarVideo() {
+  alert("🎥 Gerando vídeo 360° (simulação)");
+}
 
-// Trocar cor do copo
-document.querySelectorAll(".color-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    currentColor = btn.dataset.color;
-    drawCup();
-  });
-});
-
-// Upload de imagem
-document.getElementById("uploadInput")?.addEventListener("change", (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const img = new Image();
-  img.onload = () => {
-    uploadedImage = img;
-    drawCup();
-  };
-  img.src = URL.createObjectURL(file);
-});
-
-// Botão de download
-document.getElementById("downloadBtn")?.addEventListener("click", () => {
-  const link = document.createElement("a");
-  link.download = "mockup.png";
-  link.href = canvas.toDataURL("image/png");
+function baixarImagem() {
+  const img = document.getElementById('copo');
+  const link = document.createElement('a');
+  link.href = img.src;
+  link.download = 'modelo_copo.png';
   link.click();
-});
+}
 
-// Gerar vídeo 360 (placeholder)
-document.getElementById("generateVideoBtn")?.addEventListener("click", () => {
-  alert("Geração de vídeo 360° será adicionada em breve!");
+document.getElementById('uploadArte').addEventListener('change', function (event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const arte = document.getElementById('arte');
+    arte.src = e.target.result;
+    arte.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
 });
