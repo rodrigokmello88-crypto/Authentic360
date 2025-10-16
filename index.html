@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authentic360 - Visualizador</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Authentic 360</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <img src="logo.png" class="logo" alt="Authentic360">
+    <img src="logo.png" alt="Authentic" class="logo" />
   </header>
 
   <main>
     <aside class="menu">
       <h2>Modelos</h2>
-      <button onclick="trocarCopo('caneca_png.png')">Caneca</button>
-      <button onclick="trocarCopo('caneca_slim_png.png')">Caneca Slim</button>
-      <button onclick="trocarCopo('ecologico.png')">Ecológico</button>
-      <button onclick="trocarCopo('espumante.png')">Espumante</button>
-      <button onclick="trocarCopo('squeeze.png')">Squeeze</button>
-      <button onclick="trocarCopo('taca_gin.png')">Taça Gin</button>
-      <button onclick="trocarCopo('twister.png')">Twister</button>
-      <button onclick="trocarCopo('xicara.png')">Xícara</button>
+      <button onclick="trocarCopo('caneca')">Caneca</button>
+      <button onclick="trocarCopo('caneca_slim')">Caneca Slim</button>
+      <button onclick="trocarCopo('ecologico')">Ecológico</button>
+      <button onclick="trocarCopo('espumante')">Espumante</button>
+      <button onclick="trocarCopo('squeeze')">Squeeze</button>
+      <button onclick="trocarCopo('taça_gin')">Taça Gin</button>
+      <button onclick="trocarCopo('twister')">Twister</button>
+      <button onclick="trocarCopo('xicara')">Xícara</button>
     </aside>
 
     <section class="visualizador">
-      <div class="copo-container">
-        <img id="copo" src="copos/caneca_png.png" alt="Copo">
-        <div id="tinta"></div>
-        <img id="arte" alt="Arte aplicada">
-      </div>
-
+      <canvas id="canvas"></canvas>
       <div class="cores">
-        <div class="cor" style="background:#d1d5db" onclick="mudarCor('#d1d5db')"></div>
-        <div class="cor" style="background:#9ca3af" onclick="mudarCor('#9ca3af')"></div>
-        <div class="cor" style="background:#000" onclick="mudarCor('#000')"></div>
-        <div class="cor" style="background:#00ffff" onclick="mudarCor('#00ffff')"></div>
-        <div class="cor" style="background:#ff00ff" onclick="mudarCor('#ff00ff')"></div>
+        <button class="cor" style="background:#ffffff" onclick="mudarCor('#ffffff')"></button>
+        <button class="cor" style="background:#d9d9d9" onclick="mudarCor('#d9d9d9')"></button>
+        <button class="cor" style="background:#999999" onclick="mudarCor('#999999')"></button>
+        <button class="cor" style="background:#000000" onclick="mudarCor('#000000')"></button>
+        <button class="cor" style="background:#00e5ff" onclick="mudarCor('#00e5ff')"></button>
+        <button class="cor" style="background:#ff00ff" onclick="mudarCor('#ff00ff')"></button>
       </div>
 
       <div class="botoes">
-        <button onclick="gerarVideo()">🎥 Gerar vídeo 360°</button>
-        <button onclick="baixarImagem()">⬇️ Baixar</button>
+        <button onclick="gerarVideo()">🎥 Gerar vídeo 360º</button>
+        <button onclick="baixarImagem()">💾 Baixar</button>
         <label class="upload">
           📁 Enviar Arte
-          <input type="file" id="uploadArte" accept="image/png, image/jpeg">
+          <input type="file" accept="image/*" onchange="enviarArte(event)" />
         </label>
       </div>
     </section>
   </main>
 
-  <footer>© 2025 Authentic360</footer>
+  <footer>
+    © 2025 Authentic Personalizados — Todos os direitos reservados.
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
