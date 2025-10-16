@@ -1,38 +1,38 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  background: url("fundos.png") no-repeat center center fixed;
+  background: url('fundos.png') no-repeat center center fixed;
   background-size: cover;
+  margin: 0;
   color: white;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-header {
-  margin-top: 15px;
-}
-
-.logo {
-  width: 130px;
+header .logo {
+  width: 160px;
+  margin: 20px 0;
 }
 
 main {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   gap: 40px;
-  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .menu {
-  background: #1f1f1f;
+  background: #1a1a1a;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .menu h2 {
-  margin-bottom: 15px;
-  color: #fff;
+  margin-bottom: 10px;
+  color: #77a5ff;
 }
 
 .menu button {
@@ -40,112 +40,70 @@ main {
   width: 180px;
   margin: 8px auto;
   padding: 10px;
-  border: none;
-  background: #3b82f6;
+  background: #3a73ff;
   color: white;
-  font-weight: bold;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.2s;
 }
 
 .menu button:hover {
-  background: #2563eb;
+  transform: scale(1.05);
 }
 
 .visualizador {
   background: #1a1a1a;
-  width: 450px;
-  height: 450px;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  text-align: center;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.copo-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#copo {
-  width: 42%;
-  height: auto;
-  position: relative;
-  z-index: 2;
+canvas {
+  width: 350px;
+  height: 350px;
+  display: block;
+  margin: 0 auto;
   object-fit: contain;
-  transition: all 0.3s ease;
-}
-
-/* camada de tinta sólida (usa o PNG como máscara) */
-#tinta {
-  position: absolute;
-  width: 42%;
-  height: auto;
-  aspect-ratio: 1/1;
-  z-index: 1;
-  transition: all 0.3s ease;
-  -webkit-mask-image: var(--mask-img);
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-image: var(--mask-img);
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  background-color: transparent;
-}
-
-#arte {
-  position: absolute;
-  width: 25%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  opacity: 0.9;
-  display: none;
-  pointer-events: none;
 }
 
 .cores {
-  margin: 15px 0;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  margin: 15px 0;
 }
 
 .cor {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
+  border: none;
   border-radius: 50%;
-  border: 2px solid #fff;
+  margin: 0 5px;
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.cor:hover {
+  transform: scale(1.2);
+}
+
+.botoes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .botoes button, .upload {
-  background: #3b82f6;
+  background: #3a73ff;
   color: white;
   border: none;
+  padding: 10px 15px;
   border-radius: 8px;
-  padding: 10px 20px;
-  margin: 5px;
-  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
-  display: inline-block;
-}
-
-.botoes button:hover, .upload:hover {
-  background: #2563eb;
+  transition: background 0.2s;
 }
 
 .upload input {
@@ -153,7 +111,7 @@ main {
 }
 
 footer {
-  margin-top: 30px;
-  font-size: 0.8rem;
+  font-size: 12px;
   color: #ccc;
+  margin-top: 20px;
 }
