@@ -1,37 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authentic360 - Visualizador</title>
-  <link rel="stylesheet" href="./style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Authentic360 - Mockups</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1 class="titulo">Visualizador de Copos Authentic360</h1>
+  <header class="topbar">
+    <img src="logo.png" alt="logo" class="logo">
+  </header>
 
-    <div class="painel" style="background-image: url('./fundos.png');">
-      <canvas id="coposCanvas" width="900" height="450"></canvas>
-    </div>
+  <main class="main-grid">
+    <aside class="models-panel" aria-label="Modelos">
+      <h3>Modelos</h3>
+      <div id="modelsList" class="models-list"></div>
+    </aside>
 
-    <div class="controles">
-      <h2>Personalização</h2>
-
-      <div class="cores">
-        <button data-color="#ffffff" style="background:#ffffff"></button>
-        <button data-color="#000000" style="background:#000000"></button>
-        <button data-color="#ff0000" style="background:#ff0000"></button>
-        <button data-color="#007bff" style="background:#007bff"></button>
-        <button data-color="#00cc66" style="background:#00cc66"></button>
-        <button data-color="#ffcc00" style="background:#ffcc00"></button>
+    <section class="viewer-panel">
+      <div class="viewer" id="viewer">
+        <canvas id="mockupCanvas" width="900" height="600"></canvas>
       </div>
 
-      <input type="file" id="upload" accept="image/*" />
-      <button id="baixar">Baixar Imagem</button>
-      <button id="gerarVideo">Gerar Vídeo 360º</button>
-    </div>
-  </div>
+      <div class="controls-row">
+        <div id="swatches" class="swatches" aria-label="Cores"></div>
 
-  <script src="./script.js"></script>
+        <div class="actions">
+          <label class="upload-btn">
+            📁 Enviar Arte
+            <input id="uploadInput" type="file" accept="image/*" />
+          </label>
+          <button id="downloadBtn" class="btn">📷 Baixar imagem</button>
+          <button id="recordBtn" class="btn">🎬 Gerar vídeo 360º (8s)</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© Authentic360 — Mockups</footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
