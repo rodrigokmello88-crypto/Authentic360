@@ -11,25 +11,18 @@ const modelos = {
 
 function trocarCopo(modelo) {
   const img = document.getElementById('copo');
-  const tinta = document.getElementById('tinta');
   if (modelos[modelo]) {
     img.src = modelos[modelo];
-    img.style.filter = '';
-    tinta.style.backgroundColor = '#ffffff';
   }
 }
 
 function mudarCor(cor) {
   const tinta = document.getElementById('tinta');
   tinta.style.backgroundColor = cor;
-  tinta.style.mixBlendMode = "multiply";
-
-  const copo = document.getElementById('copo');
-  copo.style.filter = `brightness(1) saturate(1.2)`;
 }
 
 function gerarVideo() {
-  alert("🎥 Gerando vídeo 360° (simulação)");
+  alert("🎥 Gerando vídeo 360° (simulação de 8 segundos)");
 }
 
 function baixarImagem() {
