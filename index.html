@@ -1,54 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authentic 360°</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Authentic360 - Visualizador</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Logo" class="logo" />
+  <header class="topbar">
+    <img src="logo.png" alt="Authentic360" class="logo" />
   </header>
 
-  <main>
-    <div class="viewer">
-      <canvas id="mockupCanvas"></canvas>
-    </div>
+  <main class="wrap">
+    <aside class="menu">
+      <h2>Modelos</h2>
+      <button onclick="trocarCopo('copos/caneca_png.png')">Caneca</button>
+      <button onclick="trocarCopo('copos/caneca_slim_png.png')">Caneca Slim</button>
+      <button onclick="trocarCopo('copos/ecologico.png')">Ecológico</button>
+      <button onclick="trocarCopo('copos/espumante.png')">Espumante</button>
+      <button onclick="trocarCopo('copos/squeeze.png')">Squeeze</button>
+      <button onclick="trocarCopo('copos/taca_gin.png')">Taça Gin</button>
+      <button onclick="trocarCopo('copos/twister.png')">Twister</button>
+      <button onclick="trocarCopo('copos/xicara.png')">Xícara</button>
+    </aside>
 
-    <div class="controls">
-      <select id="modelSelect">
-        <option value="copos/caneca_png.png">Caneca</option>
-        <option value="copos/caneca_slim_png.png">Caneca Slim</option>
-        <option value="copos/ecologico_png.png">Ecológico</option>
-        <option value="copos/espumante_png.png">Espumante</option>
-        <option value="copos/squeeze_png.png">Squeeze</option>
-        <option value="copos/tacagin_png.png">Taça Gin</option>
-        <option value="copos/twister_png.png">Twister</option>
-        <option value="copos/xicara_png.png">Xícara</option>
-      </select>
-
-      <div class="color-buttons">
-        <button class="color-btn" data-color="#ffffff"></button>
-        <button class="color-btn" data-color="#f8d210"></button>
-        <button class="color-btn" data-color="#e74c3c"></button>
-        <button class="color-btn" data-color="#3498db"></button>
-        <button class="color-btn" data-color="#27ae60"></button>
-        <button class="color-btn" data-color="#9b59b6"></button>
-        <button class="color-btn" data-color="#000000"></button>
+    <section class="visualizador">
+      <div class="canvas-panel">
+        <canvas id="mockup" width="800" height="600"></canvas>
       </div>
 
-      <div class="upload-section">
-        <label for="imageUpload" class="upload-btn">Enviar arte</label>
-        <input type="file" id="imageUpload" accept="image/*" />
-      </div>
+      <div class="controls">
+        <div class="cores" id="cores">
+          <!-- cores geradas por JS -->
+        </div>
 
-      <div class="action-buttons">
-        <button id="generateVideo">🎥 Gerar Vídeo</button>
-        <button id="downloadImage">📥 Baixar Imagem</button>
+        <div class="actions">
+          <button id="recordBtn">🎥 Gerar vídeo 360°</button>
+          <button id="downloadBtn">⬇️ Baixar</button>
+          <label class="upload">
+            📁 Enviar Arte
+            <input id="fileUpload" type="file" accept="image/*">
+          </label>
+        </div>
       </div>
-    </div>
+    </section>
   </main>
+
+  <footer class="footer">© 2025 Authentic360</footer>
 
   <script src="script.js"></script>
 </body>
