@@ -3,40 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authentic360</title>
+  <title>Authentic 360°</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <img src="logo.png" alt="Logo Authentic360" class="logo" />
+  <header>
+    <img src="logo.png" alt="Logo" class="logo" />
   </header>
 
-  <div class="container">
-    <aside class="sidebar">
-      <h3>Modelos</h3>
-      <div id="modelsList" class="models-list"></div>
-    </aside>
+  <main>
+    <div class="viewer">
+      <canvas id="mockupCanvas"></canvas>
+    </div>
 
-    <main class="main-viewer">
-      <div class="viewer">
-        <canvas id="mockupCanvas" width="800" height="600"></canvas>
+    <div class="controls">
+      <select id="modelSelect">
+        <option value="copos/caneca_png.png">Caneca</option>
+        <option value="copos/caneca_slim_png.png">Caneca Slim</option>
+        <option value="copos/ecologico_png.png">Ecológico</option>
+        <option value="copos/espumante_png.png">Espumante</option>
+        <option value="copos/squeeze_png.png">Squeeze</option>
+        <option value="copos/tacagin_png.png">Taça Gin</option>
+        <option value="copos/twister_png.png">Twister</option>
+        <option value="copos/xicara_png.png">Xícara</option>
+      </select>
+
+      <div class="color-buttons">
+        <button class="color-btn" data-color="#ffffff"></button>
+        <button class="color-btn" data-color="#f8d210"></button>
+        <button class="color-btn" data-color="#e74c3c"></button>
+        <button class="color-btn" data-color="#3498db"></button>
+        <button class="color-btn" data-color="#27ae60"></button>
+        <button class="color-btn" data-color="#9b59b6"></button>
+        <button class="color-btn" data-color="#000000"></button>
       </div>
 
-      <div class="controls">
-        <div id="swatches" class="swatches"></div>
-        <div class="actions">
-          <label class="upload-btn">
-            📁 Enviar Arte
-            <input id="uploadInput" type="file" accept="image/*" />
-          </label>
-          <button id="downloadBtn" class="btn">Baixar Imagem</button>
-          <button id="recordBtn" class="btn">Gerar Vídeo 360°</button>
-        </div>
+      <div class="upload-section">
+        <label for="imageUpload" class="upload-btn">Enviar arte</label>
+        <input type="file" id="imageUpload" accept="image/*" />
       </div>
-    </main>
-  </div>
 
-  <footer class="footer">© Authentic360 — Mockups</footer>
+      <div class="action-buttons">
+        <button id="generateVideo">🎥 Gerar Vídeo</button>
+        <button id="downloadImage">📥 Baixar Imagem</button>
+      </div>
+    </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
