@@ -1,66 +1,79 @@
-body {
-  background: #111;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  zoom: 0.8;
+const canvas = document.getElementById("coposCanvas");
+const ctx = canvas.getContext("2d");
+
+const copos = [
+  { nome: "caneca", arquivo: "caneca_png.png", x: 100, y: 80, escala: 0.5 },
+  { nome: "caneca_slim", arquivo: "caneca_slim_png.png", x: 320, y: 80, escala: 0.5 },
+  { nome: "espumante", arquivo: "espumante_png.png", x: 540, y: 80, escala: 0.45 }
+];
+
+let corAtual = "#ffffff";
+let arte = null;
+let imagens = {};
+
+function carregarImagens(callback) {
+  let carregadas = 0;
+  copos.forEach(copo => {
+    const img = new Image();
+    img.src = copo.arquivo;
+    img.onload = () => {
+      imagens[copo.nome] = img;
+      carregadas++;
+      if (carregadas === copos.length) callback();
+    };
+    img.onerror = () => console.error("Erro ao carregar imagem:", copo.arquivo);
+  });
 }
 
-.container {
-  margin: 20px auto;
-  max-width: 1200px;
+function desenhar() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  copos.forEach(copo => {
+    const img = imagens[copo.nome];
+    if (!img) return;
+    const largura = img.width * copo.escala;
+    const altura = img.height * copo.escala;
+
+    ctx.drawImage(img, copo.x, copo.y, largura, altura);
+
+    // Pintura real (não apenas sombra)
+    ctx.globalCompositeOperation = "source-atop";
+    ctx.fillStyle = corAtual;
+    ctx.fillRect(copo.x, copo.y, largura, altura);
+    ctx.globalCompositeOperation = "source-over";
+
+    if (arte) {
+      ctx.drawImage(arte, copo.x + largura * 0.2, copo.y + altura * 0.3, largura * 0.6, altura * 0.4);
+    }
+  });
 }
 
-.painel {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-}
+document.querySelectorAll(".cores button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    corAtual = btn.dataset.color;
+    desenhar();
+  });
+});
 
-.area-copos {
-  background: #333;
-  border-radius: 20px;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 900px;
-  height: 450px;
-}
+document.getElementById("upload").addEventListener("change", e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+  img.onload = () => {
+    arte = img;
+    desenhar();
+  };
+});
 
-canvas {
-  max-width: 100%;
-  height: auto;
-}
+document.getElementById("baixar").addEventListener("click", () => {
+  const link = document.createElement("a");
+  link.download = "mockup.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+});
 
-.controles {
-  text-align: left;
-}
+document.getElementById("gerarVideo").addEventListener("click", () => {
+  alert("Geração de vídeo 360º será implementada em breve!");
+});
 
-.cores {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.cores button {
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-#baixar, #gerarVideo, #upload {
-  display: block;
-  margin: 10px 0;
-  padding: 10px 20px;
-  background: #555;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
-}
+carregarImagens(desenhar);
