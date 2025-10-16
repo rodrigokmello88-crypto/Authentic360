@@ -1,75 +1,145 @@
-body {
-  background: #111;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  zoom: 0.8;
+:root{
+  --bg-dark:#0f1720;
+  --panel:#1f2123;
+  --accent:#0078ff;
+  --muted:#bdbdbd;
+  --white:#ffffff;
 }
 
-.container {
-  margin: 20px auto;
-  max-width: 1200px;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: "Montserrat", sans-serif;
+  background: url("fundos.png") center center / cover no-repeat fixed;
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
 
-.titulo {
-  font-size: 28px;
-  margin-bottom: 10px;
+/* Topbar */
+.topbar{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:18px 0;
+  background:rgba(0,0,0,0.25);
+  box-shadow:0 1px 6px rgba(0,0,0,0.35);
+}
+.logo{ height:64px; }
+
+/* Layout */
+.main-grid{
+  max-width:1180px;
+  margin:26px auto;
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:20px;
+  padding:0 18px;
+  align-items:start;
+  flex:1;
 }
 
-.painel {
-  background-color: #333;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 20px;
-  margin: 0 auto;
-  width: 900px;
-  height: 450px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+/* Model list */
+.models-panel{
+  background:rgba(0,0,0,0.6);
+  border-radius:12px;
+  padding:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.5);
+}
+.models-panel h3{
+  margin:0 0 12px 0;
+  color:var(--accent);
+  font-size:18px;
+  text-align:center;
+}
+.models-list{ display:flex; flex-direction:column; gap:10px; }
+
+.model-btn{
+  background:var(--accent);
+  color:var(--white);
+  border:none;
+  padding:10px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow:0 6px 14px rgba(0,0,0,0.3);
+  transition:transform .12s;
+}
+.model-btn:hover{ transform:translateY(-3px); }
+
+/* Viewer */
+.viewer-panel{ display:flex; flex-direction:column; gap:12px; align-items:center; }
+.viewer{
+  width:100%;
+  background:var(--panel);
+  border-radius:16px;
+  padding:22px;
+  box-shadow:0 14px 40px rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+canvas{
+  width:760px;          /* main visible size */
+  height:420px;
+  border-radius:8px;
+  background:transparent;
+  display:block;
 }
 
-canvas {
-  max-width: 100%;
-  height: auto;
+/* Controls row */
+.controls-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  gap:18px;
+  padding-top:6px;
+}
+.swatches{ display:flex; gap:10px; align-items:center; }
+.color-swatch{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,0.12);
+  cursor:pointer;
+  box-shadow:0 6px 12px rgba(0,0,0,0.4);
+}
+.color-swatch:hover{ transform:scale(1.06); }
+
+/* actions */
+.actions{ display:flex; gap:12px; align-items:center; }
+.upload-btn{
+  background:#2e7bff;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  display:inline-block;
+  font-weight:700;
+}
+.upload-btn input{ display:none; }
+
+.btn{
+  background:linear-gradient(90deg,var(--accent),#3fa2ff);
+  color:#fff;
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,0,0,0.35);
 }
 
-.controles {
-  text-align: center;
-  margin-top: 20px;
-}
+/* footer */
+.footer{ text-align:center; color:var(--muted); padding:18px 0; margin-top:22px; }
 
-.cores {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.cores button {
-  width: 40px;
-  height: 40px;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-#baixar, #gerarVideo, #upload {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 20px;
-  background: #555;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-#baixar:hover, #gerarVideo:hover, #upload:hover {
-  background: #777;
+/* Responsive fallback */
+@media (max-width:960px){
+  .main-grid{ grid-template-columns: 1fr; padding:12px; }
+  canvas{ width:92%; height:auto; }
+  .models-panel{ order:2; }
+  .viewer-panel{ order:1; }
 }
