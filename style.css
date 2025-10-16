@@ -71,27 +71,30 @@ main {
 }
 
 #copo {
-  width: 45%;
-  height: auto;
+  width: auto;
+  height: 80%;
   position: relative;
   z-index: 2;
   transition: all 0.3s ease;
+  object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 #tinta {
   position: absolute;
-  width: 45%;
-  height: 100%;
-  background-color: transparent;
+  width: 80%;
+  height: 80%;
+  background-color: #ffffff;
   z-index: 1;
   mix-blend-mode: multiply;
-  transition: all 0.3s ease;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
 }
 
 #arte {
   position: absolute;
   width: 25%;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
