@@ -1,50 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authentic Personalizados</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Authentic360 - Mockups</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" class="logo" alt="Logo Authentic">
+  <header class="topbar">
+    <img src="logo.png" alt="logo" class="logo">
+  </header>
 
-    <div class="conteudo">
-      <div class="modelos">
-        <h2>Modelos</h2>
-        <button onclick="trocarModelo('copos/caneca_png.png')">Caneca</button>
-        <button onclick="trocarModelo('copos/caneca_slim_png.png')">Caneca Slim</button>
-        <button onclick="trocarModelo('copos/ecologico.png')">Ecológico</button>
-        <button onclick="trocarModelo('copos/espumante.png')">Espumante</button>
-        <button onclick="trocarModelo('copos/squeeze.png')">Squeeze</button>
-        <button onclick="trocarModelo('copos/taca_gin.png')">Taça Gin</button>
-        <button onclick="trocarModelo('copos/twister.png')">Twister</button>
-        <button onclick="trocarModelo('copos/xicara.png')">Xícara</button>
+  <main class="main-grid">
+    <aside class="models-panel">
+      <h3>Modelos</h3>
+      <div id="modelsList" class="models-list"></div>
+    </aside>
+
+    <section class="viewer-panel">
+      <div class="viewer">
+        <canvas id="mockupCanvas" width="900" height="700" aria-label="Painel do mockup"></canvas>
       </div>
 
-      <div class="preview-container" id="preview">
-        <img id="modelo" src="copos/caneca_png.png" class="modelo" alt="Modelo">
+      <div class="controls-row">
+        <div id="swatches" class="swatches" aria-label="Paleta de cores"></div>
 
-        <div class="cores">
-          <button class="cor" style="background:#ffffff" onclick="mudarCor('#ffffff')"></button>
-          <button class="cor" style="background:#ffff00" onclick="mudarCor('#ffff00')"></button>
-          <button class="cor" style="background:#0000ff" onclick="mudarCor('#0000ff')"></button>
-          <button class="cor" style="background:#ff00ff" onclick="mudarCor('#ff00ff')"></button>
-          <button class="cor" style="background:#ffc0cb" onclick="mudarCor('#ffc0cb')"></button>
-          <button class="cor" style="background:#00ff00" onclick="mudarCor('#00ff00')"></button>
-        </div>
-
-        <div class="upload-box">
-          <input type="file" id="upload" accept="image/*">
-          <button id="enviar">Enviar arte</button>
-          <button id="mockup">Baixar Mockup</button>
-          <button id="video360">Gerar Vídeo 360°</button>
+        <div class="actions">
+          <button id="recordBtn" class="btn">🎥 Gerar vídeo 360°</button>
+          <button id="downloadBtn" class="btn">⬇️ Baixar</button>
+          <label class="upload btn ghost" title="Enviar arte">
+            📁 Enviar Arte
+            <input id="uploadInput" type="file" accept="image/png, image/jpeg" />
+          </label>
         </div>
       </div>
-    </div>
-  </div>
+
+      <div id="msg" class="msg" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer">© Authentic360</footer>
 
   <script src="script.js"></script>
 </body>
