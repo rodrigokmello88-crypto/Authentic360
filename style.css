@@ -42,6 +42,7 @@ main {
   color: white;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .visualizador {
@@ -57,29 +58,15 @@ main {
   justify-content: center;
 }
 
-.copo-container {
-  position: relative;
-  width: 300px;
-  height: 300px;
-}
-
 #cupCanvas {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.art-preview {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 60%;
-  opacity: 0.9;
+  display: block;
+  width: 400px;
+  height: 400px;
+  background: transparent;
 }
 
 .colors {
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   gap: 10px;
 }
