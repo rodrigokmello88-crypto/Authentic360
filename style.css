@@ -1,71 +1,91 @@
-const canvas = document.getElementById("canvasCopo");
-const ctx = canvas.getContext("2d");
-let imagemAtual = new Image();
-let corAtual = "#ffffff";
-
-canvas.width = 360;
-canvas.height = 360;
-
-const modelos = {
-  'caneca_png.png': 'copos/caneca_png.png',
-  'caneca_slim_png.png': 'copos/caneca_slim_png.png',
-  'ecologico.png': 'copos/ecologico.png',
-  'espumante.png': 'copos/espumante.png',
-  'squeeze.png': 'copos/squeeze.png',
-  'taca_gin.png': 'copos/taca_gin.png',
-  'twister.png': 'copos/twister.png',
-  'xicara.png': 'copos/xicara.png'
-};
-
-function trocarCopo(modelo) {
-  if (!modelos[modelo]) return;
-  imagemAtual.src = modelos[modelo];
-  imagemAtual.onload = desenharCopo;
+body {
+  margin: 0;
+  background: url('fundos.png') no-repeat center center/cover;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-function desenharCopo() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // calcula proporção real da imagem
-  const ratio = Math.min(canvas.width / imagemAtual.width, canvas.height / imagemAtual.height);
-  const newWidth = imagemAtual.width * ratio;
-  const newHeight = imagemAtual.height * ratio;
-  const offsetX = (canvas.width - newWidth) / 2;
-  const offsetY = (canvas.height - newHeight) / 2;
-
-  // aplica cor de fundo
-  ctx.fillStyle = corAtual;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // aplica imagem mantendo proporção
-  ctx.globalCompositeOperation = "destination-in";
-  ctx.drawImage(imagemAtual, offsetX, offsetY, newWidth, newHeight);
-  ctx.globalCompositeOperation = "source-over";
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  gap: 40px;
+  padding-top: 60px;
 }
 
-function mudarCor(cor) {
-  corAtual = cor;
-  desenharCopo();
+.menu {
+  background: #1e1e1e;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  text-align: center;
 }
 
-function baixarImagem() {
-  const link = document.createElement("a");
-  link.href = canvas.toDataURL("image/png");
-  link.download = "copo_colorido.png";
-  link.click();
+.menu h2 {
+  color: white;
+  margin-bottom: 20px;
 }
 
-document.getElementById("uploadArte").addEventListener("change", function (event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const arte = document.getElementById("arte");
-    arte.src = e.target.result;
-    arte.style.display = "block";
-  };
-  reader.readAsDataURL(file);
-});
+.menu button {
+  display: block;
+  width: 150px;
+  margin: 10px auto;
+  padding: 10px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
 
-imagemAtual.src = modelos["caneca_png.png"];
-imagemAtual.onload = desenharCopo;
+.menu button:hover {
+  background: #2563eb;
+}
+
+.preview {
+  background: #1e1e1e;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.copo {
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(1);
+  transition: filter 0.3s ease;
+}
+
+.cores {
+  margin-top: 20px;
+}
+
+.cor {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.botoes {
+  margin-top: 20px;
+}
+
+.botoes button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.botoes button:hover {
+  background: #2563eb;
+}
