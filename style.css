@@ -1,131 +1,71 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: url("fundos.png") no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  text-align: center;
+const canvas = document.getElementById("canvasCopo");
+const ctx = canvas.getContext("2d");
+let imagemAtual = new Image();
+let corAtual = "#ffffff";
+
+canvas.width = 360;
+canvas.height = 360;
+
+const modelos = {
+  'caneca_png.png': 'copos/caneca_png.png',
+  'caneca_slim_png.png': 'copos/caneca_slim_png.png',
+  'ecologico.png': 'copos/ecologico.png',
+  'espumante.png': 'copos/espumante.png',
+  'squeeze.png': 'copos/squeeze.png',
+  'taca_gin.png': 'copos/taca_gin.png',
+  'twister.png': 'copos/twister.png',
+  'xicara.png': 'copos/xicara.png'
+};
+
+function trocarCopo(modelo) {
+  if (!modelos[modelo]) return;
+  imagemAtual.src = modelos[modelo];
+  imagemAtual.onload = desenharCopo;
 }
 
-header {
-  margin-top: 15px;
+function desenharCopo() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // calcula proporção real da imagem
+  const ratio = Math.min(canvas.width / imagemAtual.width, canvas.height / imagemAtual.height);
+  const newWidth = imagemAtual.width * ratio;
+  const newHeight = imagemAtual.height * ratio;
+  const offsetX = (canvas.width - newWidth) / 2;
+  const offsetY = (canvas.height - newHeight) / 2;
+
+  // aplica cor de fundo
+  ctx.fillStyle = corAtual;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // aplica imagem mantendo proporção
+  ctx.globalCompositeOperation = "destination-in";
+  ctx.drawImage(imagemAtual, offsetX, offsetY, newWidth, newHeight);
+  ctx.globalCompositeOperation = "source-over";
 }
 
-.logo {
-  width: 130px;
+function mudarCor(cor) {
+  corAtual = cor;
+  desenharCopo();
 }
 
-main {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  padding: 20px;
+function baixarImagem() {
+  const link = document.createElement("a");
+  link.href = canvas.toDataURL("image/png");
+  link.download = "copo_colorido.png";
+  link.click();
 }
 
-.menu {
-  background: #1f1f1f;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
+document.getElementById("uploadArte").addEventListener("change", function (event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const arte = document.getElementById("arte");
+    arte.src = e.target.result;
+    arte.style.display = "block";
+  };
+  reader.readAsDataURL(file);
+});
 
-.menu h2 {
-  margin-bottom: 15px;
-  color: #fff;
-}
-
-.menu button {
-  display: block;
-  width: 180px;
-  margin: 8px auto;
-  padding: 10px;
-  border: none;
-  background: #3b82f6;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.menu button:hover {
-  background: #2563eb;
-}
-
-.visualizador {
-  background: #1a1a1a;
-  padding: 25px;
-  border-radius: 10px;
-  position: relative;
-}
-
-.copo-container {
-  width: 360px;
-  height: 360px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#canvasCopo {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-#arte {
-  position: absolute;
-  width: 25%;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  opacity: 0.9;
-  display: none;
-  pointer-events: none;
-}
-
-.cores {
-  margin: 15px 0;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.cor {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  cursor: pointer;
-}
-
-.botoes button, .upload {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  margin: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-  display: inline-block;
-}
-
-.botoes button:hover, .upload:hover {
-  background: #2563eb;
-}
-
-.upload input {
-  display: none;
-}
-
-footer {
-  margin-top: 30px;
-  font-size: 0.8rem;
-  color: #ccc;
-}
+imagemAtual.src = modelos["caneca_png.png"];
+imagemAtual.onload = desenharCopo;
