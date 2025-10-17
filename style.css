@@ -67,14 +67,33 @@ body {
   height: 320px;
 }
 
+.copo-area {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .copo {
-  max-height: 300px;
-  width: auto;
+  width: 100%;
+  height: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
-  filter: brightness(1);
+  transition: filter 0.3s ease, background-color 0.3s ease;
   background-color: #ffffff;
-  transition: background-color 0.3s ease;
+}
+
+.arte {
+  position: absolute;
+  max-width: 80%;
+  max-height: 60%;
+  opacity: 0.9;
+  top: 20%;
+  left: 10%;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 .cores {
@@ -99,7 +118,8 @@ body {
   margin-top: 25px;
 }
 
-.botoes button {
+.botoes button,
+.botoes label {
   background: #3b82f6;
   color: white;
   border: none;
@@ -111,11 +131,15 @@ body {
   transition: background 0.3s;
 }
 
-.botoes button:hover {
+.botoes button:hover,
+.botoes label:hover {
   background: #2563eb;
 }
 
 .botoes .enviar {
-  background: #3b82f6;
   box-shadow: 0 0 10px #3b82f6;
+}
+
+#upload {
+  display: none;
 }
