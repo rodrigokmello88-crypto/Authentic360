@@ -12,8 +12,6 @@ function mudarCor(cor) {
 }
 
 function aplicarCor(cor) {
-  // Aplica a cor sobre o PNG preservando transparência
-  copoAtual.style.filter = "brightness(0) saturate(100%) invert(1)";
-  copoAtual.style.mixBlendMode = "multiply";
+  // Aplica cor sobre o PNG transparente sem distorcer a imagem
   copoAtual.style.backgroundColor = cor;
 }
