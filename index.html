@@ -1,54 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Authentic Personalizados</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="logo">
-    <img src="logo.png" alt="Logo Authentic">
-  </div>
+  <header>
+    <img src="logo.png" alt="Logo Authentic" class="logo" />
+  </header>
 
-  <div class="container">
-    <div class="menu">
+  <main>
+    <aside class="menu">
       <h2>Modelos</h2>
-      <button onclick="trocarCopo('caneca_png.png')">Caneca</button>
-      <button onclick="trocarCopo('caneca_slim_png.png')">Caneca Slim</button>
-      <button onclick="trocarCopo('ecologico.png')">Ecológico</button>
-      <button onclick="trocarCopo('espumante.png')">Espumante</button>
-      <button onclick="trocarCopo('squeeze.png')">Squeeze</button>
-      <button onclick="trocarCopo('taca_gin.png')">Taça Gin</button>
-      <button onclick="trocarCopo('twister.png')">Twister</button>
-      <button onclick="trocarCopo('xicara.png')">Xícara</button>
-    </div>
+      <button onclick="changeCup('caneca_png.png')">Caneca</button>
+      <button onclick="changeCup('caneca_slim_png.png')">Caneca Slim</button>
+      <button onclick="changeCup('ecologico.png')">Ecológico</button>
+      <button onclick="changeCup('espumante.png')">Espumante</button>
+      <button onclick="changeCup('squeeze.png')">Squeeze</button>
+      <button onclick="changeCup('taca_gin.png')">Taça Gin</button>
+      <button onclick="changeCup('twister.png')">Twister</button>
+      <button onclick="changeCup('xicara.png')">Xícara</button>
+    </aside>
 
-    <div class="preview">
-      <div class="copo-wrapper">
-        <div class="copo-area">
-          <img id="coposPreview" src="copos/caneca_png.png" alt="Copo" class="copo">
-          <img id="artePreview" class="arte" src="" alt="Arte aplicada">
-        </div>
+    <section class="visualizador">
+      <div class="copo-container">
+        <canvas id="cupCanvas"></canvas>
+        <img id="uploadedArt" class="art-preview" alt="Arte aplicada" />
       </div>
 
-      <div class="cores">
-        <button class="cor" style="background:#ffffff" onclick="mudarCor('#ffffff')"></button>
-        <button class="cor" style="background:#ffff00" onclick="mudarCor('#ffff00')"></button>
-        <button class="cor" style="background:#0000ff" onclick="mudarCor('#0000ff')"></button>
-        <button class="cor" style="background:#8000ff" onclick="mudarCor('#8000ff')"></button>
-        <button class="cor" style="background:#ff00aa" onclick="mudarCor('#ff00aa')"></button>
-        <button class="cor" style="background:#00ff00" onclick="mudarCor('#00ff00')"></button>
+      <div class="colors">
+        <button class="color" style="background: white" onclick="setColor('white')"></button>
+        <button class="color" style="background: yellow" onclick="setColor('yellow')"></button>
+        <button class="color" style="background: blue" onclick="setColor('blue')"></button>
+        <button class="color" style="background: purple" onclick="setColor('purple')"></button>
+        <button class="color" style="background: pink" onclick="setColor('pink')"></button>
+        <button class="color" style="background: limegreen" onclick="setColor('limegreen')"></button>
       </div>
 
-      <div class="botoes">
-        <button>🎥 Gerar vídeo 360°</button>
-        <button>📥 Baixar</button>
-        <label for="upload" class="enviar">📤 Enviar Arte</label>
-        <input type="file" id="upload" accept="image/*" onchange="uploadArte(event)">
+      <div class="upload-area">
+        <input type="file" id="uploadInput" accept="image/*" />
+        <label for="uploadInput" class="upload-btn">Enviar arte</label>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
