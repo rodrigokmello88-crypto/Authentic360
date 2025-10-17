@@ -1,23 +1,28 @@
-// Elementos principais
 const modeloImg = document.getElementById("modelo");
 const inputArquivo = document.getElementById("upload");
 const enviarBtn = document.getElementById("enviar");
-const baixarBtn = document.getElementById("baixar");
+const baixarBtn = document.getElementById("mockup");
+const videoBtn = document.getElementById("video360");
+
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
 
 let arte = null;
-let posX = 250, posY = 180, scale = 1, rotation = 0;
+let posX = 210, posY = 200, scale = 1, rotation = 0;
 let dragging = false, lastX, lastY;
+let corAtual = "#ffffff";
 
-// Função para trocar o modelo
 function trocarModelo(src) {
   modeloImg.src = src;
   arte = null;
 }
 window.trocarModelo = trocarModelo;
 
-// Upload da arte
+function mudarCor(cor) {
+  corAtual = cor;
+}
+window.mudarCor = mudarCor;
+
 enviarBtn.addEventListener("click", () => {
   const file = inputArquivo.files[0];
   if (!file) return;
@@ -30,12 +35,15 @@ enviarBtn.addEventListener("click", () => {
   reader.readAsDataURL(file);
 });
 
-// Desenhar no canvas
 function desenhar() {
   const container = document.getElementById("preview");
   canvas.width = container.offsetWidth;
   canvas.height = container.offsetHeight;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // cor base do copo
+  ctx.fillStyle = corAtual;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const img = modeloImg;
   const ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
@@ -59,7 +67,6 @@ function desenhar() {
 }
 requestAnimationFrame(desenhar);
 
-// Movimento e redimensionamento da arte
 canvas.addEventListener("mousedown", e => {
   dragging = true;
   lastX = e.offsetX;
@@ -76,30 +83,21 @@ canvas.addEventListener("mousemove", e => {
     lastY = e.offsetY;
   }
 });
-
-// Zoom com scroll
 canvas.addEventListener("wheel", e => {
   if (!arte) return;
   e.preventDefault();
   scale *= e.deltaY < 0 ? 1.05 : 0.95;
 });
-
-// Rotação com tecla R + movimento do mouse
 document.addEventListener("keydown", e => {
-  if (e.key === "r") {
-    document.addEventListener("mousemove", rotacionar);
-  }
+  if (e.key === "r") document.addEventListener("mousemove", rotacionar);
 });
 document.addEventListener("keyup", e => {
-  if (e.key === "r") {
-    document.removeEventListener("mousemove", rotacionar);
-  }
+  if (e.key === "r") document.removeEventListener("mousemove", rotacionar);
 });
 function rotacionar(e) {
   rotation += e.movementX * 0.01;
 }
 
-// Adiciona o canvas sobre a imagem
 modeloImg.parentElement.style.position = "relative";
 canvas.style.position = "absolute";
 canvas.style.top = 0;
@@ -107,19 +105,24 @@ canvas.style.left = 0;
 canvas.style.pointerEvents = "auto";
 modeloImg.parentElement.appendChild(canvas);
 
-// Gerar vídeo 360° (gera frames e baixa ZIP)
-baixarBtn.addEventListener("click", async () => {
-  const frames = 36;
-  const zip = new JSZip();
+// baixar mockup
+baixarBtn.addEventListener("click", () => {
+  const link = document.createElement("a");
+  link.download = "mockup.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+});
 
+// gerar video 360 (frames em .zip)
+videoBtn.addEventListener("click", async () => {
+  const zip = new JSZip();
+  const frames = 36;
   for (let i = 0; i < frames; i++) {
     rotation = (i / frames) * Math.PI * 2;
-    await new Promise(r => setTimeout(r, 10));
-    const imgData = canvas.toDataURL("image/png");
-    const base64Data = imgData.split(",")[1];
-    zip.file(`frame_${i.toString().padStart(2, "0")}.png`, base64Data, { base64: true });
+    await new Promise(r => setTimeout(r, 15));
+    const data = canvas.toDataURL("image/png").split(",")[1];
+    zip.file(`frame_${i.toString().padStart(2, "0")}.png`, data, { base64: true });
   }
-
   const blob = await zip.generateAsync({ type: "blob" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
