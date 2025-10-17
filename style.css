@@ -1,103 +1,104 @@
 body {
-  margin: 0;
-  background: url('fundos.png') no-repeat center/cover;
+  background: url("fundos.png") center/cover no-repeat;
   font-family: Arial, sans-serif;
-  color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
-header {
-  text-align: center;
-  padding: 10px;
-}
-
-.logo {
-  width: 150px;
-}
-
-main {
+.container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
-  margin-top: 20px;
+  margin-top: 60px;
 }
 
 .menu {
-  background: #1a1a1a;
-  padding: 20px;
-  border-radius: 15px;
+  background: #1e1e1e;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 .menu h2 {
+  color: #fff;
   text-align: center;
-  margin-bottom: 15px;
 }
 
 .menu button {
-  width: 100%;
-  margin-bottom: 10px;
+  width: 180px;
   padding: 10px;
-  background: #007bff;
-  border: none;
+  margin: 5px 0;
+  background: #1877f2;
   color: white;
+  border: none;
   border-radius: 8px;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.visualizador {
+.menu button:hover {
+  background: #0056c7;
+}
+
+.preview {
   background: #222;
-  padding: 20px;
-  border-radius: 20px;
-  position: relative;
+  border-radius: 12px;
+  padding: 25px;
   width: 500px;
   height: 500px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-#cupCanvas {
-  display: block;
-  width: 400px;
-  height: 400px;
-  background: transparent;
+#copo {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  transition: filter 0.3s;
 }
 
-.colors {
-  margin-top: 15px;
+#arte {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 50%;
+  max-height: 50%;
+  display: none;
+  cursor: move;
+}
+
+.color-options {
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .color {
   width: 30px;
   height: 30px;
+  margin: 0 8px;
   border: none;
   border-radius: 50%;
   cursor: pointer;
 }
 
-.upload-area {
-  margin-top: 15px;
+.upload-section {
+  margin-top: 20px;
+  text-align: center;
 }
 
-.upload-btn {
-  background: #007bff;
+.upload-section button {
+  background: #1877f2;
   color: white;
   padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.download-btn {
-  background: #28a745;
-  color: white;
-  padding: 10px 20px;
+  border-radius: 8px;
   border: none;
-  border-radius: 10px;
-  margin-top: 15px;
   cursor: pointer;
   font-weight: bold;
 }
