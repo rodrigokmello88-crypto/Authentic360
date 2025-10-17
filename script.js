@@ -25,9 +25,9 @@ const swatchColors = [
 
 /* Override: diminuir modelos problemáticos (50%) */
 const modelScaleOverrides = {
-  'copos/espumante.png': 10.0,
-  'copos/taca_gin.png': 10.0,
-  'copos/squeeze.png': 10.0
+  'copos/espumante.png': 1.0,
+  'copos/taca_gin.png': 1.0,
+  'copos/squeeze.png': 1.0
 };
 
 /* DOM */
