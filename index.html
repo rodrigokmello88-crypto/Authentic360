@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Authentic Personalizados</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 </head>
 <body>
   <div class="container">
-    <img src="logo.png" alt="Authentic Logo" class="logo" />
+    <img src="logo.png" class="logo" alt="Logo Authentic">
 
     <div class="conteudo">
       <div class="modelos">
@@ -25,11 +25,22 @@
       </div>
 
       <div class="preview-container" id="preview">
-        <img id="modelo" src="copos/caneca_png.png" alt="modelo" class="modelo" />
+        <img id="modelo" src="copos/caneca_png.png" class="modelo" alt="Modelo">
+
+        <div class="cores">
+          <button class="cor" style="background:#ffffff" onclick="mudarCor('#ffffff')"></button>
+          <button class="cor" style="background:#ffff00" onclick="mudarCor('#ffff00')"></button>
+          <button class="cor" style="background:#0000ff" onclick="mudarCor('#0000ff')"></button>
+          <button class="cor" style="background:#ff00ff" onclick="mudarCor('#ff00ff')"></button>
+          <button class="cor" style="background:#ffc0cb" onclick="mudarCor('#ffc0cb')"></button>
+          <button class="cor" style="background:#00ff00" onclick="mudarCor('#00ff00')"></button>
+        </div>
+
         <div class="upload-box">
-          <input type="file" id="upload" accept="image/*" />
+          <input type="file" id="upload" accept="image/*">
           <button id="enviar">Enviar arte</button>
-          <button id="baixar">Baixar Mockup</button>
+          <button id="mockup">Baixar Mockup</button>
+          <button id="video360">Gerar Vídeo 360°</button>
         </div>
       </div>
     </div>
