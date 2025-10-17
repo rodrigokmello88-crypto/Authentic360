@@ -3,53 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authentic360 - Visualizador</title>
+  <title>Teste Authentic360</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header>
-    <img src="logo.png" class="logo" alt="Authentic360">
-  </header>
-
-  <main>
-    <aside class="menu">
-      <h2>Modelos</h2>
-      <button onclick="trocarCopo('caneca_png.png')">Caneca</button>
-      <button onclick="trocarCopo('caneca_slim_png.png')">Caneca Slim</button>
-      <button onclick="trocarCopo('ecologico.png')">Ecológico</button>
-      <button onclick="trocarCopo('espumante.png')">Espumante</button>
-      <button onclick="trocarCopo('squeeze.png')">Squeeze</button>
-      <button onclick="trocarCopo('taca_gin.png')">Taça Gin</button>
-      <button onclick="trocarCopo('twister.png')">Twister</button>
-      <button onclick="trocarCopo('xicara.png')">Xícara</button>
-    </aside>
-
-    <section class="visualizador">
-      <div class="copo-container">
-        <canvas id="canvasCopo"></canvas>
-        <img id="arte" alt="Arte aplicada">
-      </div>
-
-      <div class="cores">
-        <div class="cor" style="background:#ffffff" onclick="mudarCor('#ffffff')"></div>
-        <div class="cor" style="background:#ffff00" onclick="mudarCor('#ffff00')"></div>
-        <div class="cor" style="background:#007bff" onclick="mudarCor('#007bff')"></div>
-        <div class="cor" style="background:#8000ff" onclick="mudarCor('#8000ff')"></div>
-        <div class="cor" style="background:#ff00aa" onclick="mudarCor('#ff00aa')"></div>
-        <div class="cor" style="background:#00ff66" onclick="mudarCor('#00ff66')"></div>
-      </div>
-
-      <div class="botoes">
-        <button onclick="baixarImagem()">⬇️ Baixar</button>
-        <label class="upload">
-          📁 Enviar Arte
-          <input type="file" id="uploadArte" accept="image/png, image/jpeg">
-        </label>
-      </div>
-    </section>
-  </main>
-
-  <footer>© 2025 Authentic360</footer>
+<body style="background: #111; color: white; text-align: center;">
+  <h1>Site carregou com sucesso!</h1>
+  <p>Se você está vendo isto, o HTML está ok e o problema está no script.js ou nas imagens.</p>
   <script src="script.js"></script>
 </body>
 </html>
