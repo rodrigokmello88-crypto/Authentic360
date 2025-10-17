@@ -1,104 +1,104 @@
 body {
-  background: url("fundos.png") center/cover no-repeat;
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
+  background: url('fundos.png') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  overflow-x: hidden;
 }
 
 .container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.conteudo {
+  display: flex;
   gap: 40px;
-  margin-top: 60px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.menu {
-  background: #1e1e1e;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-}
-
-.menu h2 {
-  color: #fff;
+.modelos {
+  background: #111;
+  border-radius: 20px;
+  padding: 20px;
+  width: 300px;
   text-align: center;
 }
 
-.menu button {
-  width: 180px;
-  padding: 10px;
-  margin: 5px 0;
-  background: #1877f2;
+.modelos h2 {
+  margin-bottom: 15px;
+}
+
+.modelos button {
+  background: #1e63ff;
   color: white;
   border: none;
+  margin: 8px 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
   border-radius: 8px;
-  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
-.menu button:hover {
-  background: #0056c7;
+.modelos button:hover {
+  background: #418aff;
 }
 
-.preview {
-  background: #222;
-  border-radius: 12px;
-  padding: 25px;
-  width: 500px;
-  height: 500px;
+.preview-container {
   position: relative;
+  background: #1a1a1a;
+  border-radius: 20px;
+  padding: 20px;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.modelo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.upload-box {
+  position: absolute;
+  bottom: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-#copo {
-  max-width: 80%;
-  max-height: 80%;
-  object-fit: contain;
-  transition: filter 0.3s;
-}
-
-#arte {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 50%;
-  max-height: 50%;
-  display: none;
-  cursor: move;
-}
-
-.color-options {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.color {
-  width: 30px;
-  height: 30px;
-  margin: 0 8px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.upload-section {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.upload-section button {
-  background: #1877f2;
+.upload-box input {
+  margin-bottom: 10px;
   color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
+}
+
+.upload-box button {
+  background: #1e63ff;
+  color: white;
   border: none;
+  margin: 5px 0;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
+  transition: 0.2s;
+}
+
+.upload-box button:hover {
+  background: #418aff;
 }
