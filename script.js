@@ -1,3 +1,13 @@
+const canvas = document.getElementById("canvasCopo");
+const ctx = canvas.getContext("2d");
+let imagemAtual = new Image();
+let corAtual = "#ffffff";
+
+// Mantém o tamanho fixo e centralizado
+canvas.width = 360;
+canvas.height = 360;
+
+// Caminhos dos copos
 const modelos = {
   'caneca_png.png': 'copos/caneca_png.png',
   'caneca_slim_png.png': 'copos/caneca_slim_png.png',
@@ -9,39 +19,55 @@ const modelos = {
   'xicara.png': 'copos/xicara.png'
 };
 
+// Função para carregar e desenhar o copo
 function trocarCopo(modelo) {
-  const img = document.getElementById('copo');
-  if (modelos[modelo]) {
-    img.src = modelos[modelo];
-  }
+  if (!modelos[modelo]) return;
+  imagemAtual.src = modelos[modelo];
+  imagemAtual.onload = () => desenharCopo();
 }
 
+// Função para desenhar com cor aplicada (mistura verdadeira)
+function desenharCopo() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // desenha a cor base
+  ctx.fillStyle = corAtual;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // desenha o copo com mistura real
+  ctx.globalCompositeOperation = "destination-in";
+  ctx.drawImage(imagemAtual, 0, 0, canvas.width, canvas.height);
+  ctx.globalCompositeOperation = "source-over";
+}
+
+// Muda cor
 function mudarCor(cor) {
-  const tinta = document.getElementById('tinta');
-  tinta.style.backgroundColor = cor;
+  corAtual = cor;
+  desenharCopo();
 }
 
-function gerarVideo() {
-  alert("🎥 Gerando vídeo 360° (simulação de 8 segundos)");
-}
-
+// Baixar imagem
 function baixarImagem() {
-  const img = document.getElementById('copo');
-  const link = document.createElement('a');
-  link.href = img.src;
-  link.download = 'modelo_copo.png';
+  const link = document.createElement("a");
+  link.href = canvas.toDataURL("image/png");
+  link.download = "copo_colorido.png";
   link.click();
 }
 
-document.getElementById('uploadArte').addEventListener('change', function (event) {
+// Upload da arte
+document.getElementById("uploadArte").addEventListener("change", function (event) {
   const file = event.target.files[0];
   if (!file) return;
 
   const reader = new FileReader();
   reader.onload = function (e) {
-    const arte = document.getElementById('arte');
+    const arte = document.getElementById("arte");
     arte.src = e.target.result;
-    arte.style.display = 'block';
+    arte.style.display = "block";
   };
   reader.readAsDataURL(file);
 });
+
+// Copo inicial
+imagemAtual.src = modelos["caneca_png.png"];
+imagemAtual.onload = () => desenharCopo();
