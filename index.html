@@ -5,40 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Authentic Personalizados</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 </head>
 <body>
   <div class="container">
-    <div class="menu">
-      <h2>Modelos</h2>
-      <button onclick="mudarModelo('caneca_png.png')">Caneca</button>
-      <button onclick="mudarModelo('caneca_slim_png.png')">Caneca Slim</button>
-      <button onclick="mudarModelo('ecologico.png')">Ecológico</button>
-      <button onclick="mudarModelo('espumante.png')">Espumante</button>
-      <button onclick="mudarModelo('squeeze.png')">Squeeze</button>
-      <button onclick="mudarModelo('taca_gin.png')">Taça Gin</button>
-      <button onclick="mudarModelo('twister.png')">Twister</button>
-      <button onclick="mudarModelo('xicara.png')">Xícara</button>
-    </div>
+    <img src="logo.png" alt="Authentic Logo" class="logo" />
 
-    <div class="preview">
-      <img id="copo" src="copos/caneca_png.png" alt="Modelo" />
-      <img id="arte" alt="Arte aplicada" />
-      <div class="color-options">
-        <button class="color" style="background:#fff" onclick="mudarCor('#fff')"></button>
-        <button class="color" style="background:#000" onclick="mudarCor('#000')"></button>
-        <button class="color" style="background:#007bff" onclick="mudarCor('#007bff')"></button>
-        <button class="color" style="background:#ff007f" onclick="mudarCor('#ff007f')"></button>
-        <button class="color" style="background:#00ff00" onclick="mudarCor('#00ff00')"></button>
+    <div class="conteudo">
+      <div class="modelos">
+        <h2>Modelos</h2>
+        <button onclick="trocarModelo('copos/caneca_png.png')">Caneca</button>
+        <button onclick="trocarModelo('copos/caneca_slim_png.png')">Caneca Slim</button>
+        <button onclick="trocarModelo('copos/ecologico.png')">Ecológico</button>
+        <button onclick="trocarModelo('copos/espumante.png')">Espumante</button>
+        <button onclick="trocarModelo('copos/squeeze.png')">Squeeze</button>
+        <button onclick="trocarModelo('copos/taca_gin.png')">Taça Gin</button>
+        <button onclick="trocarModelo('copos/twister.png')">Twister</button>
+        <button onclick="trocarModelo('copos/xicara.png')">Xícara</button>
       </div>
 
-      <div class="upload-section">
-        <input type="file" id="upload" accept="image/*" />
-        <button onclick="gerarVideo()">🎥 Gerar vídeo 360°</button>
+      <div class="preview-container" id="preview">
+        <img id="modelo" src="copos/caneca_png.png" alt="modelo" class="modelo" />
+        <div class="upload-box">
+          <input type="file" id="upload" accept="image/*" />
+          <button id="enviar">Enviar arte</button>
+          <button id="baixar">Baixar Mockup</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.11/interact.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
