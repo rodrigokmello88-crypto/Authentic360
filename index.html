@@ -1,47 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mockup de Copos</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Authentic360 - Mockups</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="sidebar">
-      <h2>Modelos</h2>
-      <button onclick="trocarModelo('caneca')">Caneca</button>
-      <button onclick="trocarModelo('caneca_slim')">Caneca Slim</button>
-      <button onclick="trocarModelo('ecologico')">Ecológico</button>
-      <button onclick="trocarModelo('espumante')">Espumante</button>
-      <button onclick="trocarModelo('squeeze')">Squeeze</button>
-      <button onclick="trocarModelo('taca_gin')">Taça Gin</button>
-      <button onclick="trocarModelo('twister')">Twister</button>
-      <button onclick="trocarModelo('xicara')">Xícara</button>
-    </div>
+  <header class="topbar">
+    <img src="logo.png" alt="logo" class="logo">
+  </header>
 
-    <div class="preview">
-      <div class="mockup-area" id="mockupArea">
-        <img id="mockup" src="copos/caneca.png" class="mockup-img" />
-        <img id="arte" class="arte" />
+  <main class="main-grid">
+    <aside class="models-panel">
+      <h3>Modelos</h3>
+      <div id="modelsList" class="models-list"></div>
+    </aside>
+
+    <section class="viewer-panel">
+      <div class="viewer">
+        <canvas id="mockupCanvas" width="900" height="700" aria-label="Painel do mockup"></canvas>
       </div>
 
-      <div class="controls">
-        <div class="colors">
-          <div class="color" style="background:#fff;" onclick="trocarCor('#fff')"></div>
-          <div class="color" style="background:#ff0;" onclick="trocarCor('#ff0')"></div>
-          <div class="color" style="background:#00f;" onclick="trocarCor('#00f')"></div>
-          <div class="color" style="background:#f0f;" onclick="trocarCor('#f0f')"></div>
-          <div class="color" style="background:#0f0;" onclick="trocarCor('#0f0')"></div>
-          <div class="color" style="background:#444;" onclick="trocarCor('#444')"></div>
+      <div class="controls-row">
+        <div id="swatches" class="swatches" aria-label="Paleta de cores"></div>
+
+        <div class="actions">
+          <button id="recordBtn" class="btn">🎥 Gerar vídeo 360°</button>
+          <button id="downloadBtn" class="btn">⬇️ Baixar</button>
+          <label class="upload btn ghost" title="Enviar arte">
+            📁 Enviar Arte
+            <input id="uploadInput" type="file" accept="image/png, image/jpeg" />
+          </label>
         </div>
-
-        <input type="file" id="upload" accept="image/*" />
-        <button class="upload-btn" onclick="enviarArte()">Enviar arte</button>
-        <button class="download-btn" onclick="baixarMockup()">Baixar Mockup</button>
       </div>
-    </div>
-  </div>
+
+      <div id="msg" class="msg" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer">© Authentic360</footer>
 
   <script src="script.js"></script>
 </body>
