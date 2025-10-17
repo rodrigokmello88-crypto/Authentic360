@@ -1,76 +1,55 @@
-const canvas = document.getElementById('cupCanvas');
-const ctx = canvas.getContext('2d');
-let currentCup = 'copos/caneca_png.png';
-let currentColor = 'white';
-let artImage = null;
+const copo = document.getElementById("copo");
+const arte = document.getElementById("arte");
+const upload = document.getElementById("upload");
 
-// 🔹 Carregar e desenhar o copo proporcional
-function loadCup() {
-  const img = new Image();
-  img.src = currentCup;
-  img.onload = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Proporção correta
-    const ratio = Math.min(
-      canvas.width * 0.8 / img.width,
-      canvas.height * 0.8 / img.height
-    );
-    const newWidth = img.width * ratio;
-    const newHeight = img.height * ratio;
-    const x = (canvas.width - newWidth) / 2;
-    const y = (canvas.height - newHeight) / 2;
-
-    // Preenche cor
-    ctx.fillStyle = currentColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Máscara respeitando transparência do PNG
-    ctx.globalCompositeOperation = 'destination-in';
-    ctx.drawImage(img, x, y, newWidth, newHeight);
-
-    // Restaura para modo normal
-    ctx.globalCompositeOperation = 'source-over';
-
-    // Aplica arte (se houver)
-    if (artImage) {
-      const artW = newWidth * 0.5;
-      const artH = newHeight * 0.5;
-      const artX = x + (newWidth - artW) / 2;
-      const artY = y + (newHeight - artH) / 2;
-      ctx.drawImage(artImage, artX, artY, artW, artH);
-    }
-  };
+// Troca o modelo
+function mudarModelo(nome) {
+  copo.src = `copos/${nome}`;
+  arte.style.display = "none";
 }
 
-function changeCup(fileName) {
-  currentCup = `copos/${fileName}`;
-  loadCup();
+// Troca a cor (tinta sobre o PNG)
+function mudarCor(cor) {
+  copo.style.filter = `drop-shadow(0 0 0 ${cor}) brightness(1.2) saturate(1.3)`;
+  copo.style.mixBlendMode = "multiply";
 }
 
-function setColor(color) {
-  currentColor = color;
-  loadCup();
-}
-
-document.getElementById('uploadInput').addEventListener('change', (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    artImage = new Image();
-    artImage.src = e.target.result;
-    artImage.onload = loadCup;
-  };
-  reader.readAsDataURL(file);
+// Upload e posicionamento da arte
+upload.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      arte.src = reader.result;
+      arte.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  }
 });
 
-// 🔹 Botão para baixar o mockup
-document.getElementById('downloadBtn').addEventListener('click', () => {
-  const link = document.createElement('a');
-  link.download = 'mockup.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
+// Permitir mover/redimensionar a arte
+interact("#arte").draggable({
+  onmove(event) {
+    const target = event.target;
+    const x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+    const y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+    target.style.transform = `translate(${x}px, ${y}px)`;
+    target.setAttribute("data-x", x);
+    target.setAttribute("data-y", y);
+  }
+}).resizable({
+  edges: { left: true, right: true, bottom: true, top: true }
+}).on("resizemove", (event) => {
+  const { x, y } = event.rect;
+  Object.assign(event.target.style, {
+    width: `${event.rect.width}px`,
+    height: `${event.rect.height}px`,
+    transform: `translate(${x}px, ${y}px)`
+  });
 });
 
-loadCup();
+// Gerar vídeo 360° (placeholder funcional)
+function gerarVideo() {
+  alert("Geração de vídeo 360° em desenvolvimento. Esta função exportará as variações do copo rotacionado automaticamente.");
+}
