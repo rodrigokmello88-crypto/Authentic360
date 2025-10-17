@@ -1,47 +1,247 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Authentic360 - Mockups</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="topbar">
-    <img src="logo.png" alt="logo" class="logo">
-  </header>
+/* Authentic360 - Mockup Avançado (Atualizado) */
 
-  <main class="main-grid">
-    <aside class="models-panel">
-      <h3>Modelos</h3>
-      <div id="modelsList" class="models-list"></div>
-    </aside>
+const modelFiles = [
+  {name:'Caneca', file:'copos/caneca_png.png'},
+  {name:'Caneca Slim', file:'copos/caneca_slim_png.png'},
+  {name:'Ecológico', file:'copos/ecologico.png'},
+  {name:'Espumante', file:'copos/espumante.png'},
+  {name:'Squeeze', file:'copos/squeeze.png'},
+  {name:'Taça Gin', file:'copos/taca_gin.png'},
+  {name:'Twister', file:'copos/twister.png'},
+  {name:'Xícara', file:'copos/xicara.png'}
+];
 
-    <section class="viewer-panel">
-      <div class="viewer">
-        <canvas id="mockupCanvas" width="900" height="700" aria-label="Painel do mockup"></canvas>
-      </div>
+const swatchColors = [
+  {name:'Branco', hex:'#ffffff'},
+  {name:'Amarelo', hex:'#f7e600'},
+  {name:'Azul', hex:'#2f7bff'},
+  {name:'Roxo', hex:'#5b16b8'},
+  {name:'Rosa', hex:'#ff39a8'},
+  {name:'Verde', hex:'#1bd84f'}
+];
 
-      <div class="controls-row">
-        <div id="swatches" class="swatches" aria-label="Paleta de cores"></div>
+const modelScaleOverrides = {
+  'copos/espumante.png': 1.1,
+  'copos/taca_gin.png': 1.1,
+  'copos/squeeze.png': 1.1
+};
 
-        <div class="actions">
-          <button id="recordBtn" class="btn">🎥 Gerar vídeo 360°</button>
-          <button id="downloadBtn" class="btn">⬇️ Baixar</button>
-          <label class="upload btn ghost" title="Enviar arte">
-            📁 Enviar Arte
-            <input id="uploadInput" type="file" accept="image/png, image/jpeg" />
-          </label>
-        </div>
-      </div>
+const canvas = document.getElementById('mockupCanvas');
+const ctx = canvas.getContext('2d', { alpha: true });
+const modelsList = document.getElementById('modelsList');
+const swatches = document.getElementById('swatches');
+const downloadBtn = document.getElementById('downloadBtn');
+const recordBtn = document.getElementById('recordBtn');
+const uploadInput = document.getElementById('uploadInput');
+const msg = document.getElementById('msg');
 
-      <div id="msg" class="msg" aria-live="polite"></div>
-    </section>
-  </main>
+let loadedModels = [];
+let currentIndex = 0;
+let tintColor = null;
+let artworkImg = null;
+let artworkState = { x: 0.5, y: 0.55, scale: 0.25, rotation: 0, skewX: 0, skewY: 0 };
+let draggingArt = false;
+let dragStart = null;
+let isRecording = false;
 
-  <footer class="footer">© Authentic360</footer>
+function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+function loadImage(src){
+  return new Promise((res, rej)=>{
+    const i = new Image();
+    i.crossOrigin = 'anonymous';
+    i.onload = ()=>res(i);
+    i.onerror = e=>rej(e);
+    i.src = src;
+  });
+}
+function fileToDataURL(file){
+  return new Promise(res=>{
+    const r = new FileReader();
+    r.onload = ()=>res(r.result);
+    r.readAsDataURL(file);
+  });
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+/* --- Pré-carregamento --- */
+async function preload(){
+  const arr=[];
+  for(const m of modelFiles){
+    try{
+      const img=await loadImage(m.file);
+      arr.push({...m,img});
+    }catch(e){ console.warn("Erro:",m.file,e); }
+  }
+  loadedModels=arr;
+}
+
+/* --- UI --- */
+function buildUI(){
+  modelsList.innerHTML='';
+  loadedModels.forEach((m,idx)=>{
+    const b=document.createElement('button');
+    b.className='model-btn';
+    b.textContent=m.name;
+    b.onclick=()=>{currentIndex=idx;setActiveModel();draw();};
+    modelsList.appendChild(b);
+  });
+
+  swatches.innerHTML='';
+  swatchColors.forEach(s=>{
+    const d=document.createElement('div');
+    d.className='color-swatch';
+    d.style.background=s.hex;
+    d.title=s.name;
+    d.onclick=()=>{tintColor=s.hex;draw();};
+    swatches.appendChild(d);
+  });
+}
+
+function setActiveModel(){
+  document.querySelectorAll('.model-btn').forEach((b,i)=>b.classList.toggle('active',i===currentIndex));
+}
+
+/* --- Desenho principal --- */
+function draw(){
+  const DPR=window.devicePixelRatio||1;
+  const w=canvas.width/DPR;
+  const h=canvas.height/DPR;
+
+  ctx.setTransform(1,0,0,1,0,0);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.scale(DPR,DPR);
+
+  const pad=40;
+  const panelW=w-pad*2, panelH=h-pad*2, panelX=pad, panelY=pad;
+
+  ctx.fillStyle='#222';
+  ctx.fillRect(panelX,panelY,panelW,panelH);
+
+  const model=loadedModels[currentIndex];
+  if(!model?.img) return;
+
+  const img=model.img;
+  const maxW=panelW*0.56, maxH=panelH*0.78;
+  let scale=Math.min(maxW/img.width,maxH/img.height);
+  if(modelScaleOverrides[model.file]) scale*=modelScaleOverrides[model.file];
+  const dw=img.width*scale, dh=img.height*scale;
+  const dx=panelX+(panelW-dw)/2, dy=panelY+(panelH-dh)/2;
+
+  const off=document.createElement('canvas');
+  off.width=img.width; off.height=img.height;
+  const octx=off.getContext('2d');
+  octx.drawImage(img,0,0);
+  if(tintColor){
+    octx.globalCompositeOperation='source-atop';
+    octx.fillStyle=tintColor;
+    octx.fillRect(0,0,off.width,off.height);
+  }
+  ctx.drawImage(off,dx,dy,dw,dh);
+
+  if(artworkImg){
+    const artW=artworkImg.width*artworkState.scale;
+    const artH=artworkImg.height*artworkState.scale;
+    const cx=panelX+panelW*artworkState.x;
+    const cy=panelY+panelH*artworkState.y;
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.transform(1, artworkState.skewY, artworkState.skewX, 1, 0, 0);
+    ctx.rotate(artworkState.rotation);
+    ctx.drawImage(artworkImg,-artW/2,-artH/2,artW,artH);
+    ctx.restore();
+  }
+}
+
+/* --- Botões --- */
+downloadBtn.onclick=()=>{ 
+  const a=document.createElement('a');
+  a.download='mockup_authentic360.png';
+  a.href=canvas.toDataURL();
+  a.click();
+};
+
+/* --- Gravar vídeo 360° --- */
+recordBtn.onclick=async()=>{
+  if(isRecording) return;
+  isRecording=true;
+  msg.textContent='🎥 Gravando vídeo 360° (8s)...';
+  const stream=canvas.captureStream(60);
+  const rec=new MediaRecorder(stream,{mimeType:'video/webm'});
+  const chunks=[];
+  rec.ondataavailable=e=>chunks.push(e.data);
+  rec.start();
+  let angle=0;
+  const interval=setInterval(()=>{
+    angle+=Math.PI/40;
+    artworkState.rotation=angle;
+    draw();
+  },100);
+  await new Promise(r=>setTimeout(r,8000));
+  clearInterval(interval);
+  rec.stop();
+  rec.onstop=()=>{
+    const blob=new Blob(chunks,{type:'video/webm'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='mockup_360.webm';
+    a.click();
+    URL.revokeObjectURL(url);
+    msg.textContent='✅ Vídeo 360° gerado.';
+    isRecording=false;
+  };
+};
+
+/* --- Upload --- */
+uploadInput.addEventListener('change',async e=>{
+  const f=e.target.files[0]; if(!f)return;
+  const data=await fileToDataURL(f);
+  const img=await loadImage(data);
+  artworkImg=img;
+  artworkState={x:0.5,y:0.55,scale:0.25,rotation:0,skewX:0,skewY:0};
+  draw();
+  msg.textContent='🖼️ Arte carregada — arraste, role para zoom, R=rotacionar, H/V=distorcer.';
+});
+
+/* --- Drag e zoom --- */
+canvas.addEventListener('pointerdown',e=>{
+  if(!artworkImg)return;
+  draggingArt=true;
+  dragStart={x:e.clientX,y:e.clientY,origX:artworkState.x,origY:artworkState.y};
+});
+canvas.addEventListener('pointermove',e=>{
+  if(!draggingArt)return;
+  const dx=(e.clientX-dragStart.x)/canvas.width;
+  const dy=(e.clientY-dragStart.y)/canvas.height;
+  artworkState.x=clamp(dragStart.origX+dx*2,0,1);
+  artworkState.y=clamp(dragStart.origY+dy*2,0,1);
+  draw();
+});
+canvas.addEventListener('pointerup',()=>draggingArt=false);
+
+canvas.addEventListener('wheel',e=>{
+  if(!artworkImg)return;
+  e.preventDefault();
+  const factor=e.deltaY<0?1.06:0.94;
+  artworkState.scale=clamp(artworkState.scale*factor,0.02,2);
+  draw();
+},{passive:false});
+
+/* --- Teclas extras --- */
+window.addEventListener('keydown',e=>{
+  if(!artworkImg)return;
+  if(e.key==='r'||e.key==='R'){artworkState.rotation+=0.1;}
+  if(e.key==='h'||e.key==='H'){artworkState.skewX+=0.05;}
+  if(e.key==='v'||e.key==='V'){artworkState.skewY+=0.05;}
+  draw();
+});
+
+/* --- Inicialização --- */
+(async()=>{
+  const DPR=window.devicePixelRatio||1;
+  canvas.width=900*DPR; canvas.height=700*DPR;
+  ctx.scale(DPR,DPR);
+  msg.textContent='Carregando modelos...';
+  await preload();
+  if(!loadedModels.length){msg.textContent='Nenhum modelo encontrado.';return;}
+  buildUI(); setActiveModel(); msg.textContent=''; draw();
+})();
