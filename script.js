@@ -4,31 +4,39 @@ let currentCup = 'copos/caneca_png.png';
 let currentColor = 'white';
 let artImage = null;
 
-canvas.width = 500;
-canvas.height = 500;
-
+// Carrega e desenha o copo
 function loadCup() {
   const img = new Image();
   img.src = currentCup;
   img.onload = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
 
-    // Pintar cor
+    // Centraliza proporcionalmente
+    const ratio = Math.min(
+      canvas.width * 0.8 / img.width,
+      canvas.height * 0.8 / img.height
+    );
+    const newWidth = img.width * ratio;
+    const newHeight = img.height * ratio;
+    const x = (canvas.width - newWidth) / 2;
+    const y = (canvas.height - newHeight) / 2;
+
+    // Cor de fundo (base para "pintar")
     ctx.fillStyle = currentColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Aplicar máscara transparente do copo
+    // Máscara do copo (respeita transparência)
     ctx.globalCompositeOperation = 'destination-in';
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    ctx.restore();
+    ctx.drawImage(img, x, y, newWidth, newHeight);
 
-    // Adiciona arte
+    // Restaura e desenha a arte
+    ctx.globalCompositeOperation = 'source-over';
     if (artImage) {
-      ctx.globalCompositeOperation = 'source-over';
-      const w = canvas.width * 0.5;
-      const h = canvas.height * 0.5;
-      ctx.drawImage(artImage, canvas.width / 2 - w / 2, canvas.height / 2 - h / 2, w, h);
+      const artW = newWidth * 0.5;
+      const artH = newHeight * 0.5;
+      const artX = x + (newWidth - artW) / 2;
+      const artY = y + (newHeight - artH) / 2;
+      ctx.drawImage(artImage, artX, artY, artW, artH);
     }
   };
 }
