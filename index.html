@@ -26,7 +26,10 @@
 
     <div class="preview">
       <div class="copo-wrapper">
-        <img id="coposPreview" src="copos/caneca_png.png" alt="Copo" class="copo">
+        <div class="copo-area">
+          <img id="coposPreview" src="copos/caneca_png.png" alt="Copo" class="copo">
+          <img id="artePreview" class="arte" src="" alt="Arte aplicada">
+        </div>
       </div>
 
       <div class="cores">
@@ -41,7 +44,8 @@
       <div class="botoes">
         <button>🎥 Gerar vídeo 360°</button>
         <button>📥 Baixar</button>
-        <button class="enviar">📤 Enviar Arte</button>
+        <label for="upload" class="enviar">📤 Enviar Arte</label>
+        <input type="file" id="upload" accept="image/*" onchange="uploadArte(event)">
       </div>
     </div>
   </div>
