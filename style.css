@@ -57,47 +57,35 @@ main {
   background: #1a1a1a;
   padding: 25px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
 .copo-container {
-  width: 320px;
-  height: 320px;
+  width: 360px;
+  height: 360px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#copo {
-  width: 100%;
-  height: auto;
-  z-index: 2;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-#tinta {
-  position: absolute;
+#canvasCopo {
   width: 100%;
   height: 100%;
-  z-index: 1;
-  mix-blend-mode: multiply;
-  opacity: 1;
-  background-color: #ffffff;
-  transition: background 0.3s ease;
+  object-fit: contain;
+  display: block;
 }
 
 #arte {
   position: absolute;
-  width: 45%;
-  top: 50%;
+  width: 25%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
   opacity: 0.9;
   display: none;
+  pointer-events: none;
 }
 
 .cores {
@@ -108,8 +96,8 @@ main {
 }
 
 .cor {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 2px solid #fff;
   cursor: pointer;
