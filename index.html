@@ -7,44 +7,38 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Logo Authentic" class="logo" />
-  </header>
-
-  <main>
-    <aside class="menu">
+  <div class="container">
+    <div class="menu">
       <h2>Modelos</h2>
-      <button onclick="changeCup('caneca_png.png')">Caneca</button>
-      <button onclick="changeCup('caneca_slim_png.png')">Caneca Slim</button>
-      <button onclick="changeCup('ecologico.png')">Ecológico</button>
-      <button onclick="changeCup('espumante.png')">Espumante</button>
-      <button onclick="changeCup('squeeze.png')">Squeeze</button>
-      <button onclick="changeCup('taca_gin.png')">Taça Gin</button>
-      <button onclick="changeCup('twister.png')">Twister</button>
-      <button onclick="changeCup('xicara.png')">Xícara</button>
-    </aside>
+      <button onclick="mudarModelo('caneca_png.png')">Caneca</button>
+      <button onclick="mudarModelo('caneca_slim_png.png')">Caneca Slim</button>
+      <button onclick="mudarModelo('ecologico.png')">Ecológico</button>
+      <button onclick="mudarModelo('espumante.png')">Espumante</button>
+      <button onclick="mudarModelo('squeeze.png')">Squeeze</button>
+      <button onclick="mudarModelo('taca_gin.png')">Taça Gin</button>
+      <button onclick="mudarModelo('twister.png')">Twister</button>
+      <button onclick="mudarModelo('xicara.png')">Xícara</button>
+    </div>
 
-    <section class="visualizador">
-      <canvas id="cupCanvas" width="500" height="500"></canvas>
-
-      <div class="colors">
-        <button class="color" style="background: white" onclick="setColor('white')"></button>
-        <button class="color" style="background: yellow" onclick="setColor('yellow')"></button>
-        <button class="color" style="background: blue" onclick="setColor('blue')"></button>
-        <button class="color" style="background: purple" onclick="setColor('purple')"></button>
-        <button class="color" style="background: pink" onclick="setColor('pink')"></button>
-        <button class="color" style="background: limegreen" onclick="setColor('limegreen')"></button>
+    <div class="preview">
+      <img id="copo" src="copos/caneca_png.png" alt="Modelo" />
+      <img id="arte" alt="Arte aplicada" />
+      <div class="color-options">
+        <button class="color" style="background:#fff" onclick="mudarCor('#fff')"></button>
+        <button class="color" style="background:#000" onclick="mudarCor('#000')"></button>
+        <button class="color" style="background:#007bff" onclick="mudarCor('#007bff')"></button>
+        <button class="color" style="background:#ff007f" onclick="mudarCor('#ff007f')"></button>
+        <button class="color" style="background:#00ff00" onclick="mudarCor('#00ff00')"></button>
       </div>
 
-      <div class="upload-area">
-        <input type="file" id="uploadInput" accept="image/*" />
-        <label for="uploadInput" class="upload-btn">Enviar arte</label>
+      <div class="upload-section">
+        <input type="file" id="upload" accept="image/*" />
+        <button onclick="gerarVideo()">🎥 Gerar vídeo 360°</button>
       </div>
+    </div>
+  </div>
 
-      <button id="downloadBtn" class="download-btn">Baixar Mockup</button>
-    </section>
-  </main>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.11/interact.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
