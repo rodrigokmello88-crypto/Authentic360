@@ -1,69 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Authentic360 - Mockups</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customizador de Copos</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <img src="logo.png" alt="logo" class="logo">
-  </header>
+  <div id="container">
+    <header>
+      <img src="logo.png" id="logo" alt="Logo" />
+      <h1>Personalize Seu Copo</h1>
+    </header>
 
-  <main class="main-grid">
-    <aside class="models-panel">
-      <h3>Modelos</h3>
-      <div id="modelsList" class="models-list"></div>
-    </aside>
-
-    <section class="viewer-panel">
-      <div class="viewer">
-        <canvas id="mockupCanvas" width="900" height="700" aria-label="Painel do mockup"></canvas>
+    <main>
+      <div id="editor-area">
+        <img id="fundo" src="fundos.png" alt="Fundo" />
+        <canvas id="canvas"></canvas>
       </div>
 
-      <div class="controls-row">
-        <div id="swatches" class="swatches" aria-label="Paleta de cores"></div>
+      <div id="painel-controles">
+        <label>Escolha o modelo:</label>
+        <select id="modeloSelect">
+          <option value="copos/caneca_png.png">Caneca</option>
+          <option value="copos/caneca_slim_png.png">Caneca Slim</option>
+          <option value="copos/ecologico.png">Ecológico</option>
+          <option value="copos/espumante.png">Espumante</option>
+          <option value="copos/squeeze.png">Squeeze</option>
+          <option value="copos/taca_gin.png">Taça Gin</option>
+          <option value="copos/twister.png">Twister</option>
+          <option value="copos/xicara.png">Xícara</option>
+        </select>
 
-        <div class="actions">
-          <button id="recordBtn" class="btn">🎥 Gerar vídeo 360°</button>
-          <button id="downloadBtn" class="btn">⬇️ Baixar</button>
+        <label>Cor do Copo:</label>
+        <div id="cores">
+          <button class="cor" style="background:white" data-cor="#ffffff"></button>
+          <button class="cor" style="background:yellow" data-cor="#ffeb3b"></button>
+          <button class="cor" style="background:blue" data-cor="#2196f3"></button>
+          <button class="cor" style="background:purple" data-cor="#9c27b0"></button>
+          <button class="cor" style="background:pink" data-cor="#e91e63"></button>
+          <button class="cor" style="background:green" data-cor="#4caf50"></button>
+        </div>
 
-          <!-- Upload azul (mesma cor do botão baixar) -->
-          <label class="upload btn" title="Enviar arte">
-            📁 Enviar Arte
-            <input id="uploadInput" type="file" accept="image/png, image/jpeg" />
+        <div id="botoes">
+          <label class="upload-btn">
+            <input type="file" id="upload" accept="image/*" />
+            Enviar Arte
           </label>
+          <button id="fixar">Fixar Arte</button>
+          <button id="girarEsq">⟲ Girar Esquerda</button>
+          <button id="girarDir">⟳ Girar Direita</button>
+          <button id="baixar">Baixar Imagem</button>
+          <button id="gerarVideo">Gerar Vídeo 360º</button>
         </div>
       </div>
-
-      <!-- NOVOS CONTROLES VISÍVEIS -->
-      <div class="extra-controls" style="margin-top:8px; display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap;">
-        <div style="display:flex;gap:8px;align-items:center;">
-          <button id="rotateLeft" class="btn">⟲ Girar Esquerda</button>
-          <button id="rotateRight" class="btn">⟳ Girar Direita</button>
-          <button id="resetArt" class="btn">↺ Reset</button>
-        </div>
-
-        <div style="display:flex;gap:8px;align-items:center;">
-          <label style="color:var(--muted);font-size:13px;">Rotação</label>
-          <input id="rotateSlider" type="range" min="-3.14" max="3.14" step="0.01" value="0" style="width:180px;">
-        </div>
-
-        <div style="display:flex;gap:8px;align-items:center;">
-          <label style="color:var(--muted);font-size:13px;">Skew X</label>
-          <input id="skewX" type="range" min="-1" max="1" step="0.01" value="0" style="width:140px;">
-          <label style="color:var(--muted);font-size:13px;">Skew Y</label>
-          <input id="skewY" type="range" min="-1" max="1" step="0.01" value="0" style="width:140px;">
-        </div>
-      </div>
-
-      <div id="msg" class="msg" aria-live="polite"></div>
-    </section>
-  </main>
-
-  <footer class="footer">© Authentic360</footer>
+    </main>
+  </div>
 
   <script src="script.js"></script>
 </body>
