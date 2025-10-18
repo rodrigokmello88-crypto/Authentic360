@@ -1,7 +1,6 @@
-/* script.js - Authentic360 mockup (ajustado) */
-/* Estrutura esperada: /copos/ + fundos.png + logo.png na raiz */
+/* script.js - Authentic360 com controles de rotação/distorção visíveis */
 
-/* Arquivos de modelo — confirme os nomes dos PNGs na pasta /copos/ */
+/* Modelos e cores */
 const modelFiles = [
   {name:'Caneca', file:'copos/caneca_png.png'},
   {name:'Caneca Slim', file:'copos/caneca_slim_png.png'},
@@ -13,7 +12,6 @@ const modelFiles = [
   {name:'Xícara', file:'copos/xicara.png'}
 ];
 
-/* Cores pedidas */
 const swatchColors = [
   {name:'Branco', hex:'#ffffff'},
   {name:'Amarelo', hex:'#f7e600'},
@@ -23,7 +21,7 @@ const swatchColors = [
   {name:'Verde', hex:'#1bd84f'}
 ];
 
-/* Override: diminuir modelos problemáticos (50%) */
+/* Pequenos overrides de escala (ajuste fino por modelo se precisar) */
 const modelScaleOverrides = {
   'copos/espumante.png': 1.0,
   'copos/taca_gin.png': 1.0,
@@ -40,16 +38,23 @@ const recordBtn = document.getElementById('recordBtn');
 const uploadInput = document.getElementById('uploadInput');
 const msg = document.getElementById('msg');
 
+const rotateLeftBtn = document.getElementById('rotateLeft');
+const rotateRightBtn = document.getElementById('rotateRight');
+const resetBtn = document.getElementById('resetArt');
+const rotateSlider = document.getElementById('rotateSlider');
+const skewXSlider = document.getElementById('skewX');
+const skewYSlider = document.getElementById('skewY');
+
 let loadedModels = [];
 let currentIndex = 0;
 let tintColor = null;
 let artworkImg = null;
-let artworkState = { x:0.5, y:0.55, scale:0.25 };
+let artworkState = { x:0.5, y:0.55, scale:0.25, rotation:0, skewX:0, skewY:0 };
 let draggingArt = false;
 let dragStart = null;
-let canvasRect = null;
+let isRecording = false;
 
-/* --- Helpers --- */
+/* Helpers */
 function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
 function loadImage(src){
   return new Promise((res, rej) => {
@@ -68,13 +73,13 @@ function fileToDataURL(file){
   });
 }
 
-/* --- Preload modelos --- */
+/* Preload */
 async function preload(){
   const arr = [];
   for(const m of modelFiles){
     try{
       const img = await loadImage(m.file);
-      arr.push({name:m.name, file:m.file, img});
+      arr.push({...m, img});
     }catch(e){
       console.warn('Falha ao carregar', m.file, e);
     }
@@ -82,10 +87,10 @@ async function preload(){
   loadedModels = arr;
 }
 
-/* --- Build UI --- */
+/* Build UI */
 function buildUI(){
   modelsList.innerHTML = '';
-  loadedModels.forEach((m, idx) => {
+  loadedModels.forEach((m,idx) => {
     const b = document.createElement('button');
     b.className = 'model-btn';
     b.textContent = m.name;
@@ -110,35 +115,31 @@ function buildUI(){
     swatches.appendChild(d);
   });
 }
-
 function setActiveModel(){
   const buttons = modelsList.querySelectorAll('.model-btn');
   buttons.forEach((b,i)=> b.classList.toggle('active', i===currentIndex));
 }
 
-/* --- Desenho --- */
+/* Draw */
 function draw(){
-  // device pixel ratio handling:
   const DPR = window.devicePixelRatio || 1;
   const logicalW = canvas.width / DPR;
   const logicalH = canvas.height / DPR;
 
-  // clear (use logical coords)
-  ctx.setTransform(1,0,0,1,0,0); // reset transform
+  ctx.setTransform(1,0,0,1,0,0);
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.scale(DPR,DPR);
 
-  // panel rectangle (chumbo)
   const pad = 40;
   const panelW = logicalW - pad*2;
   const panelH = logicalH - pad*2;
   const panelX = pad;
   const panelY = pad;
 
+  // panel (chumbo)
   ctx.fillStyle = '#222';
   ctx.fillRect(panelX, panelY, panelW, panelH);
 
-  // if no model loaded
   const model = loadedModels[currentIndex];
   if(!model || !model.img){
     ctx.fillStyle = '#fff';
@@ -147,32 +148,25 @@ function draw(){
     return;
   }
 
-  // compute scale to fit proportionally
   const img = model.img;
-  // available area for cup drawing inside panel
   const maxW = panelW * 0.56;
   const maxH = panelH * 0.78;
   let scale = Math.min(maxW / img.width, maxH / img.height);
-
-  // apply per-model override (reduce by factor)
   const override = modelScaleOverrides[model.file];
-  if(typeof override === 'number'){
-    scale *= override; // e.g. 0.5
-  }
+  if(typeof override === 'number') scale *= override;
 
   const dw = img.width * scale;
   const dh = img.height * scale;
   const dx = panelX + (panelW - dw) / 2;
   const dy = panelY + (panelH - dh) / 2 - 10;
 
-  // draw model into offscreen canvas to allow tint full-paint
+  // offscreen for tint
   const off = document.createElement('canvas');
   off.width = img.width;
   off.height = img.height;
   const octx = off.getContext('2d');
   octx.clearRect(0,0,off.width,off.height);
-  octx.drawImage(img, 0,0);
-
+  octx.drawImage(img, 0, 0);
   if(tintColor){
     octx.globalCompositeOperation = 'source-atop';
     octx.fillStyle = tintColor;
@@ -180,22 +174,29 @@ function draw(){
     octx.globalCompositeOperation = 'source-over';
   }
 
-  // draw final image (centered)
   ctx.drawImage(off, 0,0, off.width, off.height, dx, dy, dw, dh);
 
-  // draw artwork overlay if exists
+  // artwork
   if(artworkImg){
     const artW = artworkImg.width * artworkState.scale;
     const artH = artworkImg.height * artworkState.scale;
     const cx = panelX + panelW * artworkState.x;
     const cy = panelY + panelH * artworkState.y;
-    const ax = cx - artW/2;
-    const ay = cy - artH/2;
-    ctx.drawImage(artworkImg, 0,0, artworkImg.width, artworkImg.height, ax, ay, artW, artH);
+
+    ctx.save();
+    // move to center
+    ctx.translate(cx, cy);
+    // apply skew
+    // transform(a, b, c, d, e, f) where b = skewY, c = skewX
+    ctx.transform(1, artworkState.skewY, artworkState.skewX, 1, 0, 0);
+    // rotate
+    ctx.rotate(artworkState.rotation);
+    ctx.drawImage(artworkImg, -artW/2, -artH/2, artW, artH);
+    ctx.restore();
   }
 }
 
-/* --- Download PNG --- */
+/* Download */
 function downloadPNG(){
   const link = document.createElement('a');
   link.download = 'mockup_authentic360.png';
@@ -203,8 +204,10 @@ function downloadPNG(){
   link.click();
 }
 
-/* --- Recording 8s (canvas capture) --- */
+/* Recording 8s */
 async function recordVideo8s(){
+  if(isRecording) return;
+  isRecording = true;
   msg.textContent = 'Gravando 8s...';
   const stream = canvas.captureStream(60);
   const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9' :
@@ -213,7 +216,21 @@ async function recordVideo8s(){
   const chunks = [];
   rec.ondataavailable = e => { if(e.data && e.data.size) chunks.push(e.data); };
   rec.start();
-  await new Promise(res => setTimeout(res, 8000));
+
+  // automatic gentle rotation during record (cosmetic) — keep rotation animation separate from artwork.rotation control
+  const start = performance.now();
+  const dur = 8000;
+  const step = 1000/30;
+  const anim = setInterval(()=> {
+    const elapsed = performance.now() - start;
+    const t = elapsed / dur;
+    // optional small rotation for the artwork while recording (adds 360 feel)
+    artworkState.rotation += Math.PI/180 * 2; // +2 degrees per frame approx
+    draw();
+  }, step);
+
+  await new Promise(res => setTimeout(res, dur));
+  clearInterval(anim);
   rec.stop();
   rec.onstop = () => {
     const blob = new Blob(chunks, { type: mime });
@@ -224,10 +241,11 @@ async function recordVideo8s(){
     a.click();
     setTimeout(()=> URL.revokeObjectURL(url), 10000);
     msg.textContent = 'Vídeo gerado e baixado.';
+    isRecording = false;
   };
 }
 
-/* --- Upload arte handling --- */
+/* Upload handling */
 uploadInput.addEventListener('change', async (ev) => {
   const f = ev.target.files && ev.target.files[0];
   if(!f) return;
@@ -235,32 +253,40 @@ uploadInput.addEventListener('change', async (ev) => {
   try{
     const img = await loadImage(dataURL);
     artworkImg = img;
-    // inicializa tamanho proporcional (25% do painel)
+    // initialize scale relative to canvas
     const DPR = window.devicePixelRatio || 1;
     const logicalW = canvas.width / DPR;
     const logicalH = canvas.height / DPR;
     artworkState.scale = Math.min(logicalW, logicalH) * 0.25 / Math.max(img.width, img.height);
     artworkState.x = 0.5;
     artworkState.y = 0.55;
+    artworkState.rotation = 0;
+    artworkState.skewX = 0;
+    artworkState.skewY = 0;
+    rotateSlider.value = 0;
+    skewXSlider.value = 0;
+    skewYSlider.value = 0;
     draw();
-    msg.textContent = 'Arte carregada. Clique e arraste para posicionar; roda do mouse para escalar.';
+    msg.textContent = 'Arte carregada. Arraste para mover; roda do mouse para escalar; use os botões/ sliders para girar/distorcer.';
   }catch(e){
     console.error(e);
     msg.textContent = 'Erro ao carregar a arte.';
   }
 });
 
-/* --- Dragging artwork on canvas --- */
+/* Dragging artwork on canvas */
 canvas.addEventListener('pointerdown', (e) => {
   if(!artworkImg) return;
+  canvas.setPointerCapture && canvas.setPointerCapture(e.pointerId);
+  draggingArt = true;
   canvasRect = canvas.getBoundingClientRect();
   const DPR = window.devicePixelRatio || 1;
   const mx = (e.clientX - canvasRect.left) * (canvas.width / canvasRect.width) / DPR;
   const my = (e.clientY - canvasRect.top) * (canvas.height / canvasRect.height) / DPR;
 
   const pad = 40;
-  const logicalW = canvas.width / (window.devicePixelRatio || 1);
-  const logicalH = canvas.height / (window.devicePixelRatio || 1);
+  const logicalW = canvas.width / DPR;
+  const logicalH = canvas.height / DPR;
   const panelW = logicalW - pad*2;
   const panelH = logicalH - pad*2;
 
@@ -271,14 +297,11 @@ canvas.addEventListener('pointerdown', (e) => {
   const ax = cx - artW/2;
   const ay = cy - artH/2;
 
-  // pointer coords in logical units:
-  const mxLog = mx;
-  const myLog = my;
-
-  if(mxLog >= ax && mxLog <= ax + artW && myLog >= ay && myLog <= ay + artH){
-    draggingArt = true;
-    dragStart = { mx: mxLog, my: myLog, startX: artworkState.x, startY: artworkState.y, panelW, panelH };
-    canvas.setPointerCapture && canvas.setPointerCapture(e.pointerId);
+  if(mx >= ax && mx <= ax + artW && my >= ay && my <= ay + artH){
+    dragStart = { mx, my, startX: artworkState.x, startY: artworkState.y, panelW, panelH };
+  } else {
+    draggingArt = false;
+    dragStart = null;
   }
 });
 
@@ -311,11 +334,52 @@ canvas.addEventListener('wheel', (e) => {
   draw();
 }, {passive:false});
 
-/* keyboard scale */
+/* keyboard shortcuts */
 window.addEventListener('keydown', (e) => {
   if(!artworkImg) return;
   if(e.key === '+' || e.key === '='){ artworkState.scale = clamp(artworkState.scale * 1.06, 0.02, 2.5); draw(); }
   if(e.key === '-') { artworkState.scale = clamp(artworkState.scale * 0.94, 0.02, 2.5); draw(); }
+  if(e.key === 'r' || e.key === 'R'){ artworkState.rotation += 0.15; rotateSlider.value = artworkState.rotation; draw(); }
+  if(e.key === 'h' || e.key === 'H'){ artworkState.skewX = clamp(artworkState.skewX + 0.05, -1, 1); skewXSlider.value = artworkState.skewX; draw(); }
+  if(e.key === 'v' || e.key === 'V'){ artworkState.skewY = clamp(artworkState.skewY + 0.05, -1, 1); skewYSlider.value = artworkState.skewY; draw(); }
+});
+
+/* sliders & buttons interactions */
+rotateLeftBtn.addEventListener('click', () => {
+  artworkState.rotation -= Math.PI/12; // 15 degrees
+  rotateSlider.value = artworkState.rotation;
+  draw();
+});
+rotateRightBtn.addEventListener('click', () => {
+  artworkState.rotation += Math.PI/12;
+  rotateSlider.value = artworkState.rotation;
+  draw();
+});
+resetBtn.addEventListener('click', () => {
+  if(!artworkImg) return;
+  artworkState.rotation = 0;
+  artworkState.skewX = 0;
+  artworkState.skewY = 0;
+  artworkState.scale = Math.min((canvas.width / (window.devicePixelRatio||1)), (canvas.height / (window.devicePixelRatio||1))) * 0.25 / Math.max(artworkImg.width, artworkImg.height);
+  artworkState.x = 0.5;
+  artworkState.y = 0.55;
+  rotateSlider.value = 0;
+  skewXSlider.value = 0;
+  skewYSlider.value = 0;
+  draw();
+});
+
+rotateSlider.addEventListener('input', (e) => {
+  artworkState.rotation = parseFloat(e.target.value);
+  draw();
+});
+skewXSlider.addEventListener('input', (e) => {
+  artworkState.skewX = parseFloat(e.target.value);
+  draw();
+});
+skewYSlider.addEventListener('input', (e) => {
+  artworkState.skewY = parseFloat(e.target.value);
+  draw();
 });
 
 /* buttons */
@@ -328,9 +392,9 @@ recordBtn.addEventListener('click', async () => {
   }
 });
 
-/* --- Init --- */
+/* Init */
 (async function init(){
-  // set high-DPI internal resolution
+  // high DPI
   const DPR = window.devicePixelRatio || 1;
   const logicalWidth = 900;
   const logicalHeight = 700;
